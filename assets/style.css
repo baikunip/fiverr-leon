@@ -1,7 +1,8 @@
 body { margin: 0; padding: 0; }
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-#side-bar{position: absolute;left:.5em;top:.5em;max-height:95vh;width:25vw;z-index:2;}
-.jet-color{background-color: #312f2fef;color:white;}
+#side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
+#popup{position: absolute;left:.5em;top:30.5vh;max-height:64vh;width:25vw;z-index:2;overflow: scroll;display:none;}
+.jet-color{background-color: #312f2fef!important;color:white!important;}
 .layer-btn{outline:none;background-color:transparent;color:white;width:.7em;height:.7em;}
 .hide-btn{visibility: hidden;}
 

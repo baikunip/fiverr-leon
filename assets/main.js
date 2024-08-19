@@ -97,3 +97,34 @@ let layerShow=(layerId)=>{
         `<a id="point-heat-show" class="btn btn-sm btn-dark jet-color" onclick="layerHide('`+layerId+`')" role="button" data-bs-toggle="button"><i class="bi bi-eye"></i></a>`
     )
 }
+// Popup functions
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
+
+    if (!features.length) {
+        $("#popup").hide()
+        return;
+    }
+
+    let feature = features[0],
+    fkeys=Object.keys(feature.properties),
+    // 
+    tagString=`<div class="card-header"><h5>Turbines Info</h5></div>
+            <div class="card-body">
+                <table class="table jet-color table-sm" style="width:100%;">` 
+    console.log(feature.properties)   
+    for (let index = 0; index < fkeys.length; index++) {
+        const element = fkeys[index];
+        tagString+=`<tr class="jet-color">
+                        <th scope="row" class="jet-color">`+(index+1)+`</th>
+                        <td class="jet-color">`+element+`</td>
+                        <td class="jet-color">`+feature.properties[element]+`</td>
+                      </tr>`
+    }    
+    tagString+=`</table>
+            </div>`
+    $("#popup").show().empty().append(
+        tagString
+    )
+
+});
