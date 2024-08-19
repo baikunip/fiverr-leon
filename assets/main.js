@@ -123,8 +123,11 @@ map.on('click', function (e) {
     }    
     tagString+=`</table>
             </div>`
-    $("#popup").show().empty().append(
-        tagString
-    )
-
+    $("#popup").show().empty().append(tagString)
 });
+map.on('mouseenter', 'point', () => {
+    map.getCanvas().style.cursor = 'pointer'
+  })
+map.on('mouseleave', 'point', () => {
+    map.getCanvas().style.cursor = ''
+})
