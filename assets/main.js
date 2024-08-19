@@ -85,3 +85,15 @@ map.on('load', () => {
     });
 })
 // Layer Control Functionalities
+let layerHide=(layerId)=>{
+    map.setLayoutProperty(layerId, 'visibility', 'none');
+    $('#'+layerId+'-visibility').empty().append(
+        `<a id="point-heat-hide" class="btn btn-sm btn-dark jet-color" onclick="layerShow('`+layerId+`')" role="button" data-bs-toggle="button"><i class="bi bi-eye-slash"></i></a>`
+    )
+}
+let layerShow=(layerId)=>{
+    map.setLayoutProperty(layerId, 'visibility', 'visible');
+    $('#'+layerId+'-visibility').empty().append(
+        `<a id="point-heat-show" class="btn btn-sm btn-dark jet-color" onclick="layerHide('`+layerId+`')" role="button" data-bs-toggle="button"><i class="bi bi-eye"></i></a>`
+    )
+}

@@ -1,0 +1,13 @@
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#side-bar{position: absolute;left:.5em;top:.5em;max-height:95vh;width:25vw;z-index:2;}
+.jet-color{background-color: #312f2fef;color:white;}
+.layer-btn{outline:none;background-color:transparent;color:white;width:.7em;height:.7em;}
+.hide-btn{visibility: hidden;}
+
+/* Legend Style */
+.legend-bar{height:1em;width:100%;}
+.dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
+#point-legend{background-color: #FFFC62;}
+#heat-point-legend{background-image: linear-gradient(to right,rgb(255,252,28),rgb(209,229,240),rgb(253,219,199),rgb(239,138,98),rgb(178,24,43));}
+        
