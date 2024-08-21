@@ -10,7 +10,122 @@ const map = new mapboxgl.Map({
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
+// draw pulsing dot before load it to the map components
+ // to draw a pulsing dot icon on the map.
+ const size = 50
+ ,pulsingDot = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+
+    // When the layer is added to the map,
+    // get the rendering context for the map canvas.
+    onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
+
+    // Call once before every frame where the icon will be used.
+    render: function () {
+        const duration = 1000;
+        const t = (performance.now() % duration) / duration;
+
+        const radius = (size / 2) * 0.3;
+        const outerRadius = (size / 2) * 0.7 * t + radius;
+        const context = this.context;
+
+        // Draw the outer circle.
+        context.clearRect(0, 0, this.width, this.height);
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            outerRadius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+        context.fill();
+
+        // Draw the inner circle.
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = 'rgba(255, 100, 100, .5)';
+        context.strokeStyle = 'white';
+        context.lineWidth = 2 + 4 * (1 - t);
+        context.fill();
+        context.stroke();
+
+        // Update this image's data with data from the canvas.
+        this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+        ).data;
+
+        // Continuously repaint the map, resulting
+        // in the smooth animation of the dot.
+        map.triggerRepaint();
+
+        // Return `true` to let the map know that the image was updated.
+        return true;
+    }
+};
+
+const nopulsingDot = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+    onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
+
+    render: function () {
+        const radius = (size / 2) * 0.3;
+        const context = this.context;
+
+        // Draw the inner circle.
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = '#FFFC62';
+        context.strokeStyle = 'white';
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+        ).data;
+
+        return true;
+    }
+};
+
+// map loading all components
 map.on('load', () => {
+    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+    map.addImage('nopulsing-dot', nopulsingDot, { pixelRatio: 2 });
     const layers = map.getStyle().layers;
     // Find the index of the first symbol layer in the map style.
     let firstSymbolId;
@@ -31,10 +146,14 @@ map.on('load', () => {
         'id': 'point',
         'source': 'datapoints',
         'source-layer': 'Stromerzeuger_1_bis_36666-48glzr',
-        'type': 'circle',
+        'type': 'symbol',
         'paint': {
             'circle-radius': 4,
             'circle-color': '#FFFC62'
+        },
+        'layout': {
+            'icon-image': 'nopulsing-dot',
+            'icon-allow-overlap': true // important fot display
         }
     },firstSymbolId);
     map.addLayer({
@@ -112,6 +231,7 @@ map.on('click', function (e) {
 
     if (!features.length) {
         $("#popup").hide()
+        map.setLayoutProperty('point', 'icon-image', 'nopulsing-dot')
         return;
     }
 
@@ -121,7 +241,8 @@ map.on('click', function (e) {
     tagString=`<div class="card-header"><h5>Turbines Info</h5></div>
             <div class="card-body">
                 <table class="table jet-color table-sm" style="width:100%;">` 
-    console.log(feature.properties)   
+    console.log(feature)
+
     for (let index = 0; index < fkeys.length; index++) {
         const element = fkeys[index];
         tagString+=`<tr class="jet-color">
@@ -133,6 +254,8 @@ map.on('click', function (e) {
     tagString+=`</table>
             </div>`
     $("#popup").show().empty().append(tagString)
+    // example: https://codepen.io/cladjidane/pen/GRErYqO
+    map.setLayoutProperty('point', 'icon-image', ["match", ["id"], feature.id, 'pulsing-dot', 'nopulsing-dot'])
 });
 map.on('mouseenter', 'point', () => {
     map.getCanvas().style.cursor = 'pointer'
