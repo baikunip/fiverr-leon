@@ -11,6 +11,15 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
 map.on('load', () => {
+    const layers = map.getStyle().layers;
+    // Find the index of the first symbol layer in the map style.
+    let firstSymbolId;
+    for (const layer of layers) {
+        if (layer.type === 'symbol') {
+            firstSymbolId = layer.id;
+            break;
+        }
+    }
     map.addSource('datapoints', {
         type: 'vector',
         // Use any Mapbox-hosted tileset using its tileset id.
@@ -27,7 +36,7 @@ map.on('load', () => {
             'circle-radius': 4,
             'circle-color': '#FFFC62'
         }
-    });
+    },firstSymbolId);
     map.addLayer({
         'id': 'point-heat',
         'type': 'heatmap',
@@ -82,7 +91,7 @@ map.on('load', () => {
                 0
             ]
         }
-    });
+    },firstSymbolId);
 })
 // Layer Control Functionalities
 let layerHide=(layerId)=>{
