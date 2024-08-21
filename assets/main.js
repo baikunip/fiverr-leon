@@ -42,7 +42,7 @@ map.on('load', () => {
                 0,
                 1,
                 9,
-                3
+                1.1
             ],
             'heatmap-color': [
                 'interpolate',
@@ -69,7 +69,7 @@ map.on('load', () => {
                 0,
                 2,
                 9,
-                20
+                3.6
             ],
             // Transition from heatmap to circle layer by zoom level
             'heatmap-opacity': [
@@ -77,7 +77,7 @@ map.on('load', () => {
                 ['linear'],
                 ['zoom'],
                 7,
-                1,
+                .9,
                 9,
                 0
             ]
