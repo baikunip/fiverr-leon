@@ -6,8 +6,8 @@ const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: [10.2994,54.073831], // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: 12, // starting zoom
-    minZoom:7,
-    maxZoom:16,
+    // minZoom:7,
+    // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
 map.on('load', () => {
