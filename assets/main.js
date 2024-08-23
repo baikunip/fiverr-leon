@@ -241,7 +241,7 @@ map.on('click', function (e) {
     tagString=`<div class="card-header"><h5>Turbines Info</h5></div>
             <div class="card-body">
                 <table class="table jet-color table-sm" style="width:100%;">` 
-    console.log(feature)
+    console.log(feature.properties["MaStR-Nr. der Einheit"])
 
     for (let index = 0; index < fkeys.length; index++) {
         const element = fkeys[index];
@@ -255,7 +255,7 @@ map.on('click', function (e) {
             </div>`
     $("#popup").show().empty().append(tagString)
     // example: https://codepen.io/cladjidane/pen/GRErYqO
-    map.setLayoutProperty('point', 'icon-image', ["match", ["id"], feature.id, 'pulsing-dot', 'nopulsing-dot'])
+    map.setLayoutProperty('point', 'icon-image', ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 'nopulsing-dot'])
 });
 map.on('mouseenter', 'point', () => {
     map.getCanvas().style.cursor = 'pointer'
