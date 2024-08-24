@@ -273,7 +273,7 @@ map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
 // filters
-let bdeVal=[]
+let bdeVal=[0,20000],stats=["In Planung","In Betrieb","Endgültig stillgelegt"]
 $( "#slider-filter" ).slider({
     range: true,
     min: 0,
@@ -285,9 +285,35 @@ $( "#slider-filter" ).slider({
       bdeVal=ui.values
     }
 });
+// Betriebs-Status
+$('#in-planung').on('change',()=>{
+    if($('#in-planung').is(":checked")) stats.push("In Planung")
+    else stats.splice(stats.indexOf("In Planung"),1)
+})
+$('#in-betrieb').on('change',()=>{
+    if($('#in-betrieb').is(":checked")) stats.push("In Betrieb")
+    else stats.splice(stats.indexOf("In Betrieb"),1)
+})
+$('#in-es').on('change',()=>{
+    if($('#in-es').is(":checked")) stats.push("Endgültig stillgelegt")
+    else stats.splice(stats.indexOf("Endgültig stillgelegt"),1)
+})
 $('#apply-filter').on('click',()=>{
-    map.setFilter('point',['any',['all',[">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-        ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]]])
-    map.setFilter('point-heat',['any',['all',[">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-        ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]]])
+    let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]]
+    console.log(statsFilter)
+    map.setFilter('point',['any',
+        ['all',
+            [">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+            ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            // ["match",["get","Betriebs-Status"],stats]
+            statsFilter
+        ]
+    ])
+    map.setFilter('point-heat',['any',
+        ['all',
+            [">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+            ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            statsFilter
+        ]
+    ])
 })
