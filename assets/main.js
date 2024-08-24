@@ -273,7 +273,13 @@ map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
 // filters
-let bdeVal=[0,20000],stats=["In Planung","In Betrieb","Endgültig stillgelegt"]
+let bdeVal=[0,20000],stats=["In Planung","In Betrieb","Endgültig stillgelegt"],
+bundesland=["Hessen","Schleswig-Holstein","Nordrhein-Westfalen","Rheinland-Pfalz",
+    "Bayern","Baden-Württemberg","Mecklenburg-Vorpommern","Niedersachsen","Sachsen-Anhalt",
+    "Saarland","Sachsen","Brandenburg","Ausschließliche Wirtschaftszone","Thüringen",
+    "Hamburg"
+]
+bundesland.forEach(element => {$("#bundeslandOptions").append('<option value="'+element+'">')});
 $( "#slider-filter" ).slider({
     range: true,
     min: 0,
@@ -299,21 +305,21 @@ $('#in-es').on('change',()=>{
     else stats.splice(stats.indexOf("Endgültig stillgelegt"),1)
 })
 $('#apply-filter').on('click',()=>{
-    let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]]
-    console.log(statsFilter)
+    let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
+    bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()]
     map.setFilter('point',['any',
         ['all',
-            [">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-            ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+            ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
             // ["match",["get","Betriebs-Status"],stats]
-            statsFilter
+            statsFilter,bundeslandFilter
         ]
     ])
     map.setFilter('point-heat',['any',
         ['all',
-            [">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-            ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
-            statsFilter
+            [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+            ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            statsFilter,bundeslandFilter
         ]
     ])
 })

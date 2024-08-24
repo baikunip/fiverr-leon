@@ -105,6 +105,19 @@
                     </div>
                     <div class="col-md-3 align-self-center " id="slider-filter-max">20000</div>
                     <div class="col-md-12"><hr></div>
+                    <div class="col-md-12">Bundesland</div>
+                    <div class="col-md-4 align-self-center">
+                        <select id="bundesland-query" class="form-select-sm jet-color" aria-label="Default select example">
+                            <option value="==" selected>Is in</option>
+                            <option value="!=">Is not in</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control-sm jet-color" list="bundeslandOptions" id="bundesland" placeholder="Bundesland">
+                        <datalist id="bundeslandOptions">
+                        </datalist>
+                    </div>
+                    <div class="col-md-12"><hr></div>
                     <div class="col-md-12 mt-2 d-grid gap-2">
                         <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Apply</button>
                     </div>
