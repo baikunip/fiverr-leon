@@ -148,8 +148,17 @@ map.on('load', () => {
         'source-layer': 'Stromerzeuger_1_bis_36666-48glzr',
         'type': 'symbol',
         'paint': {
-            'circle-radius': 4,
-            'circle-color': '#FFFC62'
+            // 'circle-radius': 4,
+            // 'circle-color': '#FFFC62',
+            'icon-opacity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                1,
+                0,
+                14,
+                1
+            ]
         },
         'layout': {
             'icon-image': 'nopulsing-dot',
@@ -264,6 +273,7 @@ map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
 // filters
+let bdeVal=[]
 $( "#slider-filter" ).slider({
     range: true,
     min: 0,
@@ -272,5 +282,12 @@ $( "#slider-filter" ).slider({
     slide: function( event, ui ) {
       $( "#slider-filter-min" ).html(ui.values[0])
       $( "#slider-filter-max" ).html(ui.values[1])
+      bdeVal=ui.values
     }
-  });
+});
+$('#apply-filter').on('click',()=>{
+    map.setFilter('point',['any',['all',[">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+        ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]]])
+    map.setFilter('point-heat',['any',['all',[">", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+        ["<", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]]])
+})
