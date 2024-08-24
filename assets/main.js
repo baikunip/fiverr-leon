@@ -263,3 +263,14 @@ map.on('mouseenter', 'point', () => {
 map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
+// filters
+$( "#slider-filter" ).slider({
+    range: true,
+    min: 0,
+    max: 20000,
+    values: [ 0, 20000 ],
+    slide: function( event, ui ) {
+      $( "#slider-filter-min" ).html(ui.values[0])
+      $( "#slider-filter-max" ).html(ui.values[1])
+    }
+  });
