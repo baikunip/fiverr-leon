@@ -140,12 +140,12 @@ map.on('load', () => {
         // Use any Mapbox-hosted tileset using its tileset id.
         // Learn more about where to find a tileset id:
         // https://docs.mapbox.com/help/glossary/tileset-id/
-        url: 'mapbox://baikunip14.51ogwkf4'
+        url: 'mapbox://baikunip14.1l8f5t0m'
     });
     map.addLayer({
         'id': 'point',
         'source': 'datapoints',
-        'source-layer': 'Stromerzeuger_1_bis_36666-48glzr',
+        'source-layer': 'newData-323m7b',
         'type': 'symbol',
         'paint': {
             // 'circle-radius': 4,
@@ -169,7 +169,7 @@ map.on('load', () => {
         'id': 'point-heat',
         'type': 'heatmap',
         'source': 'datapoints',
-        'source-layer': 'Stromerzeuger_1_bis_36666-48glzr',
+        'source-layer': 'newData-323m7b',
         'maxzoom': 9,
         'paint':{
             'heatmap-intensity': [
@@ -250,14 +250,22 @@ map.on('click', function (e) {
     tagString=`<div class="card-header"><h5>Turbines Info</h5></div>
             <div class="card-body">
                 <table class="table jet-color table-sm" style="width:100%;">` 
-    console.log(feature.properties["MaStR-Nr. der Einheit"])
-
+    let dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
     for (let index = 0; index < fkeys.length; index++) {
         const element = fkeys[index];
+        let stringVal=''
+        if(dateAttr.includes(element)){
+            console.log(feature.properties[element])
+            let convertedTime=new Date(feature.properties[element]* 1000)
+            stringVal=convertedTime.getDay()+'-'+convertedTime.getMonth()+'-'+convertedTime.getFullYear()
+            if(stringVal=='1-0-1900')stringVal='-'
+        }else{
+            stringVal=feature.properties[element]
+        }
         tagString+=`<tr class="jet-color">
                         <th scope="row" class="jet-color">`+(index+1)+`</th>
                         <td class="jet-color">`+element+`</td>
-                        <td class="jet-color">`+feature.properties[element]+`</td>
+                        <td class="jet-color">`+stringVal+`</td>
                       </tr>`
     }    
     tagString+=`</table>
@@ -294,6 +302,14 @@ $( "#slider-filter" ).slider({
 });
 energyProducer.forEach(element=>{$("#energy-producer-list").append('<option value="'+element+'">'+element+'</option>')})
 $("#energy-producer-list").multiSelect()
+// $('#date-comission-start').datepicker()
+// $('#date-comission-end').datepicker()
+let dateComissioned=[0,Date.now()]
+$('input[name="date-comission-start"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    dateComissioned=[new Date(start).getTime(),new Date(end).getTime()]
+  })
 // Betriebs-Status
 $('#in-planung').on('change',()=>{
     if($('#in-planung').is(":checked")) stats.push("In Planung")
@@ -310,19 +326,27 @@ $('#in-es').on('change',()=>{
 $('#apply-filter').on('click',()=>{
     let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
     bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()],
-    energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]]
+    energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]],
+    // console.log('Start Date: '+$('#date-comission-start').datepicker("getDate"))
+    comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]*1000],
+    comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]*1000]
+    // comissionStart=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[0]],["literal", dateComissioned[0]]],
+    // comissionEnd=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],["literal", dateComissioned[0]]]
+    console.log(dateComissioned)
     map.setFilter('point',['any',
         ['all',
             [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
             ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            comissionStart,comissionEnd,
             // ["match",["get","Betriebs-Status"],stats]
-            statsFilter,bundeslandFilter,energyProducerFilter
+            statsFilter,bundeslandFilter,energyProducerFilter,
         ]
     ])
     map.setFilter('point-heat',['any',
         ['all',
             [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
             ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
+            comissionStart,comissionEnd,
             statsFilter,bundeslandFilter,energyProducerFilter
         ]
     ])

@@ -6,6 +6,7 @@ body { margin: 0; padding: 0; }
 .jet-color{background-color: #312f2fef!important;color:white!important;}
 .layer-btn{outline:none;background-color:transparent;color:white;width:.7em;height:.7em;}
 .hide-btn{visibility: hidden;}
+.date-picker-filter{width:100%;}
 /* Legend Style */
 .legend-bar{height:1em;width:100%;}
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
