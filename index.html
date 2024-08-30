@@ -109,16 +109,13 @@
                     <div class="col-md-12"><hr></div>
                     <div class="col-md-12">Hersteller der Windenergieanlage</div>
                     <div class="col-md-12">
-                        <select id="energy-producer-list" name="energy-producer-list" multiple></select>
+                        <select id="energy-producer-list" name="energy-producer-list"></select>
                     </div>
                     <div class="col-md-12"><hr></div>
                     <div class="col-md-12">Inbetriebnahmedatum der Einheit</div>
-                    <div class="col-md-6 align-self-center">
+                    <div class="col-md-12 align-self-center">
                         <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
-                        <input type="text" name="date-comission-start" value="01/01/2018 - 01/15/2020" />
-                    </div>
-                    <div class="col-md-6 align-self-center">
-                        <input type="text" id="date-comission-end" class="jet-color date-picker-filter">
+                        <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" />
                     </div>
                     <div class="col-md-12"><hr></div>
                     <div class="col-md-12">Bundesland</div>
@@ -129,13 +126,13 @@
                         </select>
                     </div>
                     <div class="col-md-8">
-                        <input class="form-control-sm jet-color" list="bundeslandOptions" id="bundesland" placeholder="Bundesland">
+                        <input class="form-control-sm jet-color bar-filter" list="bundeslandOptions" id="bundesland" placeholder="Bundesland">
                         <datalist id="bundeslandOptions">
                         </datalist>
                     </div>
                     <div class="col-md-12"><hr></div>
                     <div class="col-md-12 mt-2 d-grid gap-2">
-                        <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Apply</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Set Filter</button>
                     </div>
                 </div>
             </div>

@@ -255,7 +255,7 @@ map.on('click', function (e) {
         const element = fkeys[index];
         let stringVal=''
         if(dateAttr.includes(element)){
-            console.log(feature.properties[element])
+            console.log(element+': '+feature.properties[element])
             let convertedTime=new Date(feature.properties[element]* 1000)
             stringVal=convertedTime.getDay()+'-'+convertedTime.getMonth()+'-'+convertedTime.getFullYear()
             if(stringVal=='1-0-1900')stringVal='-'
@@ -308,7 +308,10 @@ let dateComissioned=[0,Date.now()]
 $('input[name="date-comission-start"]').daterangepicker({
     opens: 'left'
   }, function(start, end, label) {
-    dateComissioned=[new Date(start).getTime(),new Date(end).getTime()]
+    let newStart=new Date(start).getTime()
+    if(newStart==0)newStart=0
+    else newStart=newStart/1000
+    dateComissioned=[newStart,(new Date(end).getTime()/1000)]
   })
 // Betriebs-Status
 $('#in-planung').on('change',()=>{
@@ -328,8 +331,8 @@ $('#apply-filter').on('click',()=>{
     bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()],
     energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]],
     // console.log('Start Date: '+$('#date-comission-start').datepicker("getDate"))
-    comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]*1000],
-    comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]*1000]
+    comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]],
+    comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]]
     // comissionStart=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[0]],["literal", dateComissioned[0]]],
     // comissionEnd=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],["literal", dateComissioned[0]]]
     console.log(dateComissioned)
