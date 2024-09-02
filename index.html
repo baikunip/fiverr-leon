@@ -80,57 +80,79 @@
             <div class="card-header"><h5>Filters Control</h5></div>
             <div class="card-body">
                 <div class="row no-gutters">
-                    <div class="col-md-12">Betriebs-Status</div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">Filter Selection</div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="betriebs-status-check" checked value="Betriebs-Status">
+                            <label class="form-check-label" for="betriebs-status-check">Betriebs-Status</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="bde-check" checked value="Bruttoleistung der Einheit">
+                            <label class="form-check-label" for="bde-check">Bruttoleistung der Einheit</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="hdw-check" checked value="Hersteller der Windenergieanlage">
+                            <label class="form-check-label" for="hdw-check">Hersteller der Windenergieanlage</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="ide-check" checked value="Inbetriebnahmedatum der Einheit">
+                            <label class="form-check-label" for="ide-check">Inbetriebnahmedatum der Einheit</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="bundesland-check" checked value="Bundesland">
+                            <label class="form-check-label" for="bundesland-check">Bundesland</label>
+                        </div>
+                    <div class="col-md-12"><hr></div>
+                    <div class="col-md-12 betriebs-status-filter">Betriebs-Status</div>
+                    <div class="col-md-6 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-betrieb">
                             <label class="form-check-label" for="in-betrieb">In Betrieb</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-planung">
                             <label class="form-check-label" for="in-planung">In Planung</label>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-es">
                             <label class="form-check-label" for="in-es">Endgültig stillgelegt</label>
                         </div>
                     </div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-12 align-self-center">Bruttoleistung der Einheit</div>
-                    <div class="col-md-3 align-self-center" id="slider-filter-min">0</div>
-                    <div class="col-md-6 align-self-center">
+                    <div class="col-md-12 betriebs-status-filter"><hr></div>
+                    <div class="col-md-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
+                    <div class="col-md-3 align-self-center bde-filter" id="slider-filter-min">0</div>
+                    <div class="col-md-6 align-self-center bde-filter">
                         <div id="slider-filter"></div>
                     </div>
-                    <div class="col-md-3 align-self-center " id="slider-filter-max">20000</div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-12">Hersteller der Windenergieanlage</div>
-                    <div class="col-md-12">
-                        <select id="energy-producer-list" name="energy-producer-list"></select>
+                    <div class="col-md-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
+                    <div class="col-md-12 bde-filter"><hr></div>
+                    <div class="col-md-12 hdw-filter">Hersteller der Windenergieanlage</div>
+                    <div class="col-md-12 hdw-filter">
+                        <select id="energy-producer-list" name="energy-producer-list" multiple></select>
                     </div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-12">Inbetriebnahmedatum der Einheit</div>
-                    <div class="col-md-12 align-self-center">
+                    <div class="col-md-12 hdw-filter"><hr></div>
+                    <div class="col-md-12 ide-filter">Inbetriebnahmedatum der Einheit</div>
+                    <div class="col-md-12 align-self-center ide-filter">
                         <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
                         <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" />
                     </div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-12">Bundesland</div>
-                    <div class="col-md-4 align-self-center">
+                    <div class="col-md-12 ide-filter"><hr></div>
+                    <div class="col-md-12 bundesland-filter">Bundesland</div>
+                    <div class="col-md-4 bundesland-filter align-self-center">
                         <select id="bundesland-query" class="form-select-sm jet-color" aria-label="Default select example">
                             <option value="==">Is in</option>
                             <option value="!=" selected>Is not in</option>
                         </select>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 bundesland-filter">
                         <input class="form-control-sm jet-color bar-filter" list="bundeslandOptions" id="bundesland" placeholder="Bundesland">
                         <datalist id="bundeslandOptions">
                         </datalist>
                     </div>
-                    <div class="col-md-12"><hr></div>
+                    <div class="col-md-12 bundesland-filter"><hr></div>
                     <div class="col-md-12 mt-2 d-grid gap-2">
                         <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Set Filter</button>
                     </div>

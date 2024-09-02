@@ -281,6 +281,26 @@ map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
 // filters
+$('#betriebs-status-check').change(()=>{
+    if($('#betriebs-status-check').is(":checked"))$('.betriebs-status-filter').show()
+    else $('.betriebs-status-filter').hide()     
+})
+$('#bde-check').change(()=>{
+    if($('#bde-check').is(":checked"))$('.bde-filter').show()
+    else $('.bde-filter').hide()     
+})
+$('#hdw-check').change(()=>{
+    if($('#hdw-check').is(":checked"))$('.hdw-filter').show()
+    else $('.hdw-filter').hide()     
+})
+$('#ide-check').change(()=>{
+    if($('#ide-check').is(":checked"))$('.ide-filter').show()
+    else $('.ide-filter').hide()     
+})
+$('#bundesland-check').change(()=>{
+    if($('#bundesland-check').is(":checked"))$('.bundesland-filter').show()
+    else $('.bundesland-filter').hide()     
+})
 let bdeVal=[0,20000],stats=["In Planung","In Betrieb","Endgültig stillgelegt"],
 bundesland=["Hessen","Schleswig-Holstein","Nordrhein-Westfalen","Rheinland-Pfalz",
     "Bayern","Baden-Württemberg","Mecklenburg-Vorpommern","Niedersachsen","Sachsen-Anhalt",
@@ -332,25 +352,19 @@ $('#apply-filter').on('click',()=>{
     energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]],
     // console.log('Start Date: '+$('#date-comission-start').datepicker("getDate"))
     comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]],
-    comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]]
-    // comissionStart=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[0]],["literal", dateComissioned[0]]],
-    // comissionEnd=[">=",['number',['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],["literal", dateComissioned[0]]]
-    console.log(dateComissioned)
+    comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],
+    bde1=[">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
+    bde2=["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]
+    queryFilter=['all']
+    if($('#betriebs-status-check').is(':checked')) queryFilter.push(statsFilter)
+    if($('#bde-check').is(':checked')) queryFilter.push(bde1,bde2)
+    if($('#hdw-check').is(':checked')) queryFilter.push(energyProducerFilter)
+    if($('#ide-check').is(':checked')) queryFilter.push(comissionStart,comissionEnd)
+    if($('#bundesland-check').is(':checked')) queryFilter.push(bundeslandFilter)
     map.setFilter('point',['any',
-        ['all',
-            [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-            ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
-            comissionStart,comissionEnd,
-            // ["match",["get","Betriebs-Status"],stats]
-            statsFilter,bundeslandFilter,energyProducerFilter,
-        ]
+        queryFilter
     ])
     map.setFilter('point-heat',['any',
-        ['all',
-            [">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
-            ["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]],
-            comissionStart,comissionEnd,
-            statsFilter,bundeslandFilter,energyProducerFilter
-        ]
+        queryFilter
     ])
 })
