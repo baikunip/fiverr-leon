@@ -2,6 +2,7 @@
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmFpa3VuaXAxNCIsImEiOiJjbDBycXdmbHEwNjY0M2lrN2lubnd1aW43In0.zsbYN2VrQ1Dit4kj4uhzWw';
+let userClick=0
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: [10.2994,54.073831], // starting position [lng, lat]. Note that lat must be set between -90 and 90
@@ -243,7 +244,7 @@ map.on('click', function (e) {
         map.setLayoutProperty('point', 'icon-image', 'nopulsing-dot')
         return;
     }
-
+    userClick+=1
     let feature = features[0],
     fkeys=Object.keys(feature.properties),
     // 
@@ -262,11 +263,18 @@ map.on('click', function (e) {
         }else{
             stringVal=feature.properties[element]
         }
-        tagString+=`<tr class="jet-color">
+        if(userClick>4){
+            tagString+=`<tr class="jet-color">
                         <th scope="row" class="jet-color">`+(index+1)+`</th>
                         <td class="jet-color">`+element+`</td>
-                        <td class="jet-color">`+stringVal+`</td>
+                        <td class="jet-color"><b>*****</b></td>
                       </tr>`
+        }
+            tagString+=`<tr class="jet-color">
+                            <th scope="row" class="jet-color">`+(index+1)+`</th>
+                            <td class="jet-color">`+element+`</td>
+                            <td class="jet-color">`+stringVal+`</td>
+                        </tr>`
     }    
     tagString+=`</table>
             </div>`
