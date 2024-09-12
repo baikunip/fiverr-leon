@@ -14,7 +14,7 @@
 </head>
 <body>
     <div id="map">
-        <div class="card jet-color" id="side-bar">
+        <!-- <div class="card jet-color" id="side-bar">
             <div class="card-header"><h5>Layer Control</h5></div>
             <div class="card-body">
                 <div class="row no-gutters">
@@ -51,11 +51,61 @@
                     <div class="col-md-12"><hr></div>
                 </div>
             </div>
-        </div>
-        <div class="card jet-color" id="popup">
-            <div class="card-header"><h5>Turbines Info</h5></div>
+        </div> -->
+        <div class="card" id="popup">
+            <div class="card-header row jet-color" style="border-radius: 5px;margin-left:10px;margin-right:10px;margin-top:10px;">
+                <div class="col-md-4 d-flex align-self-center">
+                    <div id="betrieb-status"></div>
+                    <div id="betrieb-text">In Betrieb</div>
+                </div>
+                <div class="col-md-4 d-flex align-self-center">
+                    <div><i class="bi bi-lightning-charge-fill" style="color:rgb(103, 213, 103)"></i></div>
+                    <div id="betrieb-text">5.4MW</div>
+                </div>
+                <div class="col-md-4 d-flex align-self-center">
+                    <div id="turbine-img"></div>
+                    <div id="vestas-text">Vestas</div>
+                </div>
+            </div>
+            <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
+                <div class="col-md-8 d-flex align-self-center">
+                    <div id="betrieb-status"></div>
+                    <div id="betrieb-text">In Betrieb</div>
+                </div>
+                <div class="col-md-4 d-flex align-self-center">
+                    <div><i class="bi bi-lightning-charge-fill" style="color:rgb(103, 213, 103)"></i></div>
+                    <div id="betrieb-text">5.4MW</div>
+                </div>
+                <div class="col-md-6 d-flex align-self-center">
+                    <div id="vestas-text">Hersteller</div>
+                </div>
+                <div class="col-md-6 d-flex align-self-center">
+                    <div id="vestas-text">Typenbezeichnung</div>
+                </div>
+                <div class="col-md-5 d-flex align-self-center">
+                    <!-- <div id="manufacturing-img"></div> -->
+                     <img src="./assets/img/manufacturing.png" alt="" style="width:100%;margin:0;padding:0;">
+                </div>
+                <div class="col-md-3 d-flex align-self-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            112m
+                            Rotordurchmesser
+                        </div>
+                        <div class="col-md-12">
+                            112m
+                            Rotordurchmesser
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    8.11.2017
+                    Inbetriebnahme
+                </div>
+            </div>
             <div class="card-body">
-                <table class="table table-dark table-sm">
+
+                <!-- <table class="table table-dark table-sm">
                     <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
@@ -73,7 +123,7 @@
                         <td colspan="2">Larry the Bird</td>
                         <td>@twitter</td>
                       </tr>
-                </table>
+                </table> -->
             </div>
         </div>
         <div class="card jet-color" id="filter-bar">

@@ -1,7 +1,19 @@
-body { margin: 0; padding: 0; }
+body { margin: 0; padding: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
-#popup{position: absolute;left:.5em;top:30.5vh;max-height:64vh;width:25vw;z-index:2;overflow: scroll;display:none;}
+#popup{
+    position: absolute;left:.5em;top:30.5vh;max-height:64vh;width:25vw;z-index:2;overflow: scroll;
+    border-radius: 15px;background-color: rgba(23, 22, 26, 0.87);
+
+}
 #filter-bar{position: absolute;right:.5em;top:.5vh;width:20vw;z-index:2;max-height: 98vh;overflow: scroll;}
 .jet-color{background-color: #312f2fef!important;color:white!important;}
 .layer-btn{outline:none;background-color:transparent;color:white;width:.7em;height:.7em;}
@@ -10,6 +22,22 @@ body { margin: 0; padding: 0; }
 /* Legend Style */
 .legend-bar{height:1em;width:100%;}
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
+#betrieb-status{height:1em;width:1em;border-radius: 100%;margin-right:8px;background-color:rgb(103, 213, 103)}
+#turbine-img{background-image: url('./img/turbine.png');
+    /* background-color: rgb(103, 213, 103); */
+    background-blend-mode: multiply;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:1.2em;height:2em;
+}
+#manufacturing-img{background-image: url('./img/manufacturing.png');
+    /* background-color: rgb(103, 213, 103); */
+    background-blend-mode: multiply;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:7em;
+    height:10em;
+}
 #point-legend{background-color: #FFFC62;}
 #heat-point-legend{background-image: linear-gradient(to right,rgb(255,252,28),rgb(209,229,240),rgb(253,219,199),rgb(239,138,98),rgb(178,24,43));}
         
