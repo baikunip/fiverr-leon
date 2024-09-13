@@ -23,6 +23,8 @@ body { margin: 0; padding: 0;
 .legend-bar{height:1em;width:100%;}
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
 #betrieb-status{height:1em;width:1em;border-radius: 100%;margin-right:8px;background-color:rgb(103, 213, 103)}
+.sub-text-popup{font-size: 1em;color:#515155;}
+.text-popup{font-size:1.8em;font-weight: lighter;}
 #turbine-img{background-image: url('./img/turbine.png');
     /* background-color: rgb(103, 213, 103); */
     background-blend-mode: multiply;
