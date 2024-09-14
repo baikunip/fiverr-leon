@@ -58,12 +58,12 @@
         <div class="card" id="popup">
             <div class="card-header row jet-color" style="border-radius: 5px;margin-left:10px;margin-right:10px;margin-top:10px;">
                 <div class="col-md-4 d-flex align-self-center">
-                    <div id="betrieb-status"></div>
-                    <div id="betrieb-text" style="font-weight: 400;font-size: 1.5em;">In Betrieb</div>
+                    <div id="Betriebs-Status-icon"></div>
+                    <div id="Betriebs-Status-popup" class="popup-text" style="font-weight: 400;font-size: 1.5em;">-</div>
                 </div>
                 <div class="col-md-4 d-flex align-self-center">
                     <div><i class="bi bi-lightning-charge-fill" style="color:rgb(103, 213, 103)"></i></div>
-                    <div id="betrieb-text" style="font-weight: 400;font-size: 1.5em;">5.4MW</div>
+                    <div style="font-weight: 400;font-size: 1.5em;" class="d-flex"><div id="BruttoleistungderEinheit-popup">-</div> MW</div>
                 </div>
                 <div class="col-md-4 d-flex align-self-center">
                     <div id="turbine-img"></div>
@@ -72,10 +72,10 @@
             </div>
             <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
                 <div class="col-md-8 d-flex align-self-center">
-                    <div class="text-popup">Vestas Deutschland GmbH</div>
+                    <div id="HerstellerderWindenergieanlage-popup" class="text-popup">Vestas Deutschland GmbH</div>
                 </div>
                 <div class="col-md-4 d-flex align-self-center">
-                    <div class="text-popup">V1.54</div>
+                    <div id="Typenbezeichnung-popup" class="text-popup">V1.54</div>
                 </div>
                 <div class="col-md-6 d-flex align-self-center">
                     <div class="sub-text-popup">Hersteller</div>
@@ -90,7 +90,7 @@
                 <div class="col-md-3 d-flex align-self-center">
                     <div class="row">
                         <div class="col-md-12 mb-1">
-                            <div class="text-popup">
+                            <div id="RotordurchmesserderWindenergieanlage-popup" class="text-popup">
                                 112m
                             </div>
                             <div class="sub-text-popup">
@@ -98,30 +98,30 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">
-                            <div class="text-popup">
+                            <div id="NabenhöhederWindenergieanlage-popup" class="text-popup">
                                 112m
                             </div>
                             <div class="sub-text-popup">
-                                Rotordurchmesser
+                                Nabenhöhe
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="text-popup">
-                        112m
+                    <div id="InbetriebnahmedatumderEinheit-popup" class="text-popup">
+                        -
                     </div>
                     <div class="sub-text-popup">
-                        Rotordurchmesser
+                        Inbetriebnahme
                     </div>
                 </div>
             </div>
             <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
                 <div class="col-md-8 d-flex align-self-center">
-                    <div class="text-popup">Windpark Sillerup</div>
+                    <div id="NamedesWindparks-popup" class="text-popup">Windpark Sillerup</div>
                 </div>
                 <div class="col-md-4 d-flex align-self-center">
-                    <div class="text-popup">28.04.2024</div>
+                    <div id="LetzteAktualisierung-popup" class="text-popup">-</div>
                 </div>
                 <div class="col-md-6 d-flex align-self-center">
                     <div class="sub-text-popup">Name des Windparks</div>
@@ -136,7 +136,7 @@
                 <div class="col-md-8 d-flex align-self-center">
                     <div class="row">
                         <div class="col-md-12 mb-1">
-                            <div class="text-popup">
+                            <div id="Betriebers-popup" class="text-popup">
                                 Norderwöhrden Poolgesellschaft mbH
                             </div>
                             <div class="sub-text-popup">
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">
-                            <div class="text-popup">
+                            <div id="Anlagenbetreibers-popup" class="text-popup">
                                 WEA 1 (100187297)
                             </div>
                             <div class="sub-text-popup">
@@ -176,7 +176,7 @@
                 <div class="col-md-8 d-flex align-self-center">
                     <div class="row">
                         <div class="col-md-12 mb-1">
-                            <div class="text-popup">
+                            <div id="Anschluss-Netzbetreibers-popup" class="text-popup">
                                 Schleswig-Holstein Netz AG (SNB919861978666)
                             </div>
                             <div class="sub-text-popup">
@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-2">
-                            <div class="text-popup">
+                            <div id="Spannungsebene-popup" class="text-popup">
                                 Höchstspannung
                             </div>
                             <div class="sub-text-popup">
@@ -217,7 +217,19 @@
                         </div>
                         <div class="col-md-12">
                             <div class="text-popup">8.11.2017</div>
-                            <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
+                            <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-popup">EEG998920826773</div>
+                            <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-popup">E2079301EA01000000000088121700001</div>
+                            <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-popup">WIN19-5/009,</div>
+                            <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
                         </div>
                     </div>
                   </div>

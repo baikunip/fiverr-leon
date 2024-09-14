@@ -238,7 +238,6 @@ let layerShow=(layerId)=>{
 // Popup functions
 map.on('click', function (e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
-
     if (!features.length) {
         $("#popup").hide()
         map.setLayoutProperty('point', 'icon-image', 'nopulsing-dot')
@@ -252,6 +251,24 @@ map.on('click', function (e) {
             <div class="card-body">
                 <table class="table jet-color table-sm" style="width:100%;">` 
     let dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
+    console.log(feature.properties)
+    $("#Betriebs-Status-popup").html(feature.properties["Betriebs-Status"])
+    $("#BruttoleistungderEinheit-popup").html(feature.properties["Bruttoleistung der Einheit"]/1000)
+    $("#HerstellerderWindenergieanlage-popup").html(feature.properties["Hersteller der Windenergieanlage"])
+    $("#Typenbezeichnung-popup").html(feature.properties["Typenbezeichnung"])
+    $("#RotordurchmesserderWindenergieanlage-popup").html(feature.properties["Rotordurchmesser der Windenergieanlage"])
+    $("#NabenhöhederWindenergieanlage-popup").html(feature.properties["Nabenhöhe der Windenergieanlage"])
+    let inbetriebDate=new Date(feature.properties["Inbetriebnahmedatum der Einheit"]*1000)
+    if(feature.properties["Inbetriebnahmedatum der Einheit"]==-2208988800) $("#InbetriebnahmedatumderEinheit-popup").html("-")
+    else $("#InbetriebnahmedatumderEinheit-popup").html(inbetriebDate.getDay()+'.'+inbetriebDate.getMonth()+'.'+inbetriebDate.getFullYear())
+    $("#NamedesWindparks-popup").html(feature.properties["Name des Windparks"])
+    let Letzte=new Date(feature.properties["Letzte Aktualisierung"]*1000)
+    if(feature.properties["Letzte Aktualisierung"]==-2208988800) $("#LetzteAktualisierung-popup").html("-")
+    else $("#LetzteAktualisierung-popup").html(Letzte.getDay()+'.'+Letzte.getMonth()+'.'+Letzte.getFullYear())
+    
+    $("#Anlagenbetreibers-popup").html(feature.properties["Name des Anlagenbetreibers (nur Org.)"])
+    $("#Anschluss-Netzbetreibers-popup").html(feature.properties["Name des Anschluss-Netzbetreibers"])
+    $("#Spannungsebene-popup").html(feature.properties["Spannungsebene"])
     for (let index = 0; index < fkeys.length; index++) {
         const element = fkeys[index];
         let stringVal=''
@@ -278,7 +295,7 @@ map.on('click', function (e) {
     }    
     tagString+=`</table>
             </div>`
-    $("#popup").show().empty().append(tagString)
+    // $("#popup").show().empty().append(tagString)
     // example: https://codepen.io/cladjidane/pen/GRErYqO
     map.setLayoutProperty('point', 'icon-image', ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 'nopulsing-dot'])
 });
