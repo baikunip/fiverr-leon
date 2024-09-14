@@ -10,7 +10,7 @@ body { margin: 0; padding: 0;
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
 #popup{
-    position: absolute;left:.5em;top:30.5vh;max-height:64vh;width:25vw;z-index:2;overflow: scroll;
+    position: absolute;left:.5em;top:30.5vh;max-height:64vh;width:28vw;z-index:2;overflow: scroll;
     border-radius: 15px;background-color: rgba(23, 22, 26, 0.87);
 
 }
@@ -24,7 +24,7 @@ body { margin: 0; padding: 0;
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
 #betrieb-status{height:1em;width:1em;border-radius: 100%;margin-right:8px;background-color:rgb(103, 213, 103)}
 .sub-text-popup{font-size: 1em;color:#515155;}
-.text-popup{font-size:1.8em;font-weight: lighter;}
+.text-popup{font-size:1.6em;}
 #turbine-img{background-image: url('./img/turbine.png');
     /* background-color: rgb(103, 213, 103); */
     background-blend-mode: multiply;
