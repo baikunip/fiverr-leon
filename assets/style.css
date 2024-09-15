@@ -7,6 +7,14 @@ body { margin: 0; padding: 0;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
 }
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
 #popup{
