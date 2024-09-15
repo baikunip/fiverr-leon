@@ -252,23 +252,29 @@ map.on('click', function (e) {
                 <table class="table jet-color table-sm" style="width:100%;">` 
     let dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
     console.log(feature.properties)
+    function setPopupDate(property){
+        let popupDate=new Date(feature.properties[property]*1000)
+        if(feature.properties[property]==-2208988800) return "-"
+        else return popupDate.getDay()+'.'+popupDate.getMonth()+'.'+popupDate.getFullYear()
+    }
     $("#Betriebs-Status-popup").html(feature.properties["Betriebs-Status"])
-    $("#BruttoleistungderEinheit-popup").html(feature.properties["Bruttoleistung der Einheit"]/1000)
+    $("#BruttoleistungderEinheit-popup").html((feature.properties["Bruttoleistung der Einheit"]/1000)+" MW")
     $("#HerstellerderWindenergieanlage-popup").html(feature.properties["Hersteller der Windenergieanlage"])
     $("#Typenbezeichnung-popup").html(feature.properties["Typenbezeichnung"])
     $("#RotordurchmesserderWindenergieanlage-popup").html(feature.properties["Rotordurchmesser der Windenergieanlage"])
     $("#NabenhöhederWindenergieanlage-popup").html(feature.properties["Nabenhöhe der Windenergieanlage"])
-    let inbetriebDate=new Date(feature.properties["Inbetriebnahmedatum der Einheit"]*1000)
-    if(feature.properties["Inbetriebnahmedatum der Einheit"]==-2208988800) $("#InbetriebnahmedatumderEinheit-popup").html("-")
-    else $("#InbetriebnahmedatumderEinheit-popup").html(inbetriebDate.getDay()+'.'+inbetriebDate.getMonth()+'.'+inbetriebDate.getFullYear())
+    $("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Inbetriebnahmedatum der Einheit"))
     $("#NamedesWindparks-popup").html(feature.properties["Name des Windparks"])
-    let Letzte=new Date(feature.properties["Letzte Aktualisierung"]*1000)
-    if(feature.properties["Letzte Aktualisierung"]==-2208988800) $("#LetzteAktualisierung-popup").html("-")
-    else $("#LetzteAktualisierung-popup").html(Letzte.getDay()+'.'+Letzte.getMonth()+'.'+Letzte.getFullYear())
-    
+    $("#LetzteAktualisierung-popup").html(setPopupDate("Letzte Aktualisierung"))
     $("#Anlagenbetreibers-popup").html(feature.properties["Name des Anlagenbetreibers (nur Org.)"])
     $("#Anschluss-Netzbetreibers-popup").html(feature.properties["Name des Anschluss-Netzbetreibers"])
+    $("#Netzbetreiberprüfung-popup").html(feature.properties["Netzbetreiberprüfung"])
     $("#Spannungsebene-popup").html(feature.properties["Spannungsebene"])
+    $("#MaStR-NrderEEG-Anlage-popup").html(feature.properties["MaStR-Nr. der EEG-Anlage"])
+    $("#InstallierteLeistungderEEG-Anlage-popup").html((feature.properties["Installierte Leistung der EEG-Anlage"]/1000)+" MW")
+    $("#InbetriebnahmedatumderEEG-Anlage-popup").html(setPopupDate("Inbetriebnahmedatum der EEG-Anlage"))
+    $("#EEG-Anlagenschlüssel-popup").html(feature.properties["EEG-Anlagenschlüssel"])
+    $("#Zuschlagnummer-popup").html(feature.properties["Zuschlagnummer (EEG/KWK-Ausschreibung)"])
     for (let index = 0; index < fkeys.length; index++) {
         const element = fkeys[index];
         let stringVal=''
@@ -295,7 +301,8 @@ map.on('click', function (e) {
     }    
     tagString+=`</table>
             </div>`
-    // $("#popup").show().empty().append(tagString)
+    $("#popup").show()
+    // .empty().append(tagString)
     // example: https://codepen.io/cladjidane/pen/GRErYqO
     map.setLayoutProperty('point', 'icon-image', ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 'nopulsing-dot'])
 });
