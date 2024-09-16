@@ -257,16 +257,20 @@ map.on('click', function (e) {
         if(feature.properties[property]==-2208988800) return "-"
         else return popupDate.getDay()+'.'+popupDate.getMonth()+'.'+popupDate.getFullYear()
     }
+    function setPopupValue(property){
+        if(feature.properties[property]) return "-"
+        else return feature.properties[property]
+    }
     $("#Betriebs-Status-popup").html(feature.properties["Betriebs-Status"])
     $("#BruttoleistungderEinheit-popup").html((feature.properties["Bruttoleistung der Einheit"]/1000)+" MW")
     $("#HerstellerderWindenergieanlage-popup").html(feature.properties["Hersteller der Windenergieanlage"])
     $("#Typenbezeichnung-popup").html(feature.properties["Typenbezeichnung"])
-    $("#RotordurchmesserderWindenergieanlage-popup").html(feature.properties["Rotordurchmesser der Windenergieanlage"])
-    $("#NabenhöhederWindenergieanlage-popup").html(feature.properties["Nabenhöhe der Windenergieanlage"])
+    $("#RotordurchmesserderWindenergieanlage-popup").html(setPopupValue("Rotordurchmesser der Windenergieanlage")+" m")
+    $("#NabenhöhederWindenergieanlage-popup").html(setPopupValue("Nabenhöhe der Windenergieanlage")+" m")
     $("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Inbetriebnahmedatum der Einheit"))
-    $("#NamedesWindparks-popup").html(feature.properties["Name des Windparks"])
+    $("#NamedesWindparks-popup").html(setPopupValue("Name des Windparks"))
     $("#LetzteAktualisierung-popup").html(setPopupDate("Letzte Aktualisierung"))
-    $("#Anlagenbetreibers-popup").html(feature.properties["Name des Anlagenbetreibers (nur Org.)"])
+    $("#Anlagenbetreibers-popup").html(setPopupValue("Name des Anlagenbetreibers (nur Org.)"))
     $("#Anschluss-Netzbetreibers-popup").html(feature.properties["Name des Anschluss-Netzbetreibers"])
     $("#Netzbetreiberprüfung-popup").html(feature.properties["Netzbetreiberprüfung"])
     $("#Spannungsebene-popup").html(feature.properties["Spannungsebene"])
