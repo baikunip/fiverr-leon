@@ -56,26 +56,28 @@
             </div>
         </div> -->
         <div class="card" id="popup">
-            <div class="card-header row jet-color" style="border-radius: 5px;margin-left:10px;margin-right:10px;margin-top:10px;">
+            <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
                 <div class="col-md-4 d-flex justify-content-start align-items-center">
-                    <div id="Betriebs-Status-icon"></div>
+                    <div id="Betriebs-Status-icon"><i class="bi bi-circle-fill h5" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
                     <div id="Betriebs-Status-popup" class="text-popup" style="font-weight: 400;font-size: 1.5em;">-</div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center align-items-center">
-                    <div><i class="bi bi-lightning-charge-fill" style="color:rgb(103, 213, 103)"></i></div>
+                    <div><i class="bi bi-lightning-charge-fill h5" style="color:rgb(103, 213, 103)"></i></div>
                     <div style="font-weight: 400;font-size: 1.5em;" id="BruttoleistungderEinheit-popup" class="text-popup">-</div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end align-items-center">
-                    <div id="turbine-img"></div>
+                    <!-- <div id="turbine-img"></div> -->
+                    <img src="./assets/img/turbine.png" alt="" id="turbine-img">
                     <div id="vestas-text" class="text-popup">Vestas</div>
                 </div>
             </div>
-            <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
-                <div class="col-md-8 d-flex align-self-center">
+            <div class="card-header row jet-color popup-container d-flex align-items-center" >
+                <div class="col-md-7 d-flex align-self-center">
                     <div id="HerstellerderWindenergieanlage-popup" class="text-popup">Vestas Deutschland GmbH</div>
                 </div>
+                <div class="col-md-1 text-popup">-</div>
                 <div class="col-md-4">
-                    <div id="Typenbezeichnung-popup" class="text-end text-popup">V1.54</div>
+                    <div id="Typenbezeichnung-popup" class="text-end third-white-popup">V1.54</div>
                 </div>
                 <div class="col-md-6 d-flex align-self-center">
                     <div class="sub-text-popup">Hersteller</div>
@@ -90,7 +92,7 @@
                 <div class="col-md-3 d-flex align-self-end">
                     <div class="row">
                         <div class="col-md-12 mb-4">
-                            <div id="RotordurchmesserderWindenergieanlage-popup" class="text-popup">
+                            <div id="RotordurchmesserderWindenergieanlage-popup" class="third-white-popup">
                                 112m
                             </div>
                             <div class="sub-text-popup">
@@ -98,7 +100,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-4 mb-2 align-self-end">
-                            <div id="NabenhöhederWindenergieanlage-popup" class="text-popup">
+                            <div id="NabenhöhederWindenergieanlage-popup" class="third-white-popup">
                                 112m
                             </div>
                             <div class="sub-text-popup">
@@ -116,12 +118,12 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
+            <div class="card-header row jet-color popup-container" >
                 <div class="col-md-8 d-flex align-self-center">
                     <div id="NamedesWindparks-popup" class="text-popup">Windpark Sillerup</div>
                 </div>
                 <div class="col-md-4">
-                    <div id="LetzteAktualisierung-popup" class="text-end text-popup">-</div>
+                    <div id="LetzteAktualisierung-popup" class="text-end third-white-popup">-</div>
                 </div>
                 <div class="col-md-6 d-flex align-self-center">
                     <div class="sub-text-popup">Name des Windparks</div>
@@ -136,7 +138,7 @@
                 <div class="col-md-8 d-flex align-self-end">
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <div id="Betriebers-popup" class="text-popup">
+                            <div id="Betriebers-popup" class="third-white-popup">
                                 Norderwöhrden Poolgesellschaft mbH
                             </div>
                             <div class="sub-text-popup">
@@ -144,7 +146,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">
-                            <div id="Anlagenbetreibers-popup" class="text-popup">
+                            <div id="Anlagenbetreibers-popup" class="third-white-popup">
                                 WEA 1 (100187297)
                             </div>
                             <div class="sub-text-popup">
@@ -155,7 +157,7 @@
                 </div>
                 
             </div>
-            <div class="card-header row jet-color" style="border-radius: 5px;margin:10px;">
+            <div class="card-header row jet-color popup-container" >
                 <div class="col-md-8 d-flex align-self-center">
                     <div class="text-popup">Volleinspeisung
                     </div>
@@ -176,7 +178,7 @@
                 <div class="col-md-8 d-flex align-self-center">
                     <div class="row">
                         <div class="col-md-12 mb-2">
-                            <div id="Anschluss-Netzbetreibers-popup" class="text-popup">
+                            <div id="Anschluss-Netzbetreibers-popup" class="third-white-popup">
                                 Schleswig-Holstein Netz AG (SNB919861978666)
                             </div>
                             <div class="sub-text-popup">
@@ -184,7 +186,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">
-                            <div id="Spannungsebene-popup" class="text-popup">
+                            <div id="Spannungsebene-popup" class="third-white-popup">
                                 Höchstspannung
                             </div>
                             <div class="sub-text-popup">
@@ -194,7 +196,7 @@
                     </div>
                 </div>         
             </div>
-            <div class="accordion card-header row" id="accordionExample" style="border-radius: 5px;margin:10px;padding:0;">
+            <div class="accordion card-header row popup-container" id="accordionExample" style="border-radius: 5px;margin:10px;padding:0;">
                 <div class="accordion-item jet-color">
                   <h2 class="accordion-header jet-color">
                     <button class="accordion-button jet-color" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -204,31 +206,31 @@
                   <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body row">
                         <div class="col-md-12">
-                            <div class="text-popup">28.2.2019</div>
+                            <div class="third-white-popup">28.2.2019</div>
                             <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
                         </div>
                         <div class="col-md-12">
-                            <div id="MaStR-NrderEEG-Anlage-popup" class="text-popup">SEE997167004074</div>
+                            <div id="MaStR-NrderEEG-Anlage-popup" class="third-white-popup">SEE997167004074</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der Anlage</div>
                         </div>
                         <div class="col-md-12">
-                            <div id="InstallierteLeistungderEEG-Anlage-popup" class="text-popup">5,4 MW</div>
+                            <div id="InstallierteLeistungderEEG-Anlage-popup" class="third-white-popup">5,4 MW</div>
                             <div class="sub-text-popup">davon Leistung als EEG-Anlage eingtragen (in MW)</div>
                         </div>
                         <div class="col-md-12">
-                            <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="text-popup">8.11.2017</div>
+                            <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="third-white-popup">8.11.2017</div>
                             <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
                         </div>
                         <div class="col-md-12">
-                            <div id="EEG-Anlagenschlüssel-popup" class="text-popup">EEG998920826773</div>
+                            <div id="EEG-Anlagenschlüssel-popup" class="third-white-popup">EEG998920826773</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
                         </div>
                         <div class="col-md-12">
-                            <div class="text-popup">E2079301EA01000000000088121700001</div>
+                            <div class="third-white-popup">E2079301EA01000000000088121700001</div>
                             <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
                         </div>
                         <div class="col-md-12">
-                            <div id="Zuschlagnummer-popup" class="text-popup">WIN19-5/009,</div>
+                            <div id="Zuschlagnummer-popup" class="third-white-popup">WIN19-5/009,</div>
                             <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
                         </div>
                     </div>
