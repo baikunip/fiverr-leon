@@ -59,7 +59,7 @@ body { margin: 0; padding: 0;
 @media only screen and (max-width: 860px) {
     /* #map { bottom: auto;height:40vh; } */
     #popup{
-        left:0.2em;top:auto;bottom:4vh;max-height:36vh;width:99%;
+        left:.5%;right:auto;top:auto;bottom:4vh;max-height:36vh;width:99%;
     }
     #filter-bar{display:none;right:auto;left:0.2em;top:8vh;width:99%;max-height: 50vh;}
 }
