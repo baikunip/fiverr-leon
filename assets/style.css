@@ -18,9 +18,9 @@ body { margin: 0; padding: 0;
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
 #popup{
-    position: absolute;left:.5em;top:6.5vh;max-height:60vh;width:23vw;z-index:2;overflow: scroll;
+    position: absolute;left:.5em;bottom:5vh;max-height:80vh;width:32em;z-index:2;overflow: scroll;
     border-radius: 15px;background-color: rgba(23, 22, 26, 0.8705882352941177);border-style:solid;border-width:1px;border-color: #3C3C3E;
-
+    backdrop-filter: blur(7px);
 }
 .popup-container{border-radius: 15px;margin-left:10px;margin-right:10px;margin-top:10px;padding-top:15px;padding-bottom:15px;padding-left:10px;padding-right:10px;border-style:solid;border-width:1px;border-color: #3C3C3E;}
 #filter-bar{position: absolute;right:.5em;top:.5vh;width:20vw;z-index:2;max-height: 98vh;overflow: scroll;}
@@ -37,7 +37,10 @@ body { margin: 0; padding: 0;
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
 #accordionExample{border-style:solid;border-width:1px;border-color: #3C3C3E}
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
-.accordion-button.collapsed{color:#515155!important}
+.accordion-button.collapsed{color:#515155!important;background-color: transparent !important;}
+button.accordion-button:focus{
+    box-shadow: inherit;
+}
 .accordion-button,.accordion-button:hover {
     color: #72B8A4!important;
 }
