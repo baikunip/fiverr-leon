@@ -258,53 +258,33 @@ map.on('click', function (e) {
         else return popupDate.getDay()+'.'+popupDate.getMonth()+'.'+popupDate.getFullYear()
     }
     function setPopupValue(property){
-        if(feature.properties[property]) return "-"
+        if(!feature.properties[property]) return "-"
         else return feature.properties[property]
     }
-    $("#Betriebs-Status-popup").html(feature.properties["Betriebs-Status"])
+    $("#Betriebs-Status-popup").html(setPopupValue("Betriebs-Status"))
+    if(setPopupValue("Betriebs-Status")=="In Betrieb")$("#betriebs-status-icon").css("color","rgb(103, 213, 103)")
+    else if(setPopupValue("Betriebs-Status")=="Endgültig stillgelegt")$("#betriebs-status-icon").css("color","red")
+    else if(setPopupValue("Betriebs-Status")=="In Planung")$("#betriebs-status-icon").css("color","blue")
+    else $("#betriebs-status-icon").css("color","transparent")
     $("#BruttoleistungderEinheit-popup").html((feature.properties["Bruttoleistung der Einheit"]/1000)+" MW")
-    $("#HerstellerderWindenergieanlage-popup").html(feature.properties["Hersteller der Windenergieanlage"])
-    $("#Typenbezeichnung-popup").html(feature.properties["Typenbezeichnung"])
+    $("#HerstellerderWindenergieanlage-popup").html(setPopupValue("Hersteller der Windenergieanlage"))
+    $("#Typenbezeichnung-popup").html(setPopupValue("Typenbezeichnung"))
     $("#RotordurchmesserderWindenergieanlage-popup").html(setPopupValue("Rotordurchmesser der Windenergieanlage")+" m")
     $("#NabenhöhederWindenergieanlage-popup").html(setPopupValue("Nabenhöhe der Windenergieanlage")+" m")
     $("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Inbetriebnahmedatum der Einheit"))
     $("#NamedesWindparks-popup").html(setPopupValue("Name des Windparks"))
     $("#LetzteAktualisierung-popup").html(setPopupDate("Letzte Aktualisierung"))
     $("#Anlagenbetreibers-popup").html(setPopupValue("Name des Anlagenbetreibers (nur Org.)"))
-    $("#Anschluss-Netzbetreibers-popup").html(feature.properties["Name des Anschluss-Netzbetreibers"])
-    $("#Netzbetreiberprüfung-popup").html(feature.properties["Netzbetreiberprüfung"])
-    $("#Spannungsebene-popup").html(feature.properties["Spannungsebene"])
-    $("#MaStR-NrderEEG-Anlage-popup").html(feature.properties["MaStR-Nr. der EEG-Anlage"])
+    $("#Anschluss-Netzbetreibers-popup").html(setPopupValue("Name des Anschluss-Netzbetreibers"))
+    $("#Netzbetreiberprüfung-popup").html(setPopupValue("Netzbetreiberprüfung"))
+    if(feature.properties["Netzbetreiberprüfung"]=="Geprüft")$("#gepruft-check").show()
+    else $("#gepruft-check").hide()
+    $("#Spannungsebene-popup").html(setPopupValue("Spannungsebene"))
+    $("#MaStR-NrderEEG-Anlage-popup").html(setPopupValue("MaStR-Nr. der EEG-Anlage"))
     $("#InstallierteLeistungderEEG-Anlage-popup").html((feature.properties["Installierte Leistung der EEG-Anlage"]/1000)+" MW")
     $("#InbetriebnahmedatumderEEG-Anlage-popup").html(setPopupDate("Inbetriebnahmedatum der EEG-Anlage"))
-    $("#EEG-Anlagenschlüssel-popup").html(feature.properties["EEG-Anlagenschlüssel"])
-    $("#Zuschlagnummer-popup").html(feature.properties["Zuschlagnummer (EEG/KWK-Ausschreibung)"])
-    for (let index = 0; index < fkeys.length; index++) {
-        const element = fkeys[index];
-        let stringVal=''
-        if(dateAttr.includes(element)){
-            console.log(element+': '+feature.properties[element])
-            let convertedTime=new Date(feature.properties[element]* 1000)
-            stringVal=convertedTime.getDay()+'-'+convertedTime.getMonth()+'-'+convertedTime.getFullYear()
-            if(stringVal=='1-0-1900')stringVal='-'
-        }else{
-            stringVal=feature.properties[element]
-        }
-        if(userClick>4){
-            tagString+=`<tr class="jet-color">
-                        <th scope="row" class="jet-color">`+(index+1)+`</th>
-                        <td class="jet-color">`+element+`</td>
-                        <td class="jet-color"><b>*****</b></td>
-                      </tr>`
-        }
-            tagString+=`<tr class="jet-color">
-                            <th scope="row" class="jet-color">`+(index+1)+`</th>
-                            <td class="jet-color">`+element+`</td>
-                            <td class="jet-color">`+stringVal+`</td>
-                        </tr>`
-    }    
-    tagString+=`</table>
-            </div>`
+    $("#EEG-Anlagenschlüssel-popup").html(setPopupValue("EEG-Anlagenschlüssel"))
+    $("#Zuschlagnummer-popup").html(setPopupValue("Zuschlagnummer (EEG/KWK-Ausschreibung)"))
     $("#popup").show()
     // .empty().append(tagString)
     // example: https://codepen.io/cladjidane/pen/GRErYqO

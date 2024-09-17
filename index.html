@@ -58,7 +58,7 @@
         <div class="card" id="popup">
             <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
                 <div class="col-md-4 d-flex justify-content-start align-items-center">
-                    <div id="Betriebs-Status-icon"><i class="bi bi-circle-fill h5" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
+                    <div><i class="bi bi-circle-fill h5" id="betriebs-status-icon" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
                     <div id="Betriebs-Status-popup" class="text-popup" style="font-weight: 400;font-size: 1.5em;">-</div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center align-items-center">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
-                    <img src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin:0;padding:0;">
+                    <img id="gepruft-check" src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin-right:5px;padding:0;">
                     <div id="Netzbetreiberprüfung-popup" class="align-self-end text-popup"> Geprüft</div>
                 </div>
                 <div class="col-md-6 d-flex align-self-center">
@@ -196,10 +196,10 @@
                     </div>
                 </div>         
             </div>
-            <div class="accordion card-header row popup-container" id="accordionExample" style="border-radius: 5px;margin:10px;padding:0;">
-                <div class="accordion-item jet-color">
-                  <h2 class="accordion-header jet-color">
-                    <button class="accordion-button jet-color" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div class="accordion accordion-flush card-header row popup-container" id="accordionExample" style="margin:10px;padding:0;">
+                <div class="accordion-item jet-color" style="border-radius:15px;">
+                  <h2 class="accordion-header jet-color accordion-head">
+                    <button class="accordion-button jet-color"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Weitere Details
                     </button>
                   </h2>
