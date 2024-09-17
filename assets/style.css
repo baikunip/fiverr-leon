@@ -48,20 +48,19 @@ body { margin: 0; padding: 0;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23515155'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")!important;
 }
 #turbine-img{
-    /* background-color: rgb(103, 213, 103); */
-    /* background-blend-mode: multiply; */
-    background-size: contain;
-    background-repeat: no-repeat;
     width:1.9em;
 }
-#manufacturing-img{background-image: url('./img/manufacturing.png');
-    /* background-color: rgb(103, 213, 103); */
-    background-blend-mode: multiply;
-    background-size: contain;
-    background-repeat: no-repeat;
+#manufacturing-img{
     width:7em;
-    height:10em;
 }
 #point-legend{background-color: #FFFC62;}
 #heat-point-legend{background-image: linear-gradient(to right,rgb(255,252,28),rgb(209,229,240),rgb(253,219,199),rgb(239,138,98),rgb(178,24,43));}
+
+@media only screen and (max-width: 860px) {
+    /* #map { bottom: auto;height:40vh; } */
+    #popup{
+        left:0.2em;top:auto;bottom:4vh;max-height:36vh;width:99%;
+    }
+    #filter-bar{display:none;right:auto;left:0.2em;top:8vh;width:99%;max-height: 50vh;}
+}
         

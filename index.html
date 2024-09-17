@@ -21,8 +21,8 @@
             <div class="card-header"><h5>Layer Control</h5></div>
             <div class="card-body">
                 <div class="row no-gutters">
-                    <div class="col-md-8 align-self-center"><strong>Turbine Overview</strong></div>
-                    <div class="col-md-2 align-self-center dropdown">
+                    <div class="col-8 align-self-center"><strong>Turbine Overview</strong></div>
+                    <div class="col-2 align-self-center dropdown">
                         <a href="#" class="btn btn-sm btn-dark jet-color" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                               <li><a class="dropdown-item active" href="#">Zoom to fit</a></li>
@@ -30,17 +30,17 @@
                               <li><a class="dropdown-item" href="#">Show others</a></li>
                             </ul>
                     </div>
-                    <div class="col-md-2 align-self-center" id="point-heat-visibility">
+                    <div class="col-2 align-self-center" id="point-heat-visibility">
                         <a id="point-heat-show" class="btn btn-sm btn-dark jet-color" onclick="layerHide('point-heat')" role="button" data-bs-toggle="button"><i class="bi bi-eye"></i></a>
                     </div>
-                    <div class="col-md-2 align-self-center" id="heat-point-low-label">Low</div>
-                    <div class="col-md-8 align-self-center">
+                    <div class="col-2 align-self-center" id="heat-point-low-label">Low</div>
+                    <div class="col-8 align-self-center">
                         <div id="heat-point-legend" class="legend-bar"></div>
                     </div>
-                    <div class="col-md-2 align-self-center" id="heat-point-top-label">High</div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-8 align-self-center d-flex justify-content-start"><div class="dot-legend align-self-center" id="point-legend"></div><strong>Turbines</strong></div>
-                    <div class="col-md-2 align-self-center dropdown">
+                    <div class="col-2 align-self-center" id="heat-point-top-label">High</div>
+                    <div class="col-12"><hr></div>
+                    <div class="col-8 align-self-center d-flex justify-content-start"><div class="dot-legend align-self-center" id="point-legend"></div><strong>Turbines</strong></div>
+                    <div class="col-2 align-self-center dropdown">
                         <a href="#" class="btn btn-sm btn-dark jet-color" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                               <li><a class="dropdown-item active" href="#">Zoom to fit</a></li>
@@ -48,50 +48,50 @@
                               <li><a class="dropdown-item" href="#">Show others</a></li>
                             </ul>
                     </div>
-                    <div class="col-md-2 align-self-center" id="point-visibility">
+                    <div class="col-2 align-self-center" id="point-visibility">
                         <a id="point-heat-show" class="btn btn-sm btn-dark jet-color" onclick="layerHide('point')" role="button" data-bs-toggle="button"><i class="bi bi-eye"></i></a>
                     </div>
-                    <div class="col-md-12"><hr></div>
+                    <div class="col-12"><hr></div>
                 </div>
             </div>
         </div> -->
         <div class="card" id="popup">
             <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
-                <div class="col-md-4 d-flex justify-content-start align-items-center">
+                <div class="col-4 d-flex justify-content-start align-items-center">
                     <div><i class="bi bi-circle-fill h5" id="betriebs-status-icon" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
                     <div id="Betriebs-Status-popup" class="text-popup" style="font-weight: 400;font-size: 1.5em;">-</div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="col-4 d-flex justify-content-center align-items-center">
                     <div><i class="bi bi-lightning-charge-fill h5" style="color:rgb(103, 213, 103)"></i></div>
                     <div style="font-weight: 400;font-size: 1.5em;" id="BruttoleistungderEinheit-popup" class="text-popup">-</div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-end align-items-center">
+                <div class="col-4 d-flex justify-content-end align-items-center">
                     <!-- <div id="turbine-img"></div> -->
                     <img src="./assets/img/turbine.png" alt="" id="turbine-img">
                     <div id="vestas-text" class="text-popup">Vestas</div>
                 </div>
             </div>
             <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-md-7 d-flex align-self-center">
+                <div class="col-7 d-flex align-self-center">
                     <div id="HerstellerderWindenergieanlage-popup" class="text-popup">Vestas Deutschland GmbH</div>
                 </div>
-                <div class="col-md-1 text-popup">-</div>
-                <div class="col-md-4">
+                <div class="col-1 text-popup">-</div>
+                <div class="col-4">
                     <div id="Typenbezeichnung-popup" class="text-end third-white-popup">V1.54</div>
                 </div>
-                <div class="col-md-6 d-flex align-self-center">
+                <div class="col-6 d-flex align-self-center">
                     <div class="sub-text-popup">Hersteller</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="text-end sub-text-popup">Typenbezeichnung</div>
                 </div>
-                <div class="col-md-4 d-flex align-self-center">
+                <div class="col-4 d-flex align-self-center">
                     <!-- <div id="manufacturing-img"></div> -->
                      <img src="./assets/img/manufacturing.png" alt="" style="width:100%;margin:0;padding:0;">
                 </div>
-                <div class="col-md-3 d-flex align-self-end">
+                <div class="col-3 d-flex align-self-end">
                     <div class="row">
-                        <div class="col-md-12 mb-4">
+                        <div class="col-12 mb-4">
                             <div id="RotordurchmesserderWindenergieanlage-popup" class="third-white-popup">
                                 112m
                             </div>
@@ -99,7 +99,7 @@
                                 Rotordurchmesser
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4 mb-2 align-self-end">
+                        <div class="col-12 mt-4 mb-2 align-self-end">
                             <div id="NabenhöhederWindenergieanlage-popup" class="third-white-popup">
                                 112m
                             </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 align-self-end">
+                <div class="col-5 align-self-end">
                     <div id="InbetriebnahmedatumderEinheit-popup" class="text-end text-popup">
                         -
                     </div>
@@ -119,25 +119,25 @@
                 </div>
             </div>
             <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-md-8 d-flex align-self-center">
+                <div class="col-8 d-flex align-self-center">
                     <div id="NamedesWindparks-popup" class="text-popup">Windpark Sillerup</div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-4">
                     <div id="LetzteAktualisierung-popup" class="text-end third-white-popup">-</div>
                 </div>
-                <div class="col-md-6 d-flex align-self-center">
+                <div class="col-6 d-flex align-self-center">
                     <div class="sub-text-popup">Name des Windparks</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="text-end sub-text-popup">Letzte Aktualisierung</div>
                 </div>
-                <div class="col-md-4 d-flex align-self-center">
+                <div class="col-4 d-flex align-self-center">
                     <!-- <div id="manufacturing-img"></div> -->
                      <img src="./assets/img/wind-farm.png" alt="" style="width:100%;margin:0;padding:0;">
                 </div>
-                <div class="col-md-8 d-flex align-self-end">
+                <div class="col-8 d-flex align-self-end">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-12 mb-3">
                             <div id="Betriebers-popup" class="third-white-popup">
                                 Norderwöhrden Poolgesellschaft mbH
                             </div>
@@ -145,7 +145,7 @@
                                 Betreiber
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
+                        <div class="col-12 mt-4">
                             <div id="Anlagenbetreibers-popup" class="third-white-popup">
                                 WEA 1 (100187297)
                             </div>
@@ -158,26 +158,26 @@
                 
             </div>
             <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-md-8 d-flex align-self-center">
+                <div class="col-8 d-flex align-self-center">
                     <div class="text-popup">Volleinspeisung
                     </div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-end">
+                <div class="col-4 d-flex justify-content-end">
                     <img id="gepruft-check" src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin-right:5px;padding:0;">
                     <div id="Netzbetreiberprüfung-popup" class="align-self-end text-popup"> Geprüft</div>
                 </div>
-                <div class="col-md-6 d-flex align-self-center">
+                <div class="col-6 d-flex align-self-center">
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="text-end sub-text-popup">Netzbetreiberprüfung</div>
                 </div>
-                <div class="col-md-4 d-flex align-self-center">
+                <div class="col-4 d-flex align-self-center">
                     <!-- <div id="manufacturing-img"></div> -->
                      <img src="./assets/img/grid-connect.png" alt="" style="width:100%;margin:0;padding:0;">
                 </div>
-                <div class="col-md-8 d-flex align-self-center">
+                <div class="col-8 d-flex align-self-center">
                     <div class="row">
-                        <div class="col-md-12 mb-2">
+                        <div class="col-12 mb-2">
                             <div id="Anschluss-Netzbetreibers-popup" class="third-white-popup">
                                 Schleswig-Holstein Netz AG (SNB919861978666)
                             </div>
@@ -185,7 +185,7 @@
                                 Anschluss-Netzbetreiber
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
+                        <div class="col-12 mt-4">
                             <div id="Spannungsebene-popup" class="third-white-popup">
                                 Höchstspannung
                             </div>
@@ -205,31 +205,31 @@
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body row">
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div class="third-white-popup">28.2.2019</div>
                             <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div id="MaStR-NrderEEG-Anlage-popup" class="third-white-popup">SEE997167004074</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der Anlage</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div id="InstallierteLeistungderEEG-Anlage-popup" class="third-white-popup">5,4 MW</div>
                             <div class="sub-text-popup">davon Leistung als EEG-Anlage eingtragen (in MW)</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="third-white-popup">8.11.2017</div>
                             <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div id="EEG-Anlagenschlüssel-popup" class="third-white-popup">EEG998920826773</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div class="third-white-popup">E2079301EA01000000000088121700001</div>
                             <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div id="Zuschlagnummer-popup" class="third-white-popup">WIN19-5/009,</div>
                             <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
                         </div>
@@ -264,7 +264,7 @@
             <div class="card-header"><h5>Filters Control</h5></div>
             <div class="card-body">
                 <div class="row no-gutters">
-                    <div class="col-md-12">Filter Selection</div>
+                    <div class="col-12">Filter Selection</div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="betriebs-status-check" checked value="Betriebs-Status">
                             <label class="form-check-label" for="betriebs-status-check">Betriebs-Status</label>
@@ -285,59 +285,59 @@
                             <input class="form-check-input" type="checkbox" id="bundesland-check" checked value="Bundesland">
                             <label class="form-check-label" for="bundesland-check">Bundesland</label>
                         </div>
-                    <div class="col-md-12"><hr></div>
-                    <div class="col-md-12 betriebs-status-filter">Betriebs-Status</div>
-                    <div class="col-md-6 betriebs-status-filter">
+                    <div class="col-12"><hr></div>
+                    <div class="col-12 betriebs-status-filter">Betriebs-Status</div>
+                    <div class="col-6 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-betrieb">
                             <label class="form-check-label" for="in-betrieb">In Betrieb</label>
                         </div>
                     </div>
-                    <div class="col-md-6 betriebs-status-filter">
+                    <div class="col-6 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-planung">
                             <label class="form-check-label" for="in-planung">In Planung</label>
                         </div>
                     </div>
-                    <div class="col-md-12 betriebs-status-filter">
+                    <div class="col-12 betriebs-status-filter">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" checked id="in-es">
                             <label class="form-check-label" for="in-es">Endgültig stillgelegt</label>
                         </div>
                     </div>
-                    <div class="col-md-12 betriebs-status-filter"><hr></div>
-                    <div class="col-md-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
-                    <div class="col-md-3 align-self-center bde-filter" id="slider-filter-min">0</div>
-                    <div class="col-md-6 align-self-center bde-filter">
+                    <div class="col-12 betriebs-status-filter"><hr></div>
+                    <div class="col-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
+                    <div class="col-3 align-self-center bde-filter" id="slider-filter-min">0</div>
+                    <div class="col-6 align-self-center bde-filter">
                         <div id="slider-filter"></div>
                     </div>
-                    <div class="col-md-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
-                    <div class="col-md-12 bde-filter"><hr></div>
-                    <div class="col-md-12 hdw-filter">Hersteller der Windenergieanlage</div>
-                    <div class="col-md-12 hdw-filter">
+                    <div class="col-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
+                    <div class="col-12 bde-filter"><hr></div>
+                    <div class="col-12 hdw-filter">Hersteller der Windenergieanlage</div>
+                    <div class="col-12 hdw-filter">
                         <select id="energy-producer-list" name="energy-producer-list" multiple></select>
                     </div>
-                    <div class="col-md-12 hdw-filter"><hr></div>
-                    <div class="col-md-12 ide-filter">Inbetriebnahmedatum der Einheit</div>
-                    <div class="col-md-12 align-self-center ide-filter">
+                    <div class="col-12 hdw-filter"><hr></div>
+                    <div class="col-12 ide-filter">Inbetriebnahmedatum der Einheit</div>
+                    <div class="col-12 align-self-center ide-filter">
                         <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
                         <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" />
                     </div>
-                    <div class="col-md-12 ide-filter"><hr></div>
-                    <div class="col-md-12 bundesland-filter">Bundesland</div>
-                    <div class="col-md-4 bundesland-filter align-self-center">
+                    <div class="col-12 ide-filter"><hr></div>
+                    <div class="col-12 bundesland-filter">Bundesland</div>
+                    <div class="col-4 bundesland-filter align-self-center">
                         <select id="bundesland-query" class="form-select-sm jet-color" aria-label="Default select example">
                             <option value="==">Is in</option>
                             <option value="!=" selected>Is not in</option>
                         </select>
                     </div>
-                    <div class="col-md-8 bundesland-filter">
+                    <div class="col-8 bundesland-filter">
                         <input class="form-control-sm jet-color bar-filter" list="bundeslandOptions" id="bundesland" placeholder="Bundesland">
                         <datalist id="bundeslandOptions">
                         </datalist>
                     </div>
-                    <div class="col-md-12 bundesland-filter"><hr></div>
-                    <div class="col-md-12 mt-2 d-grid gap-2">
+                    <div class="col-12 bundesland-filter"><hr></div>
+                    <div class="col-12 mt-2 d-grid gap-2">
                         <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Set Filter</button>
                     </div>
                 </div>
