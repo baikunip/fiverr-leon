@@ -18,7 +18,7 @@ body { margin: 0; padding: 0;
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
 #popup{
-    position: absolute;left:.5em;bottom:5vh;max-height:80vh;width:32em;z-index:2;overflow: scroll;
+    position: absolute;left:.5em;bottom:5vh;max-height:80vh;width:38em;z-index:2;overflow: scroll;
     border-radius: 15px;background-color: rgba(23, 22, 26, 0.8705882352941177);border-style:solid;border-width:1px;border-color: #3C3C3E;
     backdrop-filter: blur(7px);
 }
