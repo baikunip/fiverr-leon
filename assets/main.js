@@ -287,8 +287,6 @@ map.on('click', function (e) {
     $("#EEG-Anlagenschlüssel-popup").html(setPopupValue("EEG-Anlagenschlüssel"))
     $("#Zuschlagnummer-popup").html(setPopupValue("Zuschlagnummer (EEG/KWK-Ausschreibung)"))
     $("#popup").show()
-    // .empty().append(tagString)
-    // example: https://codepen.io/cladjidane/pen/GRErYqO
     map.setLayoutProperty('point', 'icon-image', ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 'nopulsing-dot'])
 });
 map.on('mouseenter', 'point', () => {
@@ -298,6 +296,21 @@ map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
 })
 // filters
+// Hide/Show FIlters
+function showhidefilter(stats){
+    if(stats=="hidden"){
+        $("#filter-bar").css("width","55px").css("overflow","hide").css("max-height","55px")
+        $("#filter-btn-container").empty().append(
+            `<button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color btn btn-sm"><b><<</b></button>`
+        )
+    }else{
+        $("#filter-bar").css("width","22vw").css("overflow","scroll").css("max-height","98vh")
+        $("#filter-btn-container").empty().append(
+            `<button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"><b>>></b></button>`
+        )
+    }
+}    
+
 $('#betriebs-status-check').change(()=>{
     if($('#betriebs-status-check').is(":checked"))$('.betriebs-status-filter').show()
     else $('.betriebs-status-filter').hide()     
