@@ -23,7 +23,7 @@ body { margin: 0; padding: 0;
     backdrop-filter: blur(7px);
 }
 .popup-container{border-radius: 15px;margin-left:10px;margin-right:10px;margin-top:10px;padding-top:15px;padding-bottom:15px;padding-left:10px;padding-right:10px;border-style:solid;border-width:1px;border-color: #3C3C3E;}
-#filter-bar{position: absolute;right:0;top:.5vh;width:20vw;z-index:2;max-height: 98vh;overflow: scroll;
+#filter-bar{position: absolute;right:0;top:.5vh;width:20vw;z-index:2;max-height: 98vh;overflow: scroll;background-color: rgba(23, 22, 26, 0.8705882352941177);backdrop-filter: blur(7px);
     border: 1px solid #3C3C3E;
     border-top-left-radius: 15px;
     border-bottom-left-radius:15px;

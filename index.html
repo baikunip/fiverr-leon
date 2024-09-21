@@ -238,7 +238,7 @@
                 </div>
             </div>
         </div>
-        <div class="card jet-color" id="filter-bar">
+        <div class="card" id="filter-bar">
             <div id="filter-btn-container" class="card-header row no-gutters jet-color popup-container d-flex align-items-center" >
                 <div class="col-2">
                     <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"><b>>></b></button>
@@ -248,6 +248,14 @@
                 </div>
             </div>
             <div class="card-header"><h5>Filters Control</h5></div>
+            <div class="card-header row jet-color popup-container d-flex align-items-center" >
+                <div class="col-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
+                <div class="col-3 align-self-center bde-filter" id="slider-filter-min">0</div>
+                <div class="col-6 align-self-center bde-filter">
+                    <div id="slider-filter"></div>
+                </div>
+                <div class="col-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
+            </div>
             <div class="card-body">
                 <div class="row no-gutters">
                     <div class="col-12">Filter Selection</div>
@@ -292,12 +300,7 @@
                         </div>
                     </div>
                     <div class="col-12 betriebs-status-filter"><hr></div>
-                    <div class="col-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
-                    <div class="col-3 align-self-center bde-filter" id="slider-filter-min">0</div>
-                    <div class="col-6 align-self-center bde-filter">
-                        <div id="slider-filter"></div>
-                    </div>
-                    <div class="col-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
+                    
                     <div class="col-12 bde-filter"><hr></div>
                     <div class="col-12 hdw-filter">Hersteller der Windenergieanlage</div>
                     <div class="col-12 hdw-filter">
