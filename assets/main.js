@@ -379,9 +379,9 @@ $('#in-betrieb').on('change',()=>{
     if($('#in-betrieb').is(":checked")) stats.push("In Betrieb")
     else stats.splice(stats.indexOf("In Betrieb"),1)
 })
-$('#in-es').on('change',()=>{
-    if($('#in-es').is(":checked")) stats.push("Endgültig stillgelegt")
-    else stats.splice(stats.indexOf("Endgültig stillgelegt"),1)
+$('#in-vs').on('change',()=>{
+    if($('#in-es').is(":checked")) stats.push("Vorübergehend stillgelegt")
+    else stats.splice(stats.indexOf("Vorübergehend stillgelegt"),1)
 })
 $('#apply-filter').on('click',()=>{
     let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
