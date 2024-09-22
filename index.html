@@ -247,9 +247,14 @@
                     <div class="text-popup">Auswahl Filtern</div>
                 </div>
             </div>
-            <div class="card-header"><h5>Filters Control</h5></div>
             <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-12 align-self-center bde-filter">Bruttoleistung der Einheit</div>
+                <div class="col-12 align-self-center bde-filter">
+                    <select id="slider-attr-select" class="form-select jet-color mb-2" aria-label="Default select example">
+                        <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
+                        <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
+                        <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
+                      </select>
+                </div>
                 <div class="col-3 align-self-center bde-filter" id="slider-filter-min">0</div>
                 <div class="col-6 align-self-center bde-filter">
                     <div id="slider-filter"></div>
