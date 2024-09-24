@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="./assets/plugin/multi-select/multi-select.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -247,7 +248,7 @@
                     <div class="text-popup">Auswahl Filtern</div>
                 </div>
             </div>
-            <div class="card-header row jet-color popup-container d-flex align-items-center" >
+            <div class="card-header row jet-color filter-container d-flex align-items-center" >
                 <div class="col-12 align-self-center bde-filter">
                     <select id="slider-attr-select" class="form-select jet-color mb-2" aria-label="Default select example">
                         <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
@@ -261,7 +262,7 @@
                 </div>
                 <div class="col-3 align-self-center bde-filter" id="slider-filter-max">20000</div>
             </div>
-            <div class="card-header row no-gutters jet-color popup-container d-flex align-items-center">
+            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
                 <div class="col-5 p-0 m-0">
                     <input class="btn-check btn-betrieb-check" type="checkbox" role="switch" id="in-betrieb">
                     <label class="btn-betrieb-status btn btn-sm" for="in-betrieb">In Betrieb</label>
@@ -279,7 +280,46 @@
                     <label class="btn btn-sm btn-betrieb-status" for="in-vs">Vorübergehend stillgelegt</label>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
+                <div class="col-5">Filtern nach</div>
+                <div class="col-7 p-0 m-0 align-self-center">
+                    <select id="slider-attr-select" class="form-select jet-color mb-2" aria-label="Default select example">
+                        <option selected value="Hersteller der Windenergieanlage">Hersteller</option>
+                        <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
+                        <option value="Bundesland">Bundesland</option>
+                    </select>
+                </div>
+                <div class="col-12 mt-2 hdw-filter">
+                    <select id="energy-producer-list" name="energy-producer-list" multiple></select>
+                </div>
+            </div>
+            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
+                <div class="col-10 ide-filter">Inbetriebnahmedatum der Einheit</div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-sm reverse-btn"><i class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
+                <div class="col-6 align-self-center ide-filter">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input id="date-commision-start" type="text" class="form-control jet-color">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
+                    <!-- <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" /> -->
+                </div>
+                <div class="col-6 align-self-center">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input id="date-commision-end" type="text" class="form-control jet-color">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
+                    <!-- <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" /> -->
+                </div>
+            </div>
+            <!-- <div class="card-body">
                 <div class="row no-gutters">
                     <div class="col-12">Filter Selection</div>
                         <div class="form-check form-check-inline">
@@ -321,7 +361,7 @@
                     <div class="col-12 hdw-filter"><hr></div>
                     <div class="col-12 ide-filter">Inbetriebnahmedatum der Einheit</div>
                     <div class="col-12 align-self-center ide-filter">
-                        <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
+                        <input type="text" id="date-comission-start" class="jet-color date-picker-filter">
                         <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" />
                     </div>
                     <div class="col-12 ide-filter"><hr></div>
@@ -342,7 +382,7 @@
                         <button type="button" class="btn btn-primary btn-sm" id="apply-filter">Set Filter</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -350,6 +390,7 @@
     <script src="./assets/plugin/multi-select/jquery.multi-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
     <script src="./assets/main.js"></script>

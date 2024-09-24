@@ -297,6 +297,10 @@ map.on('mouseleave', 'point', () => {
 })
 // filters
 // Hide/Show FIlters
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
 function showhidefilter(stats){
     if(stats=="hidden"){
         $("#filter-bar").css("width","80px").css("overflow","hide").css("max-height","55px")
@@ -304,7 +308,7 @@ function showhidefilter(stats){
             `<button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"><b><<</b></button>`
         )
     }else{
-        $("#filter-bar").css("width","22vw").css("overflow","scroll").css("max-height","98vh")
+        $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
         $("#filter-btn-container").empty().append(
             `
                 <div class="col-2">
@@ -355,6 +359,7 @@ $( "#slider-filter" ).slider({
       $( "#slider-filter-min" ).html(ui.values[0])
       $( "#slider-filter-max" ).html(ui.values[1])
       bdeVal=ui.values
+      applyFilter()
     }
 });
 energyProducer.forEach(element=>{$("#energy-producer-list").append('<option value="'+element+'">'+element+'</option>')})
@@ -383,7 +388,7 @@ $('#in-vs').on('change',()=>{
     if($('#in-es').is(":checked")) stats.push("Vorübergehend stillgelegt")
     else stats.splice(stats.indexOf("Vorübergehend stillgelegt"),1)
 })
-$('#apply-filter').on('click',()=>{
+function applyFilter(){
     let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
     bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()],
     energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]],
@@ -404,4 +409,4 @@ $('#apply-filter').on('click',()=>{
     map.setFilter('point-heat',['any',
         queryFilter
     ])
-})
+}
