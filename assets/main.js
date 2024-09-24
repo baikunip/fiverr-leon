@@ -349,7 +349,9 @@ bundesland=["Hessen","Schleswig-Holstein","Nordrhein-Westfalen","Rheinland-Pfalz
     "Hamburg"
 ],
 energyProducer=['nan', 'Frisia Windkraftanlagen Service GmbH', 'Weinack Windenergie Anlagen GmbH', 'Gamesa Corporación Tecnológica S.A.', 'General Electric Deutschland Holding GmbH', 'Sonkyo Energy', 'TOZZI NORD\xa0S.R.L.', 'BARD Holding GmbH', 'eno energy systems GmbH', 'Octopus Systems GmbH', 'Wind Technik Nord GmbH', 'Norddeutsche H-Rotoren GmbH & Co. KG', 'Wittenbauer Technik & Consulting GmbH', 'Pfleiderer Deutschland GmbH', 'Krogmann GmbH & Co. KG', 'LWS systems GmbH & Co. KG.', 'Heyde Windtechnik GmbH', 'Siemens Wind Power GmbH & Co. KG', 'ABB Power-One Italy SpA', 'HSW Husumer Schiffswerft GmbH & Co. KG', 'InVentus Energie GmbH', 'GE Wind Energy GmbH', 'SB Energy UK Ltd.', 'ESPV-TEC GmbH & Co. KG', 'MyWind', 'Gödecke Energie- und Antriebstechnik GmbH', 'WTT GmbH', 'DeWind GmbH', 'Alpha projekt GmbH', 'PowerWind GmbH', 'Svit Vitru', 'VWA-Deutschland GmbH Freude am Strom', 'WSD - Windsysteme', 'Werner Eberle GmbH', 'Anhui Hummer Dynamo Co.,Ltd.', 'Uni Wind GmbH', 'Wind World A/S', 'Südwind Borsig Energy GmbH', 'AN Windenergie GmbH', 'MAX-wyn GmbH', 'REpower Systems SE', 'Nordex SE', 'Kessler Energy GmbH', 'Schuler Aktiengesellschaft', 'SkyWind GmbH', 'windradshop', 'Siemens Gamesa Renewable Energy GmbH & Co. KG', 'eno energy GmbH', 'Jacobs Energie GmbH', 'SeeBA Energiesysteme GmbH', 'EVIAG AG', 'VENSYS Energy AG', 'Vestas Deutschland GmbH', 'Hyden', 'VENTIS WIND SERVICE S.L', 'MHI Vestas Offshore Wind', 'Aeolos Windkraftanlagen', 'FWT energy GmbH', 'Eovent GmbH', 'Adwen GmbH', 'Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)', 'Nova-Wind GmbH', 'SEEWIND Windenergiesysteme GmbH', 'Lely Aircon B.V. Niederlassung Leer', 'Mischtechnik Hoffmann & Partner GmbH', 'PreVent GmbH', 'JAMP GmbH', 'Pfleiderer Wind Energy GmbH', 'GE Renewable Germany GmbH', 'Lagerwey GmbH', 'ALPHACON GmbH', 'Bonus Energy A/S', 'NEG Micon Deutschland GmbH', 'Fuhrländer AG', 'Nordtank Energy Group', 'Wind+Wing Technologies', 'Nordex Germany GmbH', 'myLEDsun', 'WES IBS GmbH', 'WindTec GmbH', 'Home Energy International', 'Tacke GmbH & Co. KG', 'VENTEGO AG', 'QREON GmbH', 'ROPATEC SRL', 'bwu Brandenburgische Wind- und Umwelttechnologien GmbH', 'Nordex Energy GmbH', 'E.A.Z. Wind GmbH', 'BRAUN Windturbinen GmbH', 'Kleinwind GmbH', 'Fortis Wind Energy', 'Amperax Energie GmbH', 'Schütz GmbH & Co. KGaA', 'PSW-Energiesysteme GmbH', 'Hanseatische AG', 'Easywind GmbH', 'K.D.-Stahl- und Maschinenbau GmbH', 'Ventis Energietechnik GmbH', 'Wincon West Wind A/S', 'Senvion Deutschland GmbH', 'Husumer Dock und Reparatur GmbH & Co. KG', 'STM Montage GmbH', 'EUSAG AG', 'S & W ENERGIESYSTEME UG (haftungsbeschränkt)', 'ENERCON GmbH', 'Kähler Maschinenbau GmbH', 'FuSystems SkyWind GmbH', 'Sonstige', 'AN Windanlagen GmbH', 'SMA Solar Technology AG', 'LuvSide GmbH', 'SOLAR-WIND-TEAM GmbH', 'Kenersys Europe GmbH', 'AN-Maschinenbau- und Umweltschutzanlagen GmbH', 'Honeywell Windtronics', 'Enron Wind GmbH', 'AREVA GmbH']
+,nachList={"Hersteller der Windenergieanlage":energyProducer,"Bundesland":bundesland,"Name des Anschluss-Netzbetreibers":['test']}
 bundesland.forEach(element => {$("#bundeslandOptions").append('<option value="'+element+'">')});
+
 $( "#slider-filter" ).slider({
     range: true,
     min: 0,
@@ -362,8 +364,17 @@ $( "#slider-filter" ).slider({
       applyFilter()
     }
 });
-energyProducer.forEach(element=>{$("#energy-producer-list").append('<option value="'+element+'">'+element+'</option>')})
-$("#energy-producer-list").multiSelect()
+$('#slider-nach-select').on('change', function() {
+    console.log($('#slider-nach-select').val())
+    $("#nach-list").empty()
+    let dataList=nachList[$('#slider-nach-select').val()]
+    console.log(dataList)
+    dataList.forEach(element=>{$("#nach-list").append('<option value="'+element+'">'+element+'</option>')})
+    
+});
+energyProducer.forEach(element=>{$("#nach-list").append('<option value="'+element+'">'+element+'</option>')})
+$("#nach-list").multiSelect()
+
 // $('#date-comission-start').datepicker()
 // $('#date-comission-end').datepicker()
 let dateComissioned=[0,Date.now()]
@@ -389,20 +400,22 @@ $('#in-vs').on('change',()=>{
     else stats.splice(stats.indexOf("Vorübergehend stillgelegt"),1)
 })
 function applyFilter(){
+    console.log('filter applied')
     let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
     bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()],
-    energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#energy-producer-list").val()]],
+    energyProducerFilter=["in", ["get","Hersteller der Windenergieanlage"],["literal", $("#nach-list").val()]],
     // console.log('Start Date: '+$('#date-comission-start').datepicker("getDate"))
     comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]],
     comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],
     bde1=[">=", ["get", "Bruttoleistung der Einheit"], bdeVal[0]],
     bde2=["<=", ["get", "Bruttoleistung der Einheit"], bdeVal[1]]
-    queryFilter=['all']
-    if($('#betriebs-status-check').is(':checked')) queryFilter.push(statsFilter)
-    if($('#bde-check').is(':checked')) queryFilter.push(bde1,bde2)
-    if($('#hdw-check').is(':checked')) queryFilter.push(energyProducerFilter)
-    if($('#ide-check').is(':checked')) queryFilter.push(comissionStart,comissionEnd)
-    if($('#bundesland-check').is(':checked')) queryFilter.push(bundeslandFilter)
+    queryFilter=['all',statsFilter,bde1,bde2,energyProducerFilter,comissionStart,comissionEnd,bundeslandFilter]
+    // if($('#betriebs-status-check').is(':checked')) queryFilter.push(statsFilter)
+    // if($('#bde-check').is(':checked')) queryFilter.push(bde1,bde2)
+    // if($('#hdw-check').is(':checked')) queryFilter.push(energyProducerFilter)
+    // if($('#ide-check').is(':checked')) queryFilter.push(comissionStart,comissionEnd)
+    // if($('#bundesland-check').is(':checked')) queryFilter.push(bundeslandFilter)
+    console.log(queryFilter)
     map.setFilter('point',['any',
         queryFilter
     ])
