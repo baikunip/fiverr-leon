@@ -346,7 +346,7 @@ bundesland=["Hessen","Schleswig-Holstein","Nordrhein-Westfalen","Rheinland-Pfalz
 ],
 energyProducer=['nan', 'Frisia Windkraftanlagen Service GmbH', 'Weinack Windenergie Anlagen GmbH', 'Gamesa Corporación Tecnológica S.A.', 'General Electric Deutschland Holding GmbH', 'Sonkyo Energy', 'TOZZI NORD\xa0S.R.L.', 'BARD Holding GmbH', 'eno energy systems GmbH', 'Octopus Systems GmbH', 'Wind Technik Nord GmbH', 'Norddeutsche H-Rotoren GmbH & Co. KG', 'Wittenbauer Technik & Consulting GmbH', 'Pfleiderer Deutschland GmbH', 'Krogmann GmbH & Co. KG', 'LWS systems GmbH & Co. KG.', 'Heyde Windtechnik GmbH', 'Siemens Wind Power GmbH & Co. KG', 'ABB Power-One Italy SpA', 'HSW Husumer Schiffswerft GmbH & Co. KG', 'InVentus Energie GmbH', 'GE Wind Energy GmbH', 'SB Energy UK Ltd.', 'ESPV-TEC GmbH & Co. KG', 'MyWind', 'Gödecke Energie- und Antriebstechnik GmbH', 'WTT GmbH', 'DeWind GmbH', 'Alpha projekt GmbH', 'PowerWind GmbH', 'Svit Vitru', 'VWA-Deutschland GmbH Freude am Strom', 'WSD - Windsysteme', 'Werner Eberle GmbH', 'Anhui Hummer Dynamo Co.,Ltd.', 'Uni Wind GmbH', 'Wind World A/S', 'Südwind Borsig Energy GmbH', 'AN Windenergie GmbH', 'MAX-wyn GmbH', 'REpower Systems SE', 'Nordex SE', 'Kessler Energy GmbH', 'Schuler Aktiengesellschaft', 'SkyWind GmbH', 'windradshop', 'Siemens Gamesa Renewable Energy GmbH & Co. KG', 'eno energy GmbH', 'Jacobs Energie GmbH', 'SeeBA Energiesysteme GmbH', 'EVIAG AG', 'VENSYS Energy AG', 'Vestas Deutschland GmbH', 'Hyden', 'VENTIS WIND SERVICE S.L', 'MHI Vestas Offshore Wind', 'Aeolos Windkraftanlagen', 'FWT energy GmbH', 'Eovent GmbH', 'Adwen GmbH', 'Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)', 'Nova-Wind GmbH', 'SEEWIND Windenergiesysteme GmbH', 'Lely Aircon B.V. Niederlassung Leer', 'Mischtechnik Hoffmann & Partner GmbH', 'PreVent GmbH', 'JAMP GmbH', 'Pfleiderer Wind Energy GmbH', 'GE Renewable Germany GmbH', 'Lagerwey GmbH', 'ALPHACON GmbH', 'Bonus Energy A/S', 'NEG Micon Deutschland GmbH', 'Fuhrländer AG', 'Nordtank Energy Group', 'Wind+Wing Technologies', 'Nordex Germany GmbH', 'myLEDsun', 'WES IBS GmbH', 'WindTec GmbH', 'Home Energy International', 'Tacke GmbH & Co. KG', 'VENTEGO AG', 'QREON GmbH', 'ROPATEC SRL', 'bwu Brandenburgische Wind- und Umwelttechnologien GmbH', 'Nordex Energy GmbH', 'E.A.Z. Wind GmbH', 'BRAUN Windturbinen GmbH', 'Kleinwind GmbH', 'Fortis Wind Energy', 'Amperax Energie GmbH', 'Schütz GmbH & Co. KGaA', 'PSW-Energiesysteme GmbH', 'Hanseatische AG', 'Easywind GmbH', 'K.D.-Stahl- und Maschinenbau GmbH', 'Ventis Energietechnik GmbH', 'Wincon West Wind A/S', 'Senvion Deutschland GmbH', 'Husumer Dock und Reparatur GmbH & Co. KG', 'STM Montage GmbH', 'EUSAG AG', 'S & W ENERGIESYSTEME UG (haftungsbeschränkt)', 'ENERCON GmbH', 'Kähler Maschinenbau GmbH', 'FuSystems SkyWind GmbH', 'Sonstige', 'AN Windanlagen GmbH', 'SMA Solar Technology AG', 'LuvSide GmbH', 'SOLAR-WIND-TEAM GmbH', 'Kenersys Europe GmbH', 'AN-Maschinenbau- und Umweltschutzanlagen GmbH', 'Honeywell Windtronics', 'Enron Wind GmbH', 'AREVA GmbH']
 ,nachList={"Hersteller der Windenergieanlage":energyProducer,"Bundesland":bundesland,"Name des Anschluss-Netzbetreibers":['test']},
-attSliders={"Bruttoleistung der Einheit":[0, 20000],"Rotordurchmesser der Windenergieanlage":[0,800],"Nabenhöhe der Windenergieanlage":[0,900]},
+attSliders={"Bruttoleistung der Einheit":[0, 20000],"Rotordurchmesser der Windenergieanlage":[0,20000],"Nabenhöhe der Windenergieanlage":[0,20000]},
 dateComissioned=[0,Date.now()]
 bundesland.forEach(element => {$("#bundeslandOptions").append('<option value="'+element+'">')});
 
@@ -356,8 +356,9 @@ $( "#slider-filter" ).slider({
     max: 20000,
     values: [ 0, 20000 ],
     slide: function( event, ui ) {
-      $( "#slider-filter-min" ).html(ui.values[0])
-      $( "#slider-filter-max" ).html(ui.values[1])
+      if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0]/1000)+' MW')
+      else $( "#slider-filter-min" ).html('0 MW')
+      $( "#slider-filter-max" ).html((ui.values[1]/1000)+' MW')
       bdeVal=ui.values
       applyFilter()
     }
@@ -375,8 +376,9 @@ $('#slider-attr-select').on('change',()=>{
         max: rangeVal[1],
         values: rangeVal,
         slide: function( event, ui ) {
-          $( "#slider-filter-min" ).html(ui.values[0])
-          $( "#slider-filter-max" ).html(ui.values[1])
+            if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0]/1000)+' MW')
+            else $( "#slider-filter-min" ).html('0 MW')
+            $( "#slider-filter-max" ).html((ui.values[1]/1000)+' MW')
           bdeVal=ui.values
           applyFilter()
         }
@@ -393,26 +395,18 @@ $('#slider-nach-select').on('change', ()=>{
 energyProducer.forEach(element=>{$("#nach-list").append('<option selected value="'+element+'">'+element+'</option>')})
 $("#nach-list").multiSelect()
 // Date Range Picker
-$('.datepicker').datepicker({
+$('.input-group.date').datepicker({
     format: 'mm/dd/yyyy',
-    startDate: '-3d'
+    todayBtn:"linked"
 });
 $('#date-commision-start').on('changeDate',()=>{
     dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000
+    applyFilter()
 })
 $('#date-commision-end').on('changeDate',()=>{
     dateComissioned[1]=new Date($('#date-commision-end').datepicker('getUTCDate')).getTime()/1000
+    applyFilter()
 })
-// $('#date-comission-start').datepicker()
-// $('#date-comission-end').datepicker()
-$('input[name="date-comission-start"]').daterangepicker({
-    opens: 'left'
-  }, function(start, end, label) {
-    let newStart=new Date(start).getTime()
-    if(newStart==0)newStart=0
-    else newStart=newStart/1000
-    dateComissioned=[newStart,(new Date(end).getTime()/1000)]
-  })
 // Betriebs-Status
 $('#in-planung').on('change',()=>{
     if($('#in-planung').is(":checked")) stats.push("In Planung")
@@ -433,6 +427,43 @@ $('#in-es').on('change',()=>{
 $('#in-vs').on('change',()=>{
     if($('#in-vs').is(":checked")) stats.push("Vorübergehend stillgelegt")
     else stats.splice(stats.indexOf("Vorübergehend stillgelegt"),1)
+    applyFilter()
+})
+$('#reverse-date-filter').on('click',()=>{
+    console.log('clicked')
+    dateComissioned=[0,Date.now()]
+    $('#date-commision-start-container').empty().append(
+        `<div id="date-commision-start" class="input-group date">
+                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
+                            <div class="col-8">
+                                <input type="text" value="von" class="jet-color">
+                            </div>
+                            <div class="col-2 jet-color">
+                                <span class="input-group-addon">
+                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
+                                </span>
+                            </div>
+                        </div>  
+                    </div>`
+    )
+    $('#date-commision-end-container').empty().append(
+        `<div id="date-commision-end" class="input-group date">
+                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
+                            <div class="col-8">
+                                <input type="text" value="bis" class="jet-color">
+                            </div>
+                            <div class="col-2 jet-color">
+                                <span class="input-group-addon">
+                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
+                                </span>
+                            </div>
+                        </div>  
+                    </div>`
+    )
+    $('.input-group.date').datepicker({
+        format: 'mm/dd/yyyy',
+        todayBtn:"linked"
+    });
     applyFilter()
 })
 function applyFilter(){
