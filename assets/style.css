@@ -93,6 +93,15 @@ button.accordion-button:focus{
     color:#7ED254;
     border-radius:50%;
 }
+.date-input{
+    width:6em!important;
+    border-radius: 5px;
+    border-color:transparent;
+    margin:0;
+    padding:2px;
+}
+.row-date{border-style:solid;border-color:white;border-radius:5px;border-width:1px;}
+.date-input:focus-visible{outline:transparent!important;}
 @media only screen and (max-width: 860px) {
     /* #map { bottom: auto;height:40vh; } */
     #popup{

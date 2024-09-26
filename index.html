@@ -297,11 +297,23 @@
                 <div class="col-2 mb-2">
                     <button id="reverse-date-filter" type="button" class="btn btn-sm reverse-btn"><i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <div id="date-commision-start-container" class="col-6 align-self-center ide-filter">
+                <div id="date-commision-start-container" class="col-12 d-flex align-self-center ide-filter">
                     <div id="date-commision-start" class="input-group date">
-                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
+                        <div class="row d-flex align-items-center row-date">
                             <div class="col-8">
-                                <input type="text" value="von" class="jet-color">
+                                <input type="text" value="von" class="date-input jet-color">
+                            </div>
+                            <div class="col-2 jet-color">
+                                <span class="input-group-addon">
+                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
+                                </span>
+                            </div>
+                        </div>  
+                    </div>
+                    <div id="date-commision-end" class="input-group date">
+                        <div class="row d-flex align-items-center row-date">
+                            <div class="col-8">
+                                <input type="text" value="bis" class="date-input jet-color">
                             </div>
                             <div class="col-2 jet-color">
                                 <span class="input-group-addon">
@@ -319,19 +331,8 @@
                     <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
                     <!-- <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" /> -->
                 </div>
-                <div id="date-commision-end-container" class="col-6 align-self-center">
-                    <div id="date-commision-end" class="input-group date">
-                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
-                            <div class="col-8">
-                                <input type="text" value="bis" class="jet-color">
-                            </div>
-                            <div class="col-2 jet-color">
-                                <span class="input-group-addon">
-                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
-                                </span>
-                            </div>
-                        </div>  
-                    </div>
+                <div id="date-commision-end-container" class="col-3 align-self-center">
+                    
                     <!-- <div id="date-commision-end" class="input-group date" data-provide="datepicker">
                         <input type="text" class="form-control jet-color">
                         <div class="input-group-addon">

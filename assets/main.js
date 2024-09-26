@@ -430,13 +430,12 @@ $('#in-vs').on('change',()=>{
     applyFilter()
 })
 $('#reverse-date-filter').on('click',()=>{
-    console.log('clicked')
     dateComissioned=[0,Date.now()]
     $('#date-commision-start-container').empty().append(
         `<div id="date-commision-start" class="input-group date">
-                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
+                        <div class="row d-flex align-items-center row-date">
                             <div class="col-8">
-                                <input type="text" value="von" class="jet-color">
+                                <input type="text" value="von" class="date-input jet-color">
                             </div>
                             <div class="col-2 jet-color">
                                 <span class="input-group-addon">
@@ -444,13 +443,11 @@ $('#reverse-date-filter').on('click',()=>{
                                 </span>
                             </div>
                         </div>  
-                    </div>`
-    )
-    $('#date-commision-end-container').empty().append(
-        `<div id="date-commision-end" class="input-group date">
-                        <div class="row no-gutters p-0 m-0 d-flex align-items-center">
+                    </div>
+                    <div id="date-commision-end" class="input-group date">
+                        <div class="row d-flex align-items-center row-date">
                             <div class="col-8">
-                                <input type="text" value="bis" class="jet-color">
+                                <input type="text" value="bis" class="date-input jet-color">
                             </div>
                             <div class="col-2 jet-color">
                                 <span class="input-group-addon">
@@ -464,6 +461,14 @@ $('#reverse-date-filter').on('click',()=>{
         format: 'mm/dd/yyyy',
         todayBtn:"linked"
     });
+    $('#date-commision-start').on('changeDate',()=>{
+        dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000
+        applyFilter()
+    })
+    $('#date-commision-end').on('changeDate',()=>{
+        dateComissioned[1]=new Date($('#date-commision-end').datepicker('getUTCDate')).getTime()/1000
+        applyFilter()
+    })
     applyFilter()
 })
 function applyFilter(){
