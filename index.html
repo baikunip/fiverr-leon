@@ -248,7 +248,7 @@
                 </div>
             </div>
             <div class="card-header row jet-color filter-container d-flex align-items-center" >
-                <div class="col-12 align-self-center bde-filter">
+                <div class="col-6 mb-2 align-self-center d-flex justify-content-start">
                     <select id="slider-attr-select" class="form-select jet-color mb-2" aria-label="Default select example">
                         <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
                         <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
@@ -281,7 +281,7 @@
             </div>
             <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
                 <div class="col-5">Filtern nach</div>
-                <div class="col-7 p-0 m-0 align-self-center">
+                <div class="col-7 justify-content-start">
                     <select id="slider-nach-select" class="form-select jet-color mb-2" aria-label="Default select example">
                         <option selected value="Hersteller der Windenergieanlage">Hersteller</option>
                         <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
@@ -322,25 +322,26 @@
                             </div>
                         </div>  
                     </div>
-                    <!-- <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control jet-color">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div> -->
-                    <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
-                    <!-- <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" /> -->
                 </div>
-                <div id="date-commision-end-container" class="col-3 align-self-center">
-                    
-                    <!-- <div id="date-commision-end" class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control jet-color">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div> -->
-                    <!-- <input type="text" id="date-comission-start" class="jet-color date-picker-filter"> -->
-                    <!-- <input type="text" name="date-comission-start" class="jet-color bar-filter" id="date-comission-start" value="01/01/2016 - 01/15/2024" /> -->
+            </div>
+            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
+                <div class="col-7 row">
+                    <div class="col-12 justify-content-start">
+                        <select id="slider-nach-select" class="form-select jet-color mb-2" aria-label="Default select example">
+                            <option selected value="Bruttoleistung der Einheit">Turbinen Leistung in MW</option>
+                            <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
+                            <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
+                            <option value="Bundesland"> Inbetriebnahme</option>
+                        </select>
+                    </div>
+                    <div class="col-12 align-self-center mb-2">
+                        <div id="legend-bar"></div>
+                    </div>
+                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-start" >0 MW</div>
+                    <div class="col-6 align-self-center  sub-text-popup d-flex justify-content-end" >20 MW</div>
+                </div>
+                <div class="col-5">
+                    Anlagen auf der Karte farblich kennzelchnen.
                 </div>
             </div>
             <!-- <div class="card-body">

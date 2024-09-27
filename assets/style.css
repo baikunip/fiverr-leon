@@ -69,6 +69,13 @@ button.accordion-button:focus{
 #filter-btn-container{
     padding:0;margin:0;width:100%;
 }
+
+.form-select{
+    border-radius:25px;
+    font-size: 1em;
+    --bs-form-select-bg-img:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>")
+}
+
 .ui-slider-handle{
     border-radius:50%;
 }
@@ -89,6 +96,8 @@ button.accordion-button:focus{
     padding:0 2px 0 0;margin:0!important;
     vertical-align: inherit;
 }
+
+
 .reverse-btn{
     color:#7ED254;
     border-radius:50%;
@@ -102,6 +111,16 @@ button.accordion-button:focus{
 }
 .row-date{border-style:solid;border-color:white;border-radius:5px;border-width:1px;}
 .date-input:focus-visible{outline:transparent!important;}
+
+/* legend */
+#legend-bar{
+    width:96%;
+    margin-left:2%;
+    height:10px;
+    border-radius:10px;
+    background-image: linear-gradient(to right,rgb(255,252,28),rgb(178,24,43))
+}
+
 @media only screen and (max-width: 860px) {
     /* #map { bottom: auto;height:40vh; } */
     #popup{
