@@ -7,6 +7,7 @@ body { margin: 0; padding: 0;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
 }
+#isMobile{display:none;}
 ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
@@ -118,7 +119,7 @@ button.accordion-button:focus{
     margin-left:2%;
     height:10px;
     border-radius:10px;
-    background-image: linear-gradient(to right,rgb(255,252,28),rgb(178,24,43))
+    background-image: linear-gradient(to right,#fffc1c,#b2182b)
 }
 
 @media only screen and (max-width: 860px) {
@@ -126,6 +127,7 @@ button.accordion-button:focus{
     #popup{
         left:.5%;right:auto;top:auto;bottom:4vh;max-height:36vh;width:99%;
     }
-    #filter-bar{display:none;right:auto;left:0.2em;top:8vh;width:99%;max-height: 50vh;}
+    #filter-bar{top:8vh;width:99%;max-height: 50vh;}
+    #isMobile{display:block;}
 }
         

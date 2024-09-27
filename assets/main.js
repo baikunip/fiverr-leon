@@ -82,7 +82,7 @@ const map = new mapboxgl.Map({
     }
 };
 
-const nopulsingDot = {
+const nopulsingDot1 = {
     width: size,
     height: size,
     data: new Uint8Array(size * size * 4),
@@ -106,7 +106,7 @@ const nopulsingDot = {
             0,
             Math.PI * 2
         );
-        context.fillStyle = '#FFFC62';
+        context.fillStyle = '#fffc1c';
         context.strokeStyle = 'white';
         context.lineWidth = 1;
         context.fill();
@@ -122,11 +122,145 @@ const nopulsingDot = {
         return true;
     }
 };
+const nopulsingDot2 = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+    onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
 
+    render: function () {
+        const radius = (size / 2) * 0.3;
+        const context = this.context;
+
+        // Draw the inner circle.
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = '#ebc120';
+        context.strokeStyle = 'white';
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+        ).data;
+
+        return true;
+    }
+};
+const nopulsingDot3 = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+    onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
+
+    render: function () {
+        const radius = (size / 2) * 0.3;
+        const context = this.context;
+
+        // Draw the inner circle.
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = '#ce6a26';
+        context.strokeStyle = 'white';
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+        ).data;
+
+        return true;
+    }
+};
+const nopulsingDot4 = {
+    width: size,
+    height: size,
+    data: new Uint8Array(size * size * 4),
+    onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d');
+    },
+
+    render: function () {
+        const radius = (size / 2) * 0.3;
+        const context = this.context;
+
+        // Draw the inner circle.
+        context.beginPath();
+        context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+        );
+        context.fillStyle = '#b2182b';
+        context.strokeStyle = 'white';
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        this.data = context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+        ).data;
+
+        return true;
+    }
+};
+let matchPulsingDot=[
+    'step',
+    ['get', 'Bruttoleistung der Einheit'],
+    'nopulsing-dot1',
+    500,
+    'nopulsing-dot2',
+    5000,
+    'nopulsing-dot3',
+    15000,
+    'nopulsing-dot4'
+    
+]
 // map loading all components
 map.on('load', () => {
     map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-    map.addImage('nopulsing-dot', nopulsingDot, { pixelRatio: 2 });
+    map.addImage('nopulsing-dot1', nopulsingDot1, { pixelRatio: 2 });
+    map.addImage('nopulsing-dot2', nopulsingDot2, { pixelRatio: 2 });
+    map.addImage('nopulsing-dot3', nopulsingDot3, { pixelRatio: 2 });
+    map.addImage('nopulsing-dot4', nopulsingDot4, { pixelRatio: 2 });
     const layers = map.getStyle().layers;
     // Find the index of the first symbol layer in the map style.
     let firstSymbolId;
@@ -150,7 +284,7 @@ map.on('load', () => {
         'type': 'symbol',
         'paint': {
             // 'circle-radius': 4,
-            // 'circle-color': '#FFFC62',
+            // 'circle-color': 'blue',
             'icon-opacity': [
                 'interpolate',
                 ['linear'],
@@ -159,10 +293,19 @@ map.on('load', () => {
                 0,
                 14,
                 1
-            ]
+            ],
+            // 'circle-color': [
+            //     'step',
+            //     ['get', 'Bruttoleistung der Einheit'],
+            //     '#51bbd6',
+            //     100,
+            //     '#f1f075',
+            //     1000,
+            //     '#f28cb1'
+            // ],
         },
         'layout': {
-            'icon-image': 'nopulsing-dot',
+            'icon-image': matchPulsingDot,
             'icon-allow-overlap': true // important fot display
         }
     },firstSymbolId);
@@ -240,7 +383,7 @@ map.on('click', function (e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
     if (!features.length) {
         $("#popup").hide()
-        map.setLayoutProperty('point', 'icon-image', 'nopulsing-dot')
+        map.setLayoutProperty('point', 'icon-image', matchPulsingDot)
         return;
     }
     userClick+=1
@@ -287,7 +430,12 @@ map.on('click', function (e) {
     $("#EEG-Anlagenschlüssel-popup").html(setPopupValue("EEG-Anlagenschlüssel"))
     $("#Zuschlagnummer-popup").html(setPopupValue("Zuschlagnummer (EEG/KWK-Ausschreibung)"))
     $("#popup").show()
-    map.setLayoutProperty('point', 'icon-image', ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 'nopulsing-dot'])
+    map.setLayoutProperty('point', 
+        'icon-image', 
+        ["match", ["get","MaStR-Nr. der Einheit"], feature.properties["MaStR-Nr. der Einheit"], 'pulsing-dot', 
+        matchPulsingDot
+    ]
+    )
 });
 map.on('mouseenter', 'point', () => {
     map.getCanvas().style.cursor = 'pointer'
@@ -304,7 +452,8 @@ function showhidefilter(stats){
             `<button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"><b><<</b></button>`
         )
     }else{
-        $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
+        if($('#isMobile').is(':visible')) $("#filter-bar").css("width","99%").css("top","8vh").css("overflow","scroll").css("max-height","50vh")
+        else $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
         $("#filter-btn-container").empty().append(
             `
                 <div class="col-2">
@@ -411,7 +560,6 @@ $('#date-commision-end').on('changeDate',()=>{
 $('#in-planung').on('change',()=>{
     if($('#in-planung').is(":checked")) stats.push("In Planung")
     else stats.splice(stats.indexOf("In Planung"),1)
-    console.log(stats)
     applyFilter()
 })
 $('#in-betrieb').on('change',()=>{
@@ -493,3 +641,22 @@ function applyFilter(){
         queryFilter
     ])
 }
+
+// legends
+$('#legend-select').on('change',()=>{
+    matchPulsingDot=[
+        'step',
+        ['get', $('#legend-select').val()],
+        'nopulsing-dot1',
+        500,
+        'nopulsing-dot2',
+        5000,
+        'nopulsing-dot3',
+        15000,
+        'nopulsing-dot4'
+        
+    ]
+    map.setLayoutProperty('point', 
+        'icon-image', matchPulsingDot
+    )
+})
