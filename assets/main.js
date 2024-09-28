@@ -534,15 +534,25 @@ $('#slider-attr-select').on('change',()=>{
     })
 })
 $('#slider-nach-select').on('change', ()=>{
-    $("#nach-list-container").empty().append(
-        `<select id="nach-list" name="nach-list" multiple></select>`
-    )
+    $("#nach-list").empty()
+    $('#nach-list-input').flexdatalist('reset')
     let dataList=nachList[$('#slider-nach-select').val()]
-    dataList.forEach(element=>{$("#nach-list").append('<option selected value="'+element+'">'+element+'</option>')})
-    $("#nach-list").multiSelect()
+    dataList.forEach(element=>{
+        $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
+        // $('#nach-list-input').flexdatalist('add',element)
+    })
+    $('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
+        applyFilter()
+    })
+    // $("#nach-list").multiSelect()
 });
-energyProducer.forEach(element=>{$("#nach-list").append('<option selected value="'+element+'">'+element+'</option>')})
-$("#nach-list").multiSelect()
+energyProducer.forEach(element=>{
+    $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
+    // $('#nach-list-input').flexdatalist('add',element)
+})
+$('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
+    applyFilter()
+})
 // Date Range Picker
 $('.input-group.date').datepicker({
     format: 'mm/dd/yyyy',
@@ -622,13 +632,17 @@ $('#reverse-date-filter').on('click',()=>{
 function applyFilter(){
     let statsFilter=["in", ["get","Betriebs-Status"],["literal", stats]],
     // bundeslandFilter=[$("#bundesland-query").val(),["get","Bundesland"],$("#bundesland").val()],
-    energyProducerFilter=["in", ["get",$('#slider-nach-select').val()],["literal", $("#nach-list").val()]],
+    
     // console.log('Start Date: '+$('#date-comission-start').datepicker("getDate"))
     comissionStart=[">=",['get','Inbetriebnahmedatum der Einheit'], dateComissioned[0]],
     comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],
     bde1=[">=", ["get", $('#slider-attr-select').val()], bdeVal[0]],
     bde2=["<=", ["get", $('#slider-attr-select').val()], bdeVal[1]]
-    queryFilter=['all',statsFilter,bde1,bde2,energyProducerFilter,comissionStart,comissionEnd]
+    queryFilter=['all',statsFilter,bde1,bde2,comissionStart,comissionEnd]
+    if(!$('#nach-list-input').val().split(",")[0]==''){
+        let energyProducerFilter=["in", ["get",$('#slider-nach-select').val()],["literal", $('#nach-list-input').val().split(",")]]
+        queryFilter.push(energyProducerFilter)
+    }
     // if($('#betriebs-status-check').is(':checked')) queryFilter.push(statsFilter)
     // if($('#bde-check').is(':checked')) queryFilter.push(bde1,bde2)
     // if($('#hdw-check').is(':checked')) queryFilter.push(energyProducerFilter)

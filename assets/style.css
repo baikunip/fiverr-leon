@@ -40,10 +40,11 @@ body { margin: 0; padding: 0;
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
 .sub-text-popup{font-size: 1em;color:#515155;font-family:"Quicksand", sans-serif;font-weight: 700;}
 .text-popup{font-size:1.8em;font-family:"Quicksand", sans-serif;font-weight: 400;}
+.text-filter{font-size: .9em!important;color:white;font-family:"Quicksand", sans-serif;font-weight: 700;}
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
 #accordionExample{border-style:solid;border-width:1px;border-color: #3C3C3E}
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
-.accordion-button.collapsed,#slider-attr-select{color:#515155!important;background-color: transparent !important;}
+.accordion-button.collapsed{color:#515155!important;background-color: transparent !important;}
 button.accordion-button:focus{
     box-shadow: inherit;
 }
@@ -107,7 +108,11 @@ button.accordion-button:focus{
 }
 
 .btn-betrieb-status{background-color:#262629;color:white;border-color:white;width:100%;height:100%;padding:2px!important;margin:1px;}
-.btn-betrieb-status:hover,.btn-betrieb-check:checked+label{
+.btn-betrieb-status:hover{
+    border-color: #7ED254!important;
+    color:white!important;
+}
+.btn-betrieb-check:checked+label{
     background-color:#7ED254!important;
     color:white!important;
 }
@@ -119,8 +124,9 @@ button.accordion-button:focus{
     padding:0 2px 0 0;margin:0!important;
     vertical-align: inherit;
 }
-
-
+#nach-list-input-flexdatalist{
+    border-bottom:2px solid white!important
+}
 .reverse-btn{
     color:#7ED254;
     border-radius:50%;

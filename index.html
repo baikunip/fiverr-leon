@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="./assets/plugin/flexdatalist/jquery.flexdatalist.css" rel="stylesheet" type="text/css">
     <link href="./assets/plugin/multi-select/multi-select.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -243,17 +244,17 @@
             <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"></button>
         </div>
         <div class="card" id="filter-bar">
-            <div id="filter-btn-container" class="card-header row no-gutters jet-color popup-container d-flex align-items-center" >
-                <div class="col-2">
+            <div id="filter-btn-container" class="card-header row no-gutters jet-color d-flex align-items-center" >
+                <div class="col-2 mb-2 mt-2">
                     <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"></button>
                 </div>
-                <div class="col-10">
+                <div class="col-10 mb-2 mt-2">
                     <div class="text-popup">Auswahl Filtern</div>
                 </div>
             </div>
             <div class="card-header row jet-color filter-container d-flex align-items-center" >
                 <div class="col-6 mb-2 align-self-center d-flex justify-content-start">
-                    <select id="slider-attr-select" class="form-select jet-color mb-2" aria-label="Default select example">
+                    <select id="slider-attr-select" class="form-select jet-color text-filter mb-2">
                         <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
                         <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
                         <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
@@ -266,42 +267,55 @@
                 <div class="col-6 align-self-center bde-filter sub-text-popup d-flex justify-content-end" id="slider-filter-max">20 MW</div>
             </div>
             <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-5 p-0 m-0">
+                <div class="col-5 p-0 m-0" style="padding-right:3px!important;margin-bottom:6px!important;">
                     <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-betrieb">
-                    <label class="btn-betrieb-status btn btn-sm" for="in-betrieb">In Betrieb</label>
+                    <label class="btn-betrieb-status btn btn-sm text-filter" for="in-betrieb">In Betrieb</label>
                 </div>
-                <div class="col-7 p-0 m-0">
+                <div class="col-7 p-0 m-0" style="padding-left:3px!important;margin-bottom:6px!important;">
                     <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-es">
-                    <label class="btn btn-sm btn-betrieb-status" for="in-es">Endgültig stillgelegt</label>
+                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-es">Endgültig stillgelegt</label>
                 </div>
-                <div class="col-5 p-0 m-0">
+                <div class="col-5 p-0 m-0" style="padding-right:3px!important;">
                     <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-planung">
-                    <label class="btn btn-sm btn-betrieb-status" for="in-planung">In Planung</label>
+                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-planung">In Planung</label>
                 </div>
-                <div class="col-7 p-0 m-0">
+                <div class="col-7 p-0 m-0" style="padding-left:3px!important;">
                     <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-vs">
-                    <label class="btn btn-sm btn-betrieb-status" for="in-vs">Vorübergehend stillgelegt</label>
+                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-vs">Vorübergehend stillgelegt</label>
                 </div>
             </div>
-            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-5">Filtern nach</div>
-                <div class="col-7 justify-content-start">
-                    <select id="slider-nach-select" class="form-select jet-color mb-2" aria-label="Default select example">
+            <div class="card-header row no-gutters jet-color filter-container d-flex  align-items-center">
+                <div class="col-12 text-filter d-flex my-auto">
+                    <span class="align-middle">Filtern nach</span>
+                    <select id="slider-nach-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example" style="width:60%;margin-left:5px;">
                         <option selected value="Hersteller der Windenergieanlage">Hersteller</option>
                         <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
                         <option value="Bundesland">Bundesland</option>
                     </select>
                 </div>
-                <div class="col-12 mt-2" id="nach-list-container">
-                    <select id="nach-list" name="nach-list" multiple></select>
+                <div class="col-1">
+                    <i class="bi bi-search jet-color"></i>
+                </div>
+                <div class="col-11 mt-2 jet-color" id="nach-list-container">
+                    <input type='text'
+                        placeholder='Nach List'
+                        class='flexdatalist jet-color text-filter'
+                        data-min-length='2'
+                        multiple='multiple'
+                        list='nach-list'
+                        id="nach-list-input"
+                        name='nach-list'>
+                        <datalist id="nach-list">
+                        </datalist>
+                    <!-- <select id="nach-list" name="nach-list" multiple class="text-filter"></select> -->
                 </div>
             </div>
             <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-10 ide-filter mb-2">Inbetriebnahmedatum der Einheit</div>
+                <div class="col-10 ide-filter mb-2 text-filter ">Inbetriebnahmedatum der Einheit</div>
                 <div class="col-2 mb-2">
                     <button id="reverse-date-filter" type="button" class="btn btn-sm reverse-btn"><i class="bi bi-arrow-counterclockwise"></i></button>
                 </div>
-                <div id="date-commision-start-container" class="col-12 d-flex align-self-center ide-filter">
+                <div id="date-commision-start-container" class="col-12 d-flex align-self-center ide-filter text-filter ">
                     <div id="date-commision-start" class="input-group date">
                         <div class="row d-flex align-items-center row-date">
                             <div class="col-8">
@@ -328,10 +342,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-7 row">
+            <div class="card-header row jet-color filter-container d-flex align-items-center">
+                <div class="col-8 row">
                     <div class="col-12 justify-content-start">
-                        <select id="legend-select" class="form-select jet-color mb-2" aria-label="Default select example">
+                        <select id="legend-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example">
                             <option selected value="Bruttoleistung der Einheit">Turbinen Leistung in MW</option>
                             <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
                             <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
@@ -341,10 +355,10 @@
                     <div class="col-12 align-self-center mb-2">
                         <div id="legend-bar"></div>
                     </div>
-                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-start" >0 MW</div>
-                    <div class="col-6 align-self-center  sub-text-popup d-flex justify-content-end" >20 MW</div>
+                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-start" >0,5 MW</div>
+                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-end" >15 MW</div>
                 </div>
-                <div class="col-5">
+                <div class="col-4 text-filter">
                     Anlagen auf der Karte farblich kennzelchnen.
                 </div>
             </div>
@@ -417,6 +431,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
     <script src="./assets/plugin/multi-select/jquery.multi-select.min.js"></script>
+    <script src="./assets/plugin/flexdatalist/jquery.flexdatalist.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
