@@ -447,23 +447,23 @@ map.on('mouseleave', 'point', () => {
 // Hide/Show FIlters
 function showhidefilter(stats){
     if(stats=="hidden"){
-        $("#filter-bar").css("width","80px").css("overflow","hide").css("max-height","55px")
-        $("#filter-btn-container").empty().append(
-            `<button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"><b><<</b></button>`
-        )
+        $("#filter-bar").hide()
+        $("#show-filter-bar").show()
     }else{
         if($('#isMobile').is(':visible')) $("#filter-bar").css("width","99%").css("top","8vh").css("overflow","scroll").css("max-height","50vh")
         else $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
-        $("#filter-btn-container").empty().append(
-            `
-                <div class="col-2">
-                        <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"><b>>></b></button>
-                    </div>
-                    <div class="col-10">
-                        <div class="text-popup">Auswahl Filtern</div>
-                </div>
-            `
-        )
+        $("#show-filter-bar").hide()
+        $("#filter-bar").show()
+        // $("#filter-btn-container").empty().append(
+        //     `
+        //         <div class="col-2">
+        //                 <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"></button>
+        //             </div>
+        //             <div class="col-10">
+        //                 <div class="text-popup">Auswahl Filtern</div>
+        //         </div>
+        //     `
+        // )
     }
 }    
 

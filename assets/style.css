@@ -66,6 +66,28 @@ button.accordion-button:focus{
 #heat-point-legend{background-image: linear-gradient(to right,rgb(255,252,28),rgb(209,229,240),rgb(253,219,199),rgb(239,138,98),rgb(178,24,43));}
 
 /* Filter Style */
+#hide-filter-btn{
+    background:no-repeat center/100% url('./img/nextRight.svg');
+}
+#show-filter-bar{
+    position:absolute;
+    z-index:99;
+    right:0;
+    top:15vh;
+    width:21px;
+    height:22px;
+    border: 1px solid #3C3C3E;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#show-filter-btn{
+    background:no-repeat center/100% url('./img/backLeft.svg');
+    height:20px;
+    width:20px;
+    padding:0;margin:0;
+}
 .filter-container{border-radius: 15px;margin-left:10px;margin-right:10px;margin-top:12px;margin-bottom:12px;padding-top:15px;padding-bottom:15px;padding-left:10px;padding-right:10px;border-style:solid;border-width:1px;border-color: #3C3C3E;}
 #filter-btn-container{
     padding:0;margin:0;width:100%;
@@ -128,6 +150,7 @@ button.accordion-button:focus{
         left:.5%;right:auto;top:auto;bottom:4vh;max-height:36vh;width:99%;
     }
     #filter-bar{top:8vh;width:99%;max-height: 50vh;}
+    #show-filter-bar{top:8vh;}
     #isMobile{display:block;}
 }
         

@@ -126,10 +126,10 @@
                 <div class="col-4">
                     <div id="LetzteAktualisierung-popup" class="text-end third-white-popup">-</div>
                 </div>
-                <div class="col-6 d-flex align-self-center">
+                <div class="col-6 mb-2 d-flex align-self-center">
                     <div class="sub-text-popup">Name des Windparks</div>
                 </div>
-                <div class="col-6">
+                <div class="col-6 mb-2">
                     <div class="text-end sub-text-popup">Letzte Aktualisierung</div>
                 </div>
                 <div class="col-4 d-flex align-self-center">
@@ -167,9 +167,9 @@
                     <img id="gepruft-check" src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin-right:5px;padding:0;">
                     <div id="Netzbetreiberprüfung-popup" class="align-self-end text-popup"> Geprüft</div>
                 </div>
-                <div class="col-6 d-flex align-self-center">
+                <div class="col-6 mb-2 d-flex align-self-center">
                 </div>
-                <div class="col-6">
+                <div class="col-6 mb-2">
                     <div class="text-end sub-text-popup">Netzbetreiberprüfung</div>
                 </div>
                 <div class="col-4 d-flex align-self-center">
@@ -206,31 +206,31 @@
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body row">
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div class="third-white-popup">-</div>
                             <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div id="MaStR-NrderEEG-Anlage-popup" class="third-white-popup">-</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der Anlage</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div id="InstallierteLeistungderEEG-Anlage-popup" class="third-white-popup">-</div>
                             <div class="sub-text-popup">davon Leistung als EEG-Anlage eingtragen (in MW)</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="third-white-popup">-</div>
                             <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div id="EEG-Anlagenschlüssel-popup" class="third-white-popup">-</div>
                             <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div class="third-white-popup">-</div>
                             <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <div id="Zuschlagnummer-popup" class="third-white-popup">-</div>
                             <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
                         </div>
@@ -239,10 +239,13 @@
                 </div>
             </div>
         </div>
+        <div id="show-filter-bar" class="jet-color" style="display:none;">
+            <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"></button>
+        </div>
         <div class="card" id="filter-bar">
             <div id="filter-btn-container" class="card-header row no-gutters jet-color popup-container d-flex align-items-center" >
                 <div class="col-2">
-                    <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"><b>>></b></button>
+                    <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"></button>
                 </div>
                 <div class="col-10">
                     <div class="text-popup">Auswahl Filtern</div>
