@@ -495,7 +495,7 @@ bundesland=["Hessen","Schleswig-Holstein","Nordrhein-Westfalen","Rheinland-Pfalz
 ],
 energyProducer=['nan', 'Frisia Windkraftanlagen Service GmbH', 'Weinack Windenergie Anlagen GmbH', 'Gamesa Corporación Tecnológica S.A.', 'General Electric Deutschland Holding GmbH', 'Sonkyo Energy', 'TOZZI NORD\xa0S.R.L.', 'BARD Holding GmbH', 'eno energy systems GmbH', 'Octopus Systems GmbH', 'Wind Technik Nord GmbH', 'Norddeutsche H-Rotoren GmbH & Co. KG', 'Wittenbauer Technik & Consulting GmbH', 'Pfleiderer Deutschland GmbH', 'Krogmann GmbH & Co. KG', 'LWS systems GmbH & Co. KG.', 'Heyde Windtechnik GmbH', 'Siemens Wind Power GmbH & Co. KG', 'ABB Power-One Italy SpA', 'HSW Husumer Schiffswerft GmbH & Co. KG', 'InVentus Energie GmbH', 'GE Wind Energy GmbH', 'SB Energy UK Ltd.', 'ESPV-TEC GmbH & Co. KG', 'MyWind', 'Gödecke Energie- und Antriebstechnik GmbH', 'WTT GmbH', 'DeWind GmbH', 'Alpha projekt GmbH', 'PowerWind GmbH', 'Svit Vitru', 'VWA-Deutschland GmbH Freude am Strom', 'WSD - Windsysteme', 'Werner Eberle GmbH', 'Anhui Hummer Dynamo Co.,Ltd.', 'Uni Wind GmbH', 'Wind World A/S', 'Südwind Borsig Energy GmbH', 'AN Windenergie GmbH', 'MAX-wyn GmbH', 'REpower Systems SE', 'Nordex SE', 'Kessler Energy GmbH', 'Schuler Aktiengesellschaft', 'SkyWind GmbH', 'windradshop', 'Siemens Gamesa Renewable Energy GmbH & Co. KG', 'eno energy GmbH', 'Jacobs Energie GmbH', 'SeeBA Energiesysteme GmbH', 'EVIAG AG', 'VENSYS Energy AG', 'Vestas Deutschland GmbH', 'Hyden', 'VENTIS WIND SERVICE S.L', 'MHI Vestas Offshore Wind', 'Aeolos Windkraftanlagen', 'FWT energy GmbH', 'Eovent GmbH', 'Adwen GmbH', 'Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)', 'Nova-Wind GmbH', 'SEEWIND Windenergiesysteme GmbH', 'Lely Aircon B.V. Niederlassung Leer', 'Mischtechnik Hoffmann & Partner GmbH', 'PreVent GmbH', 'JAMP GmbH', 'Pfleiderer Wind Energy GmbH', 'GE Renewable Germany GmbH', 'Lagerwey GmbH', 'ALPHACON GmbH', 'Bonus Energy A/S', 'NEG Micon Deutschland GmbH', 'Fuhrländer AG', 'Nordtank Energy Group', 'Wind+Wing Technologies', 'Nordex Germany GmbH', 'myLEDsun', 'WES IBS GmbH', 'WindTec GmbH', 'Home Energy International', 'Tacke GmbH & Co. KG', 'VENTEGO AG', 'QREON GmbH', 'ROPATEC SRL', 'bwu Brandenburgische Wind- und Umwelttechnologien GmbH', 'Nordex Energy GmbH', 'E.A.Z. Wind GmbH', 'BRAUN Windturbinen GmbH', 'Kleinwind GmbH', 'Fortis Wind Energy', 'Amperax Energie GmbH', 'Schütz GmbH & Co. KGaA', 'PSW-Energiesysteme GmbH', 'Hanseatische AG', 'Easywind GmbH', 'K.D.-Stahl- und Maschinenbau GmbH', 'Ventis Energietechnik GmbH', 'Wincon West Wind A/S', 'Senvion Deutschland GmbH', 'Husumer Dock und Reparatur GmbH & Co. KG', 'STM Montage GmbH', 'EUSAG AG', 'S & W ENERGIESYSTEME UG (haftungsbeschränkt)', 'ENERCON GmbH', 'Kähler Maschinenbau GmbH', 'FuSystems SkyWind GmbH', 'Sonstige', 'AN Windanlagen GmbH', 'SMA Solar Technology AG', 'LuvSide GmbH', 'SOLAR-WIND-TEAM GmbH', 'Kenersys Europe GmbH', 'AN-Maschinenbau- und Umweltschutzanlagen GmbH', 'Honeywell Windtronics', 'Enron Wind GmbH', 'AREVA GmbH']
 ,nachList={"Hersteller der Windenergieanlage":energyProducer,"Bundesland":bundesland,"Name des Anschluss-Netzbetreibers":['test']},
-attSliders={"Bruttoleistung der Einheit":[0, 20000],"Rotordurchmesser der Windenergieanlage":[0,20000],"Nabenhöhe der Windenergieanlage":[0,20000]},
+attSliders={"Bruttoleistung der Einheit":[0, 20000],"Rotordurchmesser der Windenergieanlage":[0,300],"Nabenhöhe der Windenergieanlage":[0,300]},
 dateComissioned=[-2208988800,Date.now()]
 bundesland.forEach(element => {$("#bundeslandOptions").append('<option value="'+element+'">')});
 
@@ -517,17 +517,30 @@ $('#slider-attr-select').on('change',()=>{
         `<div id="slider-filter"></div>`
     )
     let rangeVal=attSliders[$('#slider-attr-select').val()]
-    $( "#slider-filter-min" ).html(rangeVal[0])
-    $( "#slider-filter-max" ).html(rangeVal[1])
+    bdeVal=rangeVal
+    if($('#slider-attr-select').val()=="Bruttoleistung der Einheit")measurementUnit=' MW'
+    if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
+        $( "#slider-filter-min" ).html('0 MW')
+        $( "#slider-filter-max" ).html((rangeVal[1]/1000)+' MW')
+    }else{
+        $( "#slider-filter-min" ).html((rangeVal[0])+' m')
+        $( "#slider-filter-max" ).html((rangeVal[1])+' m')
+    }
+    applyFilter()
     $( "#slider-filter" ).slider({
         range: true,
         min: rangeVal[0],
         max: rangeVal[1],
         values: rangeVal,
         slide: function( event, ui ) {
-            if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0]/1000)+' MW')
-            else $( "#slider-filter-min" ).html('0 MW')
-            $( "#slider-filter-max" ).html((ui.values[1]/1000)+' MW')
+            if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
+                if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0]/1000)+' MW')
+                else $( "#slider-filter-min" ).html('0 MW')
+                $( "#slider-filter-max" ).html((ui.values[1]/1000)+' MW')
+            }else{
+                $( "#slider-filter-min" ).html((ui.values[0])+' m')
+                $( "#slider-filter-max" ).html((ui.values[1])+' m')
+            }
             bdeVal=ui.values
             applyFilter()
         }
