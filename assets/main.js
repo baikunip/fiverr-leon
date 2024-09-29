@@ -539,16 +539,13 @@ $('#slider-nach-select').on('change', ()=>{
     let dataList=nachList[$('#slider-nach-select').val()]
     dataList.forEach(element=>{
         $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
-        // $('#nach-list-input').flexdatalist('add',element)
     })
     $('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
         applyFilter()
     })
-    // $("#nach-list").multiSelect()
 });
 energyProducer.forEach(element=>{
     $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
-    // $('#nach-list-input').flexdatalist('add',element)
 })
 $('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
     applyFilter()
