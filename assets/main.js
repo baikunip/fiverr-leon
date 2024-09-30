@@ -666,18 +666,38 @@ function applyFilter(){
 
 // legends
 $('#legend-select').on('change',()=>{
-    matchPulsingDot=[
-        'step',
-        ['get', $('#legend-select').val()],
-        'nopulsing-dot1',
-        500,
-        'nopulsing-dot2',
-        5000,
-        'nopulsing-dot3',
-        15000,
-        'nopulsing-dot4'
-        
-    ]
+    let legendVal=attSliders[$('#legend-select').val()]
+    if($('#legend-select').val()=="Bruttoleistung der Einheit"){
+        $( "#min-legend-bar" ).html('0.5 MW')
+        $( "#max-legend-bar" ).html('15 MW')
+        matchPulsingDot=[
+            'step',
+            ['get', $('#legend-select').val()],
+            'nopulsing-dot1',
+            500,
+            'nopulsing-dot2',
+            5000,
+            'nopulsing-dot3',
+            15000,
+            'nopulsing-dot4'
+            
+        ]
+    }else{
+        $( "#min-legend-bar" ).html((legendVal[0])+' m')
+        $( "#max-legend-bar" ).html((legendVal[1])+' m')
+        matchPulsingDot=[
+            'step',
+            ['get', $('#legend-select').val()],
+            'nopulsing-dot1',
+            50,
+            'nopulsing-dot2',
+            100,
+            'nopulsing-dot3',
+            200,
+            'nopulsing-dot4'
+            
+        ]
+    }
     map.setLayoutProperty('point', 
         'icon-image', matchPulsingDot
     )
