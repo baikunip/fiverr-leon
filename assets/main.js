@@ -505,8 +505,8 @@ bundesland.forEach(element => {$("#bundeslandOptions").append('<option value="'+
 $( "#slider-filter" ).slider({
     range: true,
     min: 0,
-    max: 20,
-    values: [ 0, 20 ],
+    max: 15,
+    values: [ 0, 15 ],
     slide: function( event, ui ) {
       if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
       else $( "#slider-filter-min" ).html('0 MW')
