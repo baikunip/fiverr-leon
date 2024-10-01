@@ -424,12 +424,14 @@ map.on('click', function (e) {
     $("#Netzbetreiberprüfung-popup").html(setPopupValue("Netzbetreiberprüfung"))
     if(feature.properties["Netzbetreiberprüfung"]=="Geprüft")$("#gepruft-check").show()
     else $("#gepruft-check").hide()
+    $("#RegistrierungsdatumderEinheit-popup").html(setPopupValue("Registrierungsdatum der Einheit"))
     $("#Spannungsebene-popup").html(setPopupValue("Spannungsebene"))
-    $("#MaStR-NrderEEG-Anlage-popup").html(setPopupValue("MaStR-Nr. der EEG-Anlage"))
-    $("#InstallierteLeistungderEEG-Anlage-popup").html((feature.properties["Installierte Leistung der EEG-Anlage"])+" MW")
+    $("#MaStR-NrderEEG-Anlage-popup").html(setPopupValue("MaStR-Nr. der Einheit"))
+    $("#InstallierteLeistungderEEG-Anlage-popup").html((setPopupValue("Installierte Leistung der EEG-Anlage"))+" MW")
     $("#InbetriebnahmedatumderEEG-Anlage-popup").html(setPopupDate("Inbetriebnahmedatum der EEG-Anlage"))
-    $("#EEG-Anlagenschlüssel-popup").html(setPopupValue("EEG-Anlagenschlüssel"))
+    $("#MarktStammRegister-Nr-popup").html(setPopupValue("MaStR-Nr. der EEG-Anlage"))
     $("#Zuschlagnummer-popup").html(setPopupValue("Zuschlagnummer (EEG/KWK-Ausschreibung)"))
+    $("#EEG-Anlagenschlüssel-popup").html(setPopupValue("EEG-Anlagenschlüssel"))
     $("#popup").show()
     map.setLayoutProperty('point', 
         'icon-image', 

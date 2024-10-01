@@ -40,7 +40,7 @@ body { margin: 0; padding: 0;
 .dot-legend{height:.75em;width:.75em;border-radius: 100%;margin-right:8px;}
 .sub-text-popup{font-size: 1em;color:#515155;font-family:"Quicksand", sans-serif;font-weight: 700;}
 .text-popup{font-size:1.8em;font-family:"Quicksand", sans-serif;font-weight: 400;}
-.text-filter{font-size: .9em!important;color:white;font-family:"Quicksand", sans-serif;font-weight: 700;}
+.text-filter{font-size: .99em!important;color:white;font-family:"Quicksand", sans-serif;font-weight: 700;}
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
 #accordionExample{border-style:solid;border-width:1px;border-color: #3C3C3E}
 .third-white-popup{font-size:1.6em;font-family:"Quicksand", sans-serif;font-weight: 400;}
