@@ -275,12 +275,12 @@ map.on('load', () => {
         // Use any Mapbox-hosted tileset using its tileset id.
         // Learn more about where to find a tileset id:
         // https://docs.mapbox.com/help/glossary/tileset-id/
-        url: 'mapbox://baikunip14.a2zahqgb'
+        url: 'mapbox://baikunip14.31hjtm2g'
     });
     map.addLayer({
         'id': 'point',
         'source': 'datapoints',
-        'source-layer': 'newData27-1mpdoq',
+        'source-layer': 'newDataConverted-cherwl',
         'type': 'symbol',
         'paint': {
             // 'circle-radius': 4,
@@ -313,7 +313,7 @@ map.on('load', () => {
         'id': 'point-heat',
         'type': 'heatmap',
         'source': 'datapoints',
-        'source-layer': 'newData27-1mpdoq',
+        'source-layer': 'newDataConverted-cherwl',
         'maxzoom': 9,
         'paint':{
             'heatmap-intensity': [
@@ -396,9 +396,17 @@ map.on('click', function (e) {
     let dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
     console.log(feature.properties)
     function setPopupDate(property){
+        // let dateString=feature.properties[property].split('.')
         let popupDate=new Date(feature.properties[property]*1000)
+        // let popupDate=new Date(Number(dateString[2]).toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})+'-'+
+        // Number(dateString[1]).toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})+'-'+
+        // Number(dateString[0]).toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false}))
+        // console.log(dateString)
+        // console.log("date check: "+feature.properties[property])
+        // console.log("time epoch: "+popupDate)
         if(feature.properties[property]==-2208988800) return "-"
-        else return popupDate.getDay()+'.'+popupDate.getMonth()+'.'+popupDate.getFullYear()
+        // if(feature.properties[property]=="") return "-"
+        else return popupDate.getDate()+'.'+(popupDate.getMonth()+1)+'.'+popupDate.getFullYear()
     }
     function setPopupValue(property){
         if(!feature.properties[property]) return "-"
