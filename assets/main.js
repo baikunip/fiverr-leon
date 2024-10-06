@@ -11,6 +11,15 @@ const map = new mapboxgl.Map({
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
+map.addControl(
+    new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        // localGeocoder: forwardGeocoder,
+        zoom: 14,
+        placeholder: 'Enter search e.g. Lincoln Park',
+        mapboxgl: mapboxgl
+    })
+);
 // draw pulsing dot before load it to the map components
  // to draw a pulsing dot icon on the map.
  const size = 50
