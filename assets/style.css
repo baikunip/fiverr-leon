@@ -22,11 +22,16 @@ body { margin: 0; padding: 0;
     position:absolute;z-index:4;width:20vw;height:40px;top:5vh;left:40vw;border-radius: 25px;
 }
 .mapboxgl-ctrl-top-right>.mapboxgl-ctrl-geocoder{
-    width:100%;border-style:none;border-radius:25px;height:100%;padding:5px;margin:0;padding-left:25px;background-color: #262629;
+    width:100%;border-style:none;border-radius:25px;height:100%;padding:5px;margin:0;padding-left:25px;background-color: #262629;color:white;
 }
-#search-bar-icon{
-    position:absolute; left:7px;top:10px;
+.mapboxgl-ctrl-geocoder--input{
+    font-size: .99em!important;background-color:#262629!important;color:white!important;font-family:"Quicksand", sans-serif;font-weight: 700;
+    border-radius:25px;height:40px;
 }
+.mapboxgl-ctrl-geocoder--input:focus{border-style:none!important;outline:initial!important;}
+/* #search-bar-icon{
+    position:absolute; left:7px;top:15%;height:70%;
+} */
 /* Popup Style */
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
 #popup{
