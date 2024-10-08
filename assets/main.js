@@ -12,10 +12,42 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
 let herstellerList={'ENERCON GmbH': ['ENERCON GmbH', 'Lagerwey GmbH'], 'Nordex': ['Nordex SE', 'Nordex Energy GmbH', 'Südwind Borsig Energy GmbH', 'Nordex Germany GmbH'], 'Inaktive Hersteller': ['Fuhrländer AG', 'SEEWIND Windenergiesysteme GmbH', 'DeWind GmbH', 'AN-Maschinenbau- und Umweltschutzanlagen GmbH', 'Pfleiderer Deutschland GmbH', 'Frisia Windkraftanlagen Service GmbH', 'EVIAG AG', 'PowerWind GmbH', 'QREON GmbH', 'VENTIS WIND SERVICE S.L', 'MAX-wyn GmbH', 'Schütz GmbH & Co. KGaA', 'Schuler Aktiengesellschaft', 'Pfleiderer Wind Energy GmbH', 'Husumer Dock und Reparatur GmbH & Co. KG', 'SeeBA Energiesysteme GmbH', 'Hanseatische AG', 'Wincon West Wind A/S', 'Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)', 'Norddeutsche H-Rotoren GmbH & Co. KG'], 'Vestas': ['Vestas Deutschland GmbH', 'NEG Micon Deutschland GmbH', 'Wind World A/S', 'Nordtank Energy Group', 'MHI Vestas Offshore Wind'], 'Senvion': ['Senvion Deutschland GmbH', 'REpower Systems SE', 'HSW Husumer Schiffswerft GmbH & Co. KG', 'bwu Brandenburgische Wind- und Umwelttechnologien GmbH', 'Kenersys Europe GmbH', 'Jacobs Energie GmbH'], 'GE': ['Tacke GmbH & Co. KG', 'General Electric Deutschland Holding GmbH', 'GE Wind Energy GmbH', 'GE Renewable Germany GmbH', 'Enron Wind GmbH'], 'Kleinwindanlagen-Hersteller': ['Easywind GmbH', 'Lely Aircon B.V. Niederlassung Leer', 'PSW-Energiesysteme GmbH', 'FuSystems SkyWind GmbH', 'WindTec GmbH', 'TOZZI NORD\xa0S.R.L.', 'BRAUN Windturbinen GmbH', 'EUSAG AG', 'Wind+Wing Technologies', 'Heyde Windtechnik GmbH', 'VWA-Deutschland GmbH Freude am Strom', 'LWS systems GmbH & Co. KG.', 'Kähler Maschinenbau GmbH', 'Weinack Windenergie Anlagen GmbH', 'K.D.-Stahl- und Maschinenbau GmbH', 'Fortis Wind Energy', 'Wind Technik Nord GmbH', 'Wittenbauer Technik & Consulting GmbH', 'ALPHACON GmbH', 'Kessler Energy GmbH', 'WSD - Windsysteme', 'JAMP GmbH', 'Sonkyo Energy', 'Home Energy International', 'SOLAR-WIND-TEAM GmbH', 'Mischtechnik Hoffmann & Partner GmbH', 'S & W ENERGIESYSTEME UG (haftungsbeschränkt)', 'InVentus Energie GmbH', 'SkyWind GmbH', 'Uni Wind GmbH', 'Nova-Wind GmbH', 'VENTEGO AG', 'Krogmann GmbH & Co. KG', 'Honeywell Windtronics', 'windradshop', 'myLEDsun', 'Werner Eberle GmbH', 'ESPV-TEC GmbH & Co. KG', 'MyWind', 'STM Montage GmbH', 'Ventis Energietechnik GmbH', 'PreVent GmbH', 'WES IBS GmbH', 'WTT GmbH', 'LuvSide GmbH', 'SMA Solar Technology AG', 'Svit Vitru', 'Aeolos Windkraftanlagen', 'ROPATEC SRL', 'E.A.Z. Wind GmbH', 'Gödecke Energie- und Antriebstechnik GmbH', 'Anhui Hummer Dynamo Co.,Ltd.', 'Eovent GmbH', 'ABB Power-One Italy SpA', 'Hyden', 'Kleinwind GmbH', 'Octopus Systems GmbH', 'Alpha projekt GmbH', 'SB Energy UK Ltd.'], 'Nicht genannt': ['nan', 'Sonstige'], 'VENSYS Energy AG': ['VENSYS Energy AG'], 'Siemens': ['Siemens Wind Power GmbH & Co. KG', 'Siemens Gamesa Renewable Energy GmbH & Co. KG', 'AN Windenergie GmbH', 'Gamesa Corporación Tecnológica S.A.', 'Adwen GmbH', 'Bonus Energy A/S', 'AN Windanlagen GmbH'], 'eno energy GmbH': ['eno energy GmbH', 'eno energy systems GmbH'], 'FWT energy GmbH': ['FWT energy GmbH'], 'AREVA GmbH': ['AREVA GmbH'], 'Amperax Energie GmbH': ['Amperax Energie GmbH'], 'BARD Holding GmbH': ['BARD Holding GmbH']}
+function forwardGeocoder(query){
+    const matchingFeatures = [];
+    for (const hersteller of Object.keys(herstellerList)) {
+        // Handle queries with different capitalization
+        // than the source data by calling toLowerCase().
+        if (
+            hersteller
+                .toLowerCase()
+                .includes(query.toLowerCase())
+        ) {
+            // Add a tree emoji as a prefix for custom
+            // data results using carmen geojson format:
+            // https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+            // 'id': 'point',
+            // 'source': 'datapoints',
+            // 'source-layer': 'newDataConverted-cherwl',
+            map.querySourceFeatures('point', {
+                sourceLayer: 'newDataConverted-cherwl'
+            }).forEach((feature) => {
+                if(feature.properties["Hersteller Zusammenfassung"]==hersteller&&herstellerList[hersteller].includes(feature.properties["Hersteller der Windenergieanlage"])){
+                    feature['place_name'] = feature.properties["Hersteller der Windenergieanlage"];
+                    feature['center'] = feature.geometry.coordinates;
+                    feature['place_type'] = feature.properties["Hersteller Zusammenfassung"];
+                    matchingFeatures.push(feature);
+                    console.log(matchingFeatures)
+                }
+            });
+            
+        }
+    }
+    return matchingFeatures;
+}
 map.addControl(
     new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        // localGeocoder: forwardGeocoder,
+        localGeocoder: forwardGeocoder,
         countries:'de',
         zoom: 14,
         placeholder: 'Enter search',
