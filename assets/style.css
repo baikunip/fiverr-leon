@@ -26,8 +26,9 @@ body { margin: 0; padding: 0;
 }
 .mapboxgl-ctrl-geocoder--input{
     font-size: .99em!important;background-color:#262629!important;color:white!important;font-family:"Quicksand", sans-serif;font-weight: 700;
-    border-radius:25px;height:40px;
+    border-radius:25px;height:40px;position:absolute;left:15%;top:0;padding-left:0;
 }
+.mapboxgl-ctrl-geocoder--button{background-color:transparent!important;position:absolute!important;right:0!important;top:25%!important;}
 .mapboxgl-ctrl-geocoder--input:focus{border-style:none!important;outline:initial!important;}
 /* #search-bar-icon{
     position:absolute; left:7px;top:15%;height:70%;
@@ -192,5 +193,8 @@ button.accordion-button:focus{
     #filter-bar{top:8vh;width:99%;max-height: 50vh;}
     #show-filter-bar{top:8vh;}
     #isMobile{display:block;}
+    .mapboxgl-ctrl-top-right{
+        width:50vw;height:40px;top:2vh;left:23vw;
+    }
 }
         

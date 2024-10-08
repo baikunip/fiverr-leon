@@ -28,15 +28,15 @@ function forwardGeocoder(query){
             // 'id': 'point',
             // 'source': 'datapoints',
             // 'source-layer': 'newDataConverted-cherwl',
-            map.querySourceFeatures('point', {
+            map.querySourceFeatures('datapoints', {
                 sourceLayer: 'newDataConverted-cherwl'
             }).forEach((feature) => {
-                if(feature.properties["Hersteller Zusammenfassung"]==hersteller&&herstellerList[hersteller].includes(feature.properties["Hersteller der Windenergieanlage"])){
+                if(feature.properties["Hersteller-Zusammenfassung"]==hersteller&&herstellerList[hersteller].includes(feature.properties["Hersteller der Windenergieanlage"])){
                     feature['place_name'] = feature.properties["Hersteller der Windenergieanlage"];
                     feature['center'] = feature.geometry.coordinates;
-                    feature['place_type'] = feature.properties["Hersteller Zusammenfassung"];
+                    feature['text'] = feature.properties["Hersteller-Zusammenfassung"];
+                    feature['place_type']='fromLayer'
                     matchingFeatures.push(feature);
-                    console.log(matchingFeatures)
                 }
             });
             
@@ -49,6 +49,19 @@ map.addControl(
         accessToken: mapboxgl.accessToken,
         localGeocoder: forwardGeocoder,
         countries:'de',
+        render:function(item){
+             // extract the item's maki icon or use a default=
+            let backgrounColor='white'
+            if(item['place_type']=='fromLayer'){
+                backgrounColor='#D8C99B'
+            }
+            return `<div class='geocoder-dropdown-item row' style='background-color:${backgrounColor}!important;'>
+            <span class='geocoder-dropdown-text col-12'><b>${item.text}</b></span>
+                <span class='geocoder-dropdown-text col-12' style='margin-left:3px;'>
+                ${item.place_name}
+                </span>
+            </div>`;
+        },
         zoom: 14,
         placeholder: 'Enter search',
         mapboxgl: mapboxgl
