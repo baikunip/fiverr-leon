@@ -1,6 +1,6 @@
 import pandas as pd
 import datetime as dt
-df=pd.read_csv('/Users/kuni/Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/fiverr-leon/data/Data27.09.csv')
+df=pd.read_csv('data/newDataConverted.csv')
 dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
 
 # for attr in dateAttr:
@@ -11,14 +11,12 @@ dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','L
     # end of convert date to epoch
 
 # get all name
-hersteller=dict.fromkeys(df["Hersteller-Zusammenfassung"].to_list())
-for key in list(hersteller):
-    hersteller[key]=[]
-# print(dict.fromkeys(df["Hersteller der Windenergieanlage"].to_list()))
-for i, j in df.iterrows():
-    if df["Hersteller der Windenergieanlage"][i] not in hersteller[df["Hersteller-Zusammenfassung"][i]]:
-        hersteller[df["Hersteller-Zusammenfassung"][i]].append(df["Hersteller der Windenergieanlage"][i])
-    # print(df["Hersteller der Windenergieanlage"][i])
+hersteller=list(dict.fromkeys(df["Name des Anschluss-Netzbetreibers"].to_list()))
+# for key in list(hersteller):
+#     hersteller[key]=[]
+# for i, j in df.iterrows():
+#     if df["Hersteller der Windenergieanlage"][i] not in hersteller[df["Hersteller-Zusammenfassung"][i]]:
+#         hersteller[df["Hersteller-Zusammenfassung"][i]].append(df["Hersteller der Windenergieanlage"][i])
 print(hersteller)
 # print(hersteller)
 # df.to_csv('newData27.09.csv')
