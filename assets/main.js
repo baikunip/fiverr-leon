@@ -12,28 +12,37 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
 function forwardGeocoder(query){
-    const matchingFeatures = [];
+    const matchingFeatures = [],collectedVal=[];
     map.querySourceFeatures('datapoints', {
         sourceLayer: 'newDataConverted-cherwl'
     }).forEach((feature) => {
-        if(feature.properties['MaStR-Nr. der Einheit'].toLowerCase().includes(query.toLowerCase())){  
-            feature['place_name'] = "MarktStammRegister-Nr. der Anlage";
+        if(feature.properties['MaStR-Nr. der Einheit'].toLowerCase().includes(query.toLowerCase())||feature.properties['MaStR-Nr. der Einheit'].toLowerCase()==query.toLowerCase()){  
+            feature['text'] = "MarktStammRegister-Nr. der Anlage";
             feature['center'] = feature.geometry.coordinates;
-            feature['text'] = feature.properties["MaStR-Nr. der Einheit"];
+            feature['place_name'] = feature.properties["MaStR-Nr. der Einheit"];
             feature['place_type']=['fromLayer']
-            matchingFeatures.push(feature);
-        }else if(feature.properties['MaStR-Nr. der EEG-Anlage'].toLowerCase().includes(query.toLowerCase())){
-            feature['place_name'] = "MarktStammRegister-Nr. der EEG-Anlage";
+            if(!collectedVal.includes(feature['place_name'])){
+                matchingFeatures.push(feature);
+                collectedVal.push(feature['place_name'])
+            }
+        }else if(feature.properties['MaStR-Nr. der EEG-Anlage'].toLowerCase().includes(query.toLowerCase())||feature.properties['MaStR-Nr. der EEG-Anlage'].toLowerCase()==query.toLowerCase()){
+            feature['text'] = "MarktStammRegister-Nr. der EEG-Anlage";
             feature['center'] = feature.geometry.coordinates;
-            feature['text'] = feature.properties["MaStR-Nr. der EEG-Anlage"];
+            feature['place_name'] = feature.properties["MaStR-Nr. der EEG-Anlage"];
             feature['place_type']=['fromLayer']
-            matchingFeatures.push(feature);
-        }else if(feature.properties['EEG-Anlagenschlüssel'].toLowerCase().includes(query.toLowerCase())){
-            feature['place_name'] = "EEG-Anlagenschlüssel";
+            if(!collectedVal.includes(feature['place_name'])){
+                matchingFeatures.push(feature);
+                collectedVal.push(feature['place_name'])
+            }
+        }else if(feature.properties['EEG-Anlagenschlüssel'].toLowerCase().includes(query.toLowerCase())||feature.properties['EEG-Anlagenschlüssel'].toLowerCase()==query.toLowerCase()){
+            feature['text'] = "EEG-Anlagenschlüssel";
             feature['center'] = feature.geometry.coordinates;
-            feature['text'] = feature.properties["EEG-Anlagenschlüssel"];
+            feature['place_name'] = feature.properties["EEG-Anlagenschlüssel"];
             feature['place_type']=['fromLayer']
-            matchingFeatures.push(feature);
+            if(!collectedVal.includes(feature['place_name'])){
+                matchingFeatures.push(feature);
+                collectedVal.push(feature['place_name'])
+            }
         }
     });
     return matchingFeatures;
@@ -43,17 +52,18 @@ map.addControl(
         accessToken: mapboxgl.accessToken,
         localGeocoder: forwardGeocoder,
         countries:'de',
-        types:"country",types:"region",types:"postcode",types:"district",types:"place",types:"locality",types:"neighborhood",types:"address",
+        // types:"country",types:"region",types:"postcode",types:"district",types:"place",types:"locality",types:"neighborhood",types:"address",
         render:function(item){
              // extract the item's maki icon or use a default=
             // let acceptedTypes=[,'fromLayer']
+            console.log(item)
             let backgrounColor='white'
             if(item['place_type'][0]=='fromLayer'){backgrounColor='#D8C99B'}
             // if(acceptedTypes.includes(item['place_type'][0])){
                 return `<div class='geocoder-dropdown-item row' style='background-color:${backgrounColor}!important;'>
-                <span class='geocoder-dropdown-text col-12'><b>${item.text}</b></span>
+                <span class='geocoder-dropdown-text col-12'><b>${item.place_name}</b></span>
                     <span class='geocoder-dropdown-text col-12' style='margin-left:3px;'>
-                    ${item.place_name}
+                    ${item.text}
                     </span>
                 </div>`;
             // }
