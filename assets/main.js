@@ -56,7 +56,6 @@ map.addControl(
         render:function(item){
              // extract the item's maki icon or use a default=
             // let acceptedTypes=[,'fromLayer']
-            console.log(item)
             let backgrounColor='white'
             if(item['place_type'][0]=='fromLayer'){backgrounColor='#D8C99B'}
             // if(acceptedTypes.includes(item['place_type'][0])){
@@ -319,6 +318,11 @@ let matchPulsingDot=[
 ]
 // map loading all components
 map.on('load', () => {
+    
+    // $('.mapboxgl-ctrl-geocoder--input').on('focus',()=>{
+    // map.flyTo({
+    //     center: [9.520702538433511,51.47691783935821],zoom:5,
+    // })})
     map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
     map.addImage('nopulsing-dot1', nopulsingDot1, { pixelRatio: 2 });
     map.addImage('nopulsing-dot2', nopulsingDot2, { pixelRatio: 2 });

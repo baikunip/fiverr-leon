@@ -26,7 +26,7 @@ body { margin: 0; padding: 0;
 }
 .mapboxgl-ctrl-geocoder--input{
     font-size: .99em!important;background-color:transparent!important;color:white!important;font-family:"Quicksand", sans-serif;font-weight: 700;
-    border-radius:25px;height:40px;position:absolute;left:15%;top:0;padding-left:0;width:80%!important;
+    border-radius:25px;height:40px;position:absolute;left:15%;top:0;padding-left:2px;width:80%!important;
 }
 .mapboxgl-ctrl-geocoder--button{background-color:transparent!important;position:absolute!important;right:.5em!important;top:.6em!important;}
 .mapboxgl-ctrl-geocoder--input:focus{border-style:none!important;outline:initial!important;}
