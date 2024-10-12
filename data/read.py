@@ -1,5 +1,6 @@
 import pandas as pd
 import datetime as dt
+import json
 df=pd.read_csv('data/newDataConverted.csv')
 dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','Letzte Aktualisierung','Datum der endgültigen Stilllegung','Datum der geplanten Inbetriebnahme','Inbetriebnahmedatum der EEG-Anlage']
 
@@ -14,16 +15,20 @@ dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','L
 hersteller=list(dict.fromkeys(df["Name des Anschluss-Netzbetreibers"].to_list()))
 # for key in list(hersteller):
 #     hersteller[key]=[]
-
+jsData=[]
 for i, j in df.iterrows():
     objt={'MaStR-Nr. der Einheit':'','MaStR-Nr. der EEG-Anlage':'','EEG-Anlagenschlüssel':'','center':[]}
     objt['MaStR-Nr. der Einheit']=df['MaStR-Nr. der Einheit'][i]
     objt['MaStR-Nr. der EEG-Anlage']=df['MaStR-Nr. der EEG-Anlage'][i]
     objt['EEG-Anlagenschlüssel']=df['EEG-Anlagenschlüssel'][i]
-    objt['center']=[df['latitude'][i],df['longitude'][i]]
+    objt['center']=[df['longitude'][i],df['latitude'][i]]
+    jsData.append(objt)
     # if df["Hersteller der Windenergieanlage"][i] not in hersteller[df["Hersteller-Zusammenfassung"][i]]:
     #     hersteller[df["Hersteller-Zusammenfassung"][i]].append(df["Hersteller der Windenergieanlage"][i])
-print(hersteller)
+# Serializing json
+json_object = json.dumps(jsData, indent=4)
+with open("search.json", "w") as outfile:
+    outfile.write(json_object)
 # print(hersteller)
 # df.to_csv('newData27.09.csv')
 

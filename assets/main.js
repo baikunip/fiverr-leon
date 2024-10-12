@@ -13,31 +13,29 @@ const map = new mapboxgl.Map({
 });
 function forwardGeocoder(query){
     const matchingFeatures = [],collectedVal=[];
-    map.querySourceFeatures('datapoints', {
-        sourceLayer: 'newDataConverted-cherwl'
-    }).forEach((feature) => {
-        if(feature.properties['MaStR-Nr. der Einheit'].toLowerCase().includes(query.toLowerCase())||feature.properties['MaStR-Nr. der Einheit'].toLowerCase()==query.toLowerCase()){  
+    searchQueries.forEach((feature) => {
+        if(feature['MaStR-Nr. der Einheit'].toLowerCase().includes(query.toLowerCase())||feature['MaStR-Nr. der Einheit'].toLowerCase()==query.toLowerCase()){  
             feature['text'] = "MarktStammRegister-Nr. der Anlage";
-            feature['center'] = feature.geometry.coordinates;
-            feature['place_name'] = feature.properties["MaStR-Nr. der Einheit"];
+            feature['center'] = feature['center'];
+            feature['place_name'] = feature["MaStR-Nr. der Einheit"];
             feature['place_type']=['fromLayer']
             if(!collectedVal.includes(feature['place_name'])){
                 matchingFeatures.push(feature);
                 collectedVal.push(feature['place_name'])
             }
-        }else if(feature.properties['MaStR-Nr. der EEG-Anlage'].toLowerCase().includes(query.toLowerCase())||feature.properties['MaStR-Nr. der EEG-Anlage'].toLowerCase()==query.toLowerCase()){
+        }else if(feature['MaStR-Nr. der EEG-Anlage'].toLowerCase().includes(query.toLowerCase())||feature['MaStR-Nr. der EEG-Anlage'].toLowerCase()==query.toLowerCase()){
             feature['text'] = "MarktStammRegister-Nr. der EEG-Anlage";
-            feature['center'] = feature.geometry.coordinates;
-            feature['place_name'] = feature.properties["MaStR-Nr. der EEG-Anlage"];
+            feature['center'] = feature['center'];
+            feature['place_name'] = feature["MaStR-Nr. der EEG-Anlage"];
             feature['place_type']=['fromLayer']
             if(!collectedVal.includes(feature['place_name'])){
                 matchingFeatures.push(feature);
                 collectedVal.push(feature['place_name'])
             }
-        }else if(feature.properties['EEG-Anlagenschlüssel'].toLowerCase().includes(query.toLowerCase())||feature.properties['EEG-Anlagenschlüssel'].toLowerCase()==query.toLowerCase()){
+        }else if(feature['EEG-Anlagenschlüssel'].toLowerCase().includes(query.toLowerCase())||feature['EEG-Anlagenschlüssel'].toLowerCase()==query.toLowerCase()){
             feature['text'] = "EEG-Anlagenschlüssel";
-            feature['center'] = feature.geometry.coordinates;
-            feature['place_name'] = feature.properties["EEG-Anlagenschlüssel"];
+            feature['center'] = feature['center'];
+            feature['place_name'] = feature["EEG-Anlagenschlüssel"];
             feature['place_type']=['fromLayer']
             if(!collectedVal.includes(feature['place_name'])){
                 matchingFeatures.push(feature);
@@ -53,6 +51,13 @@ map.addControl(
         localGeocoder: forwardGeocoder,
         countries:'de',
         // types:"country",types:"region",types:"postcode",types:"district",types:"place",types:"locality",types:"neighborhood",types:"address",
+        filter: function(item) {
+            // Exclude results of the type "shop" or other Point of Interest types
+            var excludedTypes = ['shop'];
+            return !excludedTypes.some(function(exclude) {
+                return item.properties.category && item.properties.category.includes(exclude);
+            });
+        },
         render:function(item){
              // extract the item's maki icon or use a default=
             // let acceptedTypes=[,'fromLayer']
