@@ -14,9 +14,14 @@ dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','L
 hersteller=list(dict.fromkeys(df["Name des Anschluss-Netzbetreibers"].to_list()))
 # for key in list(hersteller):
 #     hersteller[key]=[]
-# for i, j in df.iterrows():
-#     if df["Hersteller der Windenergieanlage"][i] not in hersteller[df["Hersteller-Zusammenfassung"][i]]:
-#         hersteller[df["Hersteller-Zusammenfassung"][i]].append(df["Hersteller der Windenergieanlage"][i])
+for i, j in df.iterrows():
+    objt={'MaStR-Nr. der Einheit':'','MaStR-Nr. der EEG-Anlage':'','EEG-Anlagenschlüssel':'','center':[]}
+    objt['MaStR-Nr. der Einheit']=df['MaStR-Nr. der Einheit'][i]
+    objt['MaStR-Nr. der EEG-Anlage']=df['MaStR-Nr. der EEG-Anlage'][i]
+    objt['EEG-Anlagenschlüssel']=df['EEG-Anlagenschlüssel'][i]
+    objt['center']=[df['latitude'][i],df['longitude'][i]]
+    # if df["Hersteller der Windenergieanlage"][i] not in hersteller[df["Hersteller-Zusammenfassung"][i]]:
+    #     hersteller[df["Hersteller-Zusammenfassung"][i]].append(df["Hersteller der Windenergieanlage"][i])
 print(hersteller)
 # print(hersteller)
 # df.to_csv('newData27.09.csv')
