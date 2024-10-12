@@ -14,6 +14,7 @@ dateAttr=['Registrierungsdatum der Einheit','Inbetriebnahmedatum der Einheit','L
 hersteller=list(dict.fromkeys(df["Name des Anschluss-Netzbetreibers"].to_list()))
 # for key in list(hersteller):
 #     hersteller[key]=[]
+
 for i, j in df.iterrows():
     objt={'MaStR-Nr. der Einheit':'','MaStR-Nr. der EEG-Anlage':'','EEG-Anlagenschlüssel':'','center':[]}
     objt['MaStR-Nr. der Einheit']=df['MaStR-Nr. der Einheit'][i]
