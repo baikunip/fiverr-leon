@@ -646,14 +646,14 @@ $('#slider-nach-select').on('change', ()=>{
     dataList.forEach(element=>{
         $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
     })
-    $('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
+    $('#nach-list-input').flexdatalist({searchContain: true}).on('change:flexdatalist',(event, set, options)=>{
         applyFilter()
     })
 });
 hersteller.forEach(element=>{
     $("#nach-list").append('<option value="'+element+'">'+element+'</option>')
 })
-$('#nach-list-input').flexdatalist().on('change:flexdatalist',(event, set, options)=>{
+$('#nach-list-input').flexdatalist({searchContain: true}).on('change:flexdatalist',(event, set, options)=>{
     applyFilter()
 })
 // Date Range Picker
