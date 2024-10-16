@@ -1,12 +1,19 @@
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmFpa3VuaXAxNCIsImEiOiJjbDBycXdmbHEwNjY0M2lrN2lubnd1aW43In0.zsbYN2VrQ1Dit4kj4uhzWw';
-let userClick=0
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmFpa3VuaXAxNCIsImEiOiJjbTJiOWZodzIwa2dvMmpxd3VoYTJkZ211In0.6cOD__WxNGnwrzmLhWJL6g';
+let tilesetID='baikunip14.1kl46bay',tilesetName='NewData-wY-converted-8uagme'
+let userClick=0,center=[10.2994,54.073831],zoom=12
+if(localStorage.hasOwnProperty('zoom')){
+    let answer = confirm("Go to the previous location?");
+    if (answer) {
+        center=localStorage.getItem('coordinates').split(','),zoom=parseFloat(localStorage.getItem('zoom'))
+    }
+}
 const map = new mapboxgl.Map({
     container: 'map', // container ID
-    center: [10.2994,54.073831], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-    zoom: 12, // starting zoom
+    center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
+    zoom: zoom, // starting zoom
     // minZoom:7,
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
@@ -333,7 +340,7 @@ const nopulsingDotGrey = {
             0,
             Math.PI * 2
         );
-        context.fillStyle = 'grey';
+        context.fillStyle = '#93A3BC';
         context.strokeStyle = 'white';
         context.lineWidth = 1;
         context.fill();
@@ -350,18 +357,20 @@ const nopulsingDotGrey = {
     }
 };
 let matchPulsingDot=[
-    "case",
-    ["==", ["get", 'Bruttoleistung der Einheit'], null],'nopulsing-dotGrey',[
     'step',
     ['get', 'Bruttoleistung der Einheit'],
+   'nopulsing-dotGrey',
+    0,
+    'nopulsing-dotGrey',
+    0.01,
     'nopulsing-dot1',
-    0.5,
-    'nopulsing-dot2',
     5,
+    'nopulsing-dot2',
+    10,
     'nopulsing-dot3',
-    15,
+    15, 
     'nopulsing-dot4'
-]]
+]
 // map loading all components
 map.on('load', () => {
     
@@ -389,12 +398,12 @@ map.on('load', () => {
         // Use any Mapbox-hosted tileset using its tileset id.
         // Learn more about where to find a tileset id:
         // https://docs.mapbox.com/help/glossary/tileset-id/
-        url: 'mapbox://baikunip14.31hjtm2g'
+        url: 'mapbox://'+tilesetID
     });
     map.addLayer({
         'id': 'point',
         'source': 'datapoints',
-        'source-layer': 'newDataConverted-cherwl',
+        'source-layer': tilesetName,
         'type': 'symbol',
         'filter':['all',["in", ["get","Betriebs-Status"],["literal", ["In Betrieb","Vorübergehend stillgelegt"]]]],
         'paint': {
@@ -404,7 +413,7 @@ map.on('load', () => {
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                1,
+                8,
                 0,
                 14,
                 1
@@ -428,7 +437,7 @@ map.on('load', () => {
         'id': 'point-heat',
         'type': 'heatmap',
         'source': 'datapoints',
-        'source-layer': 'newDataConverted-cherwl',
+        'source-layer': tilesetName,
         'maxzoom': 9,
         'filter':['all',["in", ["get","Betriebs-Status"],["literal", ["In Betrieb","Vorübergehend stillgelegt"]]]],
         'paint':{
@@ -532,7 +541,8 @@ map.on('click', function (e) {
     $("#Typenbezeichnung-popup").html(setPopupValue("Typenbezeichnung"))
     $("#RotordurchmesserderWindenergieanlage-popup").html(setPopupValue("Rotordurchmesser der Windenergieanlage")+" m")
     $("#NabenhöhederWindenergieanlage-popup").html(setPopupValue("Nabenhöhe der Windenergieanlage")+" m")
-    $("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Inbetriebnahmedatum der Einheit"))
+    if(setPopupValue("Betriebs-Status")=="In Planung")$("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Datum der geplanten Inbetriebnahme"))
+    else $("#InbetriebnahmedatumderEinheit-popup").html(setPopupDate("Inbetriebnahmedatum der Einheit"))
     $("#NamedesWindparks-popup").html(setPopupValue("Name des Windparks"))
     $("#LetzteAktualisierung-popup").html(setPopupDate("Letzte Aktualisierung"))
     $("#Betriebers-popup").html(setPopupValue("Name des Anlagenbetreibers (nur Org.)"))
@@ -562,6 +572,10 @@ map.on('mouseenter', 'point', () => {
   })
 map.on('mouseleave', 'point', () => {
     map.getCanvas().style.cursor = ''
+})
+map.on('moveend',()=>{
+    localStorage.setItem('coordinates',[map.getCenter().lng,map.getCenter().lat])
+    localStorage.setItem('zoom',map.getZoom())
 })
 // filters
 // Hide/Show FIlters
@@ -673,6 +687,9 @@ $('#slider-attr-select').on('change',()=>{
                 if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
                 else $( "#slider-filter-min" ).html('0 MW')
                 $( "#slider-filter-max" ).html((ui.values[1])+' MW')
+            }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
+                $( "#slider-filter-min" ).html((rangeVal[0]))
+                $( "#slider-filter-max" ).html((rangeVal[1]))
             }else{
                 $( "#slider-filter-min" ).html((ui.values[0])+' m')
                 $( "#slider-filter-max" ).html((ui.values[1])+' m')
@@ -737,7 +754,7 @@ $('#in-vs').on('change',()=>{
     applyFilter()
 })
 $('#reverse-date-filter').on('click',()=>{
-    dateComissioned=[0,Date.now()]
+    dateComissioned=[-2208988800,Date.now()]
     $('#date-commision-start-container').empty().append(
         `<div id="date-commision-start" class="input-group date">
                         <div class="row d-flex align-items-center row-date">
@@ -791,90 +808,99 @@ function applyFilter(){
     comissionEnd=["<=",['get','Inbetriebnahmedatum der Einheit'],dateComissioned[1]],
     // Inbetriebnahmedatum der Einheit: -2208988800
     bde1=[">=", ["get", $('#slider-attr-select').val()], bdeVal[0]],
-    bde2=["<=", ["get", $('#slider-attr-select').val()], bdeVal[1]]
+    bde2=["<=", ["get", $('#slider-attr-select').val()], bdeVal[1]],
     queryFilter=['all',statsFilter,bde1,bde2,comissionStart,comissionEnd]
+    // rangeVal=attSliders[$('#slider-attr-select').val()]
+    // bdeVal=rangeVal
+    // if(!bdeVal[0]==attSliders[$('#slider-attr-select').val()][0])queryFilter.push(bde1)
     if(!$('#nach-list-input').val().split(",")[0]==''){
         let energyProducerFilter=["in", ["get",$('#slider-nach-select').val()],["literal", $('#nach-list-input').val().split(",")]]
         queryFilter.push(energyProducerFilter)
     }
-    // if($('#betriebs-status-check').is(':checked')) queryFilter.push(statsFilter)
-    // if($('#bde-check').is(':checked')) queryFilter.push(bde1,bde2)
-    // if($('#hdw-check').is(':checked')) queryFilter.push(energyProducerFilter)
-    // if($('#ide-check').is(':checked')) queryFilter.push(comissionStart,comissionEnd)
-    // if($('#bundesland-check').is(':checked')) queryFilter.push(bundeslandFilter)
     map.setFilter('point',queryFilter)
+    queryFilter.push([">", ['to-number', ["get", $('#slider-attr-select').val()]], 0])
     map.setFilter('point-heat',queryFilter)
 }
 
 // legends
 $('#legend-select').on('change',()=>{
     let legendVal=attSliders[$('#legend-select').val()]
+    map.setFilter('point-heat',[">", ['to-number', ["get", $('#legend-select').val()]], 0])
     if($('#legend-select').val()=="Bruttoleistung der Einheit"){
         $( "#min-legend-bar" ).html('0.5 MW')
         $( "#max-legend-bar" ).html('15 MW')
         matchPulsingDot=[
-            "case",
-            ["==", ["get", $('#legend-select').val()], null],'nopulsing-dotGrey',
-            [
             'step',
             ['get', $('#legend-select').val()],
+            'nopulsing-dotGrey',
+            0,
+            'nopulsing-dotGrey',
+            0.01,
             'nopulsing-dot1',
-            0.5,
-            'nopulsing-dot2',
             5,
+            'nopulsing-dot2',
+            10,
             'nopulsing-dot3',
-            15,
-            'nopulsing-dot4'
-            
-        ]]
+            15, 
+            'nopulsing-dot4' 
+        ]
     }else if($('#legend-select').val()=="Inbetriebnahmejahr"){
         $( "#min-legend-bar" ).html((legendVal[0]))
         $( "#max-legend-bar" ).html((legendVal[1]))
         matchPulsingDot=[
             "case",
-            ["==", ["get", $('#legend-select').val()], null],'nopulsing-dotGrey',
+            ["==", ["get", $('#legend-select').val()], ""],
+            'nopulsing-dotGrey',
             ['step',
-            ['get', $('#legend-select').val()],
-            'nopulsing-dot1',
-            1990,
-            'nopulsing-dot2',
-            2000,
-            'nopulsing-dot3',
-            2023,
-            'nopulsing-dot4'
-        ]]
+                ['get', $('#legend-select').val()],
+                'nopulsing-dotGrey',
+                0,
+                'nopulsing-dotGrey',
+                1,
+                'nopulsing-dot1',
+                1980,
+                'nopulsing-dot2',
+                2000,
+                'nopulsing-dot3',
+                2023,
+                'nopulsing-dot4' ] 
+        ]
     }else if($('#legend-select').val()=="Nabenhöhe der Windenergieanlage"){
         $( "#min-legend-bar" ).html((legendVal[0])+' m')
         $( "#max-legend-bar" ).html((legendVal[1])+' m')
         matchPulsingDot=[
-            "case",
-            ["==", ["get", $('#legend-select').val()], null],'nopulsing-dotGrey',[
             'step',
             ['get', $('#legend-select').val()],
+            'nopulsing-dotGrey',  
+            0,
+            'nopulsing-dotGrey',
+            1,
             'nopulsing-dot1',
-            50,
+            100,
             'nopulsing-dot2',
-            125,
+            150,
             'nopulsing-dot3',
             190,
             'nopulsing-dot4'
-        ]]
+        ]
     }else{
         $( "#min-legend-bar" ).html((legendVal[0])+' m')
         $( "#max-legend-bar" ).html((legendVal[1])+' m')
         matchPulsingDot=[
-            "case",
-            ["==", ["get", $('#legend-select').val()], null],'nopulsing-dotGrey',[
             'step',
             ['get', $('#legend-select').val()],
+            'nopulsing-dotGrey',
+            0,
+            'nopulsing-dotGrey',
+            1,
             'nopulsing-dot1',
-            50,
+            100,
             'nopulsing-dot2',
-            125,
+            150,
             'nopulsing-dot3',
-            200,
+            250,
             'nopulsing-dot4'
-        ]]
+        ]
     }
     map.setLayoutProperty('point', 
         'icon-image', matchPulsingDot

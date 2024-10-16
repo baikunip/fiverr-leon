@@ -256,115 +256,117 @@
                     <div class="text-popup">Auswahl Filtern</div>
                 </div>
             </div>
-            <div class="card-header row jet-color filter-container d-flex align-items-center" >
-                <div class="col-8 mb-2 align-self-center d-flex justify-content-start">
-                    <select id="slider-attr-select" class="form-select jet-color text-filter mb-2">
-                        <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
-                        <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
-                        <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
-                        <option value="Inbetriebnahmejahr">Inbetriebnahme</option>
-                      </select>
-                </div>
-                <div id="slider-filter-container" class="col-12 align-self-center bde-filter mb-2">
-                    <div id="slider-filter"></div>
-                </div>
-                <div class="col-6 align-self-center bde-filter sub-text-popup d-flex justify-content-start" id="slider-filter-min">0 MW</div>
-                <div class="col-6 align-self-center bde-filter sub-text-popup d-flex justify-content-end" id="slider-filter-max">15 MW</div>
-            </div>
-            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-5 p-0 m-0" style="padding-right:3px!important;margin-bottom:6px!important;">
-                    <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-betrieb">
-                    <label class="btn-betrieb-status btn btn-sm text-filter" for="in-betrieb">In Betrieb</label>
-                </div>
-                <div class="col-7 p-0 m-0" style="padding-left:3px!important;margin-bottom:6px!important;">
-                    <input class="btn-check btn-betrieb-check" type="checkbox" role="switch" id="in-es">
-                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-es">Endgültig stillgelegt</label>
-                </div>
-                <div class="col-5 p-0 m-0" style="padding-right:3px!important;">
-                    <input class="btn-check btn-betrieb-check" type="checkbox" role="switch" id="in-planung">
-                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-planung">In Planung</label>
-                </div>
-                <div class="col-7 p-0 m-0" style="padding-left:3px!important;">
-                    <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-vs">
-                    <label class="btn btn-sm btn-betrieb-status text-filter" for="in-vs">Vorübergehend stillgelegt</label>
-                </div>
-            </div>
-            <div class="card-header row no-gutters jet-color filter-container d-flex  align-items-center">
-                <div class="col-12 text-filter d-flex align-items-center">
-                    <span class="align-middle mb-2">Filtern nach</span>
-                    <select id="slider-nach-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example" style="width:65%;margin-left:5px;">
-                        <option selected value="Hersteller-Zusammenfassung">Hersteller Zusammenfassung</option>
-                        <option value="Hersteller der Windenergieanlage">Hersteller der Windenergieanlage</option>
-                        <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
-                        <option value="Bundesland">Bundesland</option>
-                    </select>
-                </div>
-                <div class="col-12 mt-2 jet-color" id="nach-list-container">
-                    <input type='text'
-                        placeholder='Suche nach'
-                        class='flexdatalist jet-color text-filter'
-                        data-min-length='2'
-                        multiple='multiple'
-                        list='nach-list'
-                        id="nach-list-input"
-                        name='nach-list'>
-                        <datalist id="nach-list">
-                        </datalist>
-                    <!-- <select id="nach-list" name="nach-list" multiple class="text-filter"></select> -->
-                </div>
-            </div>
-            <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                <div class="col-10 ide-filter mb-2 text-filter">Inbetriebnahmedatum der Einheit</div>
-                <div class="col-2 mb-2">
-                    <button id="reverse-date-filter" type="button" class="btn btn-sm reverse-btn" style="display: none;"><i class="bi bi-arrow-counterclockwise"></i></button>
-                </div>
-                <div id="date-commision-start-container" class="col-12 d-flex align-self-center ide-filter text-filter ">
-                    <div id="date-commision-start" class="input-group date">
-                        <div class="row d-flex align-items-center row-date">
-                            <div class="col-8">
-                                <input type="text" value="von" class="date-input jet-color">
-                            </div>
-                            <div class="col-2 jet-color">
-                                <span class="input-group-addon">
-                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
-                                </span>
-                            </div>
-                        </div>  
-                    </div>
-                    <div id="date-commision-end" class="input-group date">
-                        <div class="row d-flex align-items-center row-date">
-                            <div class="col-8">
-                                <input type="text" value="bis" class="date-input jet-color">
-                            </div>
-                            <div class="col-2 jet-color">
-                                <span class="input-group-addon">
-                                    <i class="bi bi-sm bi-calendar-week-fill"></i>
-                                </span>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-            </div>
-            <div class="card-header row jet-color filter-container d-flex align-items-center">
-                <div class="col-12 mb-2 text-filter">
-                    Anlagen farblich kennzelchnen.
-                </div>
-                <div class="col-9 row">
-                    <div class="col-12 justify-content-start">
-                        <select id="legend-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example">
-                            <option selected value="Bruttoleistung der Einheit">Turbinen Leistung in MW</option>
+            <div id="filter-bar-container">
+                <div class="card-header row jet-color filter-container d-flex align-items-center" >
+                    <div class="col-8 mb-2 align-self-center d-flex justify-content-start">
+                        <select id="slider-attr-select" class="form-select jet-color text-filter mb-2">
+                            <option selected value="Bruttoleistung der Einheit">Leistung MW</option>
                             <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
                             <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
                             <option value="Inbetriebnahmejahr">Inbetriebnahme</option>
+                          </select>
+                    </div>
+                    <div id="slider-filter-container" class="col-12 align-self-center bde-filter mb-2">
+                        <div id="slider-filter"></div>
+                    </div>
+                    <div class="col-6 align-self-center bde-filter sub-text-popup d-flex justify-content-start" id="slider-filter-min">0 MW</div>
+                    <div class="col-6 align-self-center bde-filter sub-text-popup d-flex justify-content-end" id="slider-filter-max">15 MW</div>
+                </div>
+                <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
+                    <div class="col-5 p-0 m-0" style="padding-right:3px!important;margin-bottom:6px!important;">
+                        <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-betrieb">
+                        <label class="btn-betrieb-status btn btn-sm text-filter" for="in-betrieb">In Betrieb</label>
+                    </div>
+                    <div class="col-7 p-0 m-0" style="padding-left:3px!important;margin-bottom:6px!important;">
+                        <input class="btn-check btn-betrieb-check" type="checkbox" role="switch" id="in-es">
+                        <label class="btn btn-sm btn-betrieb-status text-filter" for="in-es">Endgültig stillgelegt</label>
+                    </div>
+                    <div class="col-5 p-0 m-0" style="padding-right:3px!important;">
+                        <input class="btn-check btn-betrieb-check" type="checkbox" role="switch" id="in-planung">
+                        <label class="btn btn-sm btn-betrieb-status text-filter" for="in-planung">In Planung</label>
+                    </div>
+                    <div class="col-7 p-0 m-0" style="padding-left:3px!important;">
+                        <input class="btn-check btn-betrieb-check" checked type="checkbox" role="switch" id="in-vs">
+                        <label class="btn btn-sm btn-betrieb-status text-filter" for="in-vs">Vorübergehend stillgelegt</label>
+                    </div>
+                </div>
+                <div class="card-header row no-gutters jet-color filter-container d-flex  align-items-center">
+                    <div class="col-12 text-filter d-flex align-items-center">
+                        <span class="align-middle mb-2">Filtern nach</span>
+                        <select id="slider-nach-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example" style="width:65%;margin-left:5px;">
+                            <option selected value="Hersteller-Zusammenfassung">Hersteller Zusammenfassung</option>
+                            <option value="Hersteller der Windenergieanlage">Hersteller der Windenergieanlage</option>
+                            <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
+                            <option value="Bundesland">Bundesland</option>
                         </select>
                     </div>
-                    <div class="col-12 align-self-center mb-2">
-                        <div id="legend-bar"></div>
+                    <div class="col-12 mt-2 jet-color" id="nach-list-container">
+                        <input type='text'
+                            placeholder='Suche nach'
+                            class='flexdatalist jet-color text-filter'
+                            data-min-length='2'
+                            multiple='multiple'
+                            list='nach-list'
+                            id="nach-list-input"
+                            name='nach-list'>
+                            <datalist id="nach-list">
+                            </datalist>
+                        <!-- <select id="nach-list" name="nach-list" multiple class="text-filter"></select> -->
                     </div>
-                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-start" id="min-legend-bar">0,5 MW</div>
-                    <div class="col-6 align-self-center sub-text-popup d-flex justify-content-end" id="max-legend-bar">15 MW</div>
-                </div>  
-            </div>
+                </div>
+                <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
+                    <div class="col-10 ide-filter mb-2 text-filter">Inbetriebnahmedatum der Einheit</div>
+                    <div class="col-2 mb-2">
+                        <button id="reverse-date-filter" type="button" class="btn btn-sm reverse-btn" style="display: none;"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    </div>
+                    <div id="date-commision-start-container" class="col-12 d-flex align-self-center ide-filter text-filter ">
+                        <div id="date-commision-start" class="input-group date">
+                            <div class="row d-flex align-items-center row-date">
+                                <div class="col-8">
+                                    <input type="text" value="von" class="date-input jet-color">
+                                </div>
+                                <div class="col-2 jet-color">
+                                    <span class="input-group-addon">
+                                        <i class="bi bi-sm bi-calendar-week-fill"></i>
+                                    </span>
+                                </div>
+                            </div>  
+                        </div>
+                        <div id="date-commision-end" class="input-group date">
+                            <div class="row d-flex align-items-center row-date">
+                                <div class="col-8">
+                                    <input type="text" value="bis" class="date-input jet-color">
+                                </div>
+                                <div class="col-2 jet-color">
+                                    <span class="input-group-addon">
+                                        <i class="bi bi-sm bi-calendar-week-fill"></i>
+                                    </span>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header row jet-color filter-container d-flex align-items-center">
+                    <div class="col-12 mb-2 text-filter">
+                        Anlagen farblich kennzelchnen.
+                    </div>
+                    <div class="col-9 row">
+                        <div class="col-12 justify-content-start">
+                            <select id="legend-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example">
+                                <option selected value="Bruttoleistung der Einheit">Turbinen Leistung in MW</option>
+                                <option value="Rotordurchmesser der Windenergieanlage">Rotordurchmesser</option>
+                                <option value="Nabenhöhe der Windenergieanlage">Nabenhöhe</option>
+                                <option value="Inbetriebnahmejahr">Inbetriebnahme</option>
+                            </select>
+                        </div>
+                        <div class="col-12 align-self-center mb-2">
+                            <div id="legend-bar"></div>
+                        </div>
+                        <div class="col-6 align-self-center sub-text-popup d-flex justify-content-start" id="min-legend-bar">0,5 MW</div>
+                        <div class="col-6 align-self-center sub-text-popup d-flex justify-content-end" id="max-legend-bar">15 MW</div>
+                    </div>  
+                </div>
+            </div> 
             <!-- <div class="card-body">
                 <div class="row no-gutters">
                     <div class="col-12">Filter Selection</div>
