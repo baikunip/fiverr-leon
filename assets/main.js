@@ -3,21 +3,39 @@
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmFpa3VuaXAxNCIsImEiOiJjbTJiOWZodzIwa2dvMmpxd3VoYTJkZ211In0.6cOD__WxNGnwrzmLhWJL6g';
 let tilesetID='baikunip14.1kl46bay',tilesetName='NewData-wY-converted-8uagme'
-let userClick=0,center=[10.2994,54.073831],zoom=12
+let userClick=0,center=[11.038322348412294,53.40777239100876],zoom=6,bearing=0
 if(localStorage.hasOwnProperty('zoom')){
-    let answer = confirm("Go to the previous location?");
-    if (answer) {
-        center=localStorage.getItem('coordinates').split(','),zoom=parseFloat(localStorage.getItem('zoom'))
-    }
+    // let answer = confirm("Go to the previous location?");
+    // if (answer) {
+        center=localStorage.getItem('coordinates').split(',')
+        zoom=parseFloat(localStorage.getItem('zoom'))
+        bearing=parseFloat(localStorage.getItem('bearing'))
+    // }
+}
+if($('#isMobile').is(':visible')){
+    setTimeout(() => {
+        showhidefilter("hidden")
+    }, 5000);
 }
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: zoom, // starting zoom
+    bearing:137,
     // minZoom:7,
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
 });
+let geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true
+});
+map.addControl(geolocate)
+$('#geolocation').on('click',()=>{
+    geolocate.trigger()
+})
 function forwardGeocoder(query){
     const matchingFeatures = [],collectedVal=[];
     searchQueries.forEach((feature) => {
@@ -508,6 +526,7 @@ map.on('click', function (e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
     if (!features.length) {
         $("#popup").hide()
+        $("#slide-up-popup").hide()
         map.setLayoutProperty('point', 'icon-image', matchPulsingDot)
         return;
     }
@@ -576,30 +595,29 @@ map.on('mouseleave', 'point', () => {
 map.on('moveend',()=>{
     localStorage.setItem('coordinates',[map.getCenter().lng,map.getCenter().lat])
     localStorage.setItem('zoom',map.getZoom())
+    localStorage.setItem('bearing',map.getBearing())
 })
 // filters
 // Hide/Show FIlters
 function showhidefilter(stats){
     if(stats=="hidden"){
-        $("#filter-bar").hide()
-        $("#show-filter-bar").show()
+        $("#filter-bar").hide(500)
+        $("#show-filter-bar").show(500)
     }else{
-        if($('#isMobile').is(':visible')) $("#filter-bar").css("width","99%").css("top","8vh").css("overflow","scroll").css("max-height","50vh")
+        if($('#isMobile').is(':visible')) $("#filter-bar").css("width","99%").css("top","8vh").css("overflow","scroll").css("max-height","83vh")
         else $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
-        $("#show-filter-bar").hide()
-        $("#filter-bar").show()
-        // $("#filter-btn-container").empty().append(
-        //     `
-        //         <div class="col-2">
-        //                 <button id="hide-filter-btn" type="button" onclick='showhidefilter("hidden")' class="jet-color btn btn-sm"></button>
-        //             </div>
-        //             <div class="col-10">
-        //                 <div class="text-popup">Auswahl Filtern</div>
-        //         </div>
-        //     `
-        // )
+        $("#show-filter-bar").hide(500)
+        $("#filter-bar").show(500)
     }
-}    
+} 
+$('#slide-down-popup').on('click',()=>{
+    $('#popup').hide()
+    $('#slide-up-popup').show()
+}) 
+$('#slide-up-popup').on('click',()=>{
+    $('#popup').show()
+    $('#slide-up-popup').hide()
+})     
 
 $('#betriebs-status-check').change(()=>{
     if($('#betriebs-status-check').is(":checked"))$('.betriebs-status-filter').show()
@@ -684,12 +702,13 @@ $('#slider-attr-select').on('change',()=>{
         values: rangeVal,
         slide: function( event, ui ) {
             if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
-                if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
-                else $( "#slider-filter-min" ).html('0 MW')
+                // if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
+                // else $( "#slider-filter-min" ).html('0 MW')
+                $( "#slider-filter-min" ).html((ui.values[0])+' MW')
                 $( "#slider-filter-max" ).html((ui.values[1])+' MW')
             }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
-                $( "#slider-filter-min" ).html((rangeVal[0]))
-                $( "#slider-filter-max" ).html((rangeVal[1]))
+                $( "#slider-filter-min" ).html((ui.values[0]))
+                $( "#slider-filter-max" ).html((ui.values[1]))
             }else{
                 $( "#slider-filter-min" ).html((ui.values[0])+' m')
                 $( "#slider-filter-max" ).html((ui.values[1])+' m')
@@ -720,7 +739,7 @@ $('#nach-list-input').flexdatalist({searchContain: true}).on('change:flexdatalis
 $('.input-group.date').datepicker({
     format: 'mm/dd/yyyy',
     todayBtn:"linked",
-    startView:3
+    startView:2
 });
 $('#date-commision-start').on('changeDate',()=>{
     dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000
@@ -734,8 +753,19 @@ $('#date-commision-end').on('changeDate',()=>{
 })
 // Betriebs-Status
 $('#in-planung').on('change',()=>{
-    if($('#in-planung').is(":checked")) stats.push("In Planung")
-    else stats.splice(stats.indexOf("In Planung"),1)
+    if($('#in-planung').is(":checked")){
+        stats.push("In Planung")
+        if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
+            $( "#slider-filter" ).slider("option","max",2029)
+            $( "#slider-filter-max" ).html(2029)
+        }
+    }else{
+        stats.splice(stats.indexOf("In Planung"),1)
+        if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
+            $( "#slider-filter" ).slider("option","max",2024)
+            $( "#slider-filter-max" ).html(2024)
+        }      
+    }
     applyFilter()
 })
 $('#in-betrieb').on('change',()=>{
@@ -784,7 +814,7 @@ $('#reverse-date-filter').on('click',()=>{
     $('.input-group.date').datepicker({
         format: 'mm/dd/yyyy',
         todayBtn:"linked",
-        startView:3
+        startView:2
     });
     $('#date-commision-start').on('changeDate',()=>{
         dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000

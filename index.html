@@ -61,191 +61,197 @@
                 <span id="search-bar-icon"><i class="bi bi-search"></i></span>
                 <input type="text" class="jet-color text-filter" id="search-bar">
         </div> -->
-        <div class="card" id="popup">
-            <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
-                <div class="col-4 d-flex justify-content-start align-items-center">
-                    <div><i class="bi bi-circle-fill h5" id="betriebs-status-icon" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
-                    <div id="Betriebs-Status-popup" class="text-popup" style="font-weight: 400;font-size: 1.5em;">-</div>
+        <button id="geolocation" type="button" class="btn jet-color btn-sm"><i class="bi bi-crosshair small"></i></button>
+
+        <button id="slide-up-popup" type="button" class="btn btn-block jet-color" style="display:none;"><i class="bi bi-caret-up-fill"></i></button>
+        <div class="card" id="popup" style="display:none;">
+            <button id="slide-down-popup" type="button" class="btn btn-block jet-color"><i class="bi bi-caret-down-fill"></i></button>
+            <div id="popup-container">
+                <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
+                    <div class="col-4 d-flex justify-content-start align-items-center">
+                        <div><i class="bi bi-circle-fill h5" id="betriebs-status-icon" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
+                        <div id="Betriebs-Status-popup" class="text-popup" style="font-weight: 400;font-size: 1.5em;">-</div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center align-items-center">
+                        <div><i class="bi bi-lightning-charge-fill h5" style="color:rgb(103, 213, 103)"></i></div>
+                        <div style="font-weight: 400;font-size: 1.5em;" id="BruttoleistungderEinheit-popup" class="text-popup">-</div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end align-items-center">
+                        <!-- <div id="turbine-img"></div> -->
+                        <img src="./assets/img/turbine.png" alt="" id="turbine-img">
+                        <div id="vestas-text" class="text-popup" style="word-break: break-all;">Vestas</div>
+                    </div>
                 </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                    <div><i class="bi bi-lightning-charge-fill h5" style="color:rgb(103, 213, 103)"></i></div>
-                    <div style="font-weight: 400;font-size: 1.5em;" id="BruttoleistungderEinheit-popup" class="text-popup">-</div>
-                </div>
-                <div class="col-4 d-flex justify-content-end align-items-center">
-                    <!-- <div id="turbine-img"></div> -->
-                    <img src="./assets/img/turbine.png" alt="" id="turbine-img">
-                    <div id="vestas-text" class="text-popup">Vestas</div>
-                </div>
-            </div>
-            <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-7 d-flex align-self-center">
-                    <div id="HerstellerderWindenergieanlage-popup" class="text-popup">Vestas Deutschland GmbH</div>
-                </div>
-                <div class="col-1 text-popup">-</div>
-                <div class="col-4">
-                    <div id="Typenbezeichnung-popup" class="text-end third-white-popup">V1.54</div>
-                </div>
-                <div class="col-6 d-flex align-self-center">
-                    <div class="sub-text-popup">Hersteller</div>
-                </div>
-                <div class="col-6">
-                    <div class="text-end sub-text-popup">Typenbezeichnung</div>
-                </div>
-                <div class="col-4 d-flex align-self-center">
-                    <!-- <div id="manufacturing-img"></div> -->
-                     <img src="./assets/img/manufacturing.png" alt="" style="width:100%;margin:0;padding:0;">
-                </div>
-                <div class="col-3 d-flex align-self-end">
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <div id="RotordurchmesserderWindenergieanlage-popup" class="third-white-popup">
-                                -
+                <div class="card-header row jet-color popup-container d-flex align-items-center" >
+                    <div class="col-7 d-flex align-self-center">
+                        <div id="HerstellerderWindenergieanlage-popup" class="text-popup">Vestas Deutschland GmbH</div>
+                    </div>
+                    <div class="col-1 text-popup">-</div>
+                    <div class="col-4">
+                        <div id="Typenbezeichnung-popup" class="text-end third-white-popup">V1.54</div>
+                    </div>
+                    <div class="col-6 d-flex align-self-center">
+                        <div class="sub-text-popup">Hersteller</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-end sub-text-popup">Typenbezeichnung</div>
+                    </div>
+                    <div class="col-4 d-flex align-self-center">
+                        <!-- <div id="manufacturing-img"></div> -->
+                         <img src="./assets/img/manufacturing.png" alt="" style="width:100%;margin:0;padding:0;">
+                    </div>
+                    <div class="col-3 d-flex align-self-end">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <div id="RotordurchmesserderWindenergieanlage-popup" class="third-white-popup">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Rotordurchmesser
+                                </div>
                             </div>
-                            <div class="sub-text-popup">
-                                Rotordurchmesser
-                            </div>
-                        </div>
-                        <div class="col-12 mt-4 mb-2 align-self-end">
-                            <div id="NabenhöhederWindenergieanlage-popup" class="third-white-popup">
-                                -
-                            </div>
-                            <div class="sub-text-popup">
-                                Nabenhöhe
+                            <div class="col-12 mt-4 mb-2 align-self-end">
+                                <div id="NabenhöhederWindenergieanlage-popup" class="third-white-popup">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Nabenhöhe
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-5 align-self-end">
-                    <div id="InbetriebnahmedatumderEinheit-popup" class="text-end text-popup">
-                        -
-                    </div>
-                    <div class="text-end sub-text-popup">
-                        Inbetriebnahme
-                    </div>
-                </div>
-            </div>
-            <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-8 d-flex align-self-center">
-                    <div id="NamedesWindparks-popup" class="text-popup">-</div>
-                </div>
-                <div class="col-4">
-                    <div id="LetzteAktualisierung-popup" class="text-end third-white-popup">-</div>
-                </div>
-                <div class="col-6 mb-2 d-flex align-self-center">
-                    <div class="sub-text-popup">Name des Windparks</div>
-                </div>
-                <div class="col-6 mb-2">
-                    <div class="text-end sub-text-popup">Letzte Aktualisierung</div>
-                </div>
-                <div class="col-4 d-flex align-self-center">
-                    <!-- <div id="manufacturing-img"></div> -->
-                     <img src="./assets/img/wind-farm.png" alt="" style="width:100%;margin:0;padding:0;">
-                </div>
-                <div class="col-8 d-flex align-self-end">
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <div id="Betriebers-popup" class="third-white-popup">
-                                -
-                            </div>
-                            <div class="sub-text-popup">
-                                Betreiber
-                            </div>
+                    <div class="col-5 align-self-end">
+                        <div id="InbetriebnahmedatumderEinheit-popup" class="text-end text-popup">
+                            -
                         </div>
-                        <div class="col-12 mt-4">
-                            <div id="Anlagenbetreibers-popup" class="third-white-popup">
-                                -
-                            </div>
-                            <div class="sub-text-popup">
-                                Betreibername dieser Anlage
-                            </div>
+                        <div class="text-end sub-text-popup">
+                            Inbetriebnahme
                         </div>
                     </div>
                 </div>
-                
-            </div>
-            <div class="card-header row jet-color popup-container d-flex align-items-center" >
-                <div class="col-8 d-flex align-self-center">
-                    <div class="text-popup">Volleinspeisung
+                <div class="card-header row jet-color popup-container d-flex align-items-center" >
+                    <div class="col-8 d-flex align-self-center">
+                        <div id="NamedesWindparks-popup" class="text-popup">-</div>
                     </div>
-                </div>
-                <div class="col-4 d-flex justify-content-end">
-                    <img id="gepruft-check" src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin-right:5px;padding:0;">
-                    <div id="Netzbetreiberprüfung-popup" class="align-self-end text-popup"> Geprüft</div>
-                </div>
-                <div class="col-6 mb-2 d-flex align-self-center">
-                </div>
-                <div class="col-6 mb-2">
-                    <div class="text-end sub-text-popup">Netzbetreiberprüfung</div>
-                </div>
-                <div class="col-4 d-flex align-self-center">
-                    <!-- <div id="manufacturing-img"></div> -->
-                     <img src="./assets/img/grid-connect.png" alt="" style="width:100%;margin:0;padding:0;">
-                </div>
-                <div class="col-8 d-flex align-self-center">
-                    <div class="row">
-                        <div class="col-12 mb-2">
-                            <div id="Anschluss-Netzbetreibers-popup" class="third-white-popup">
-                                -
+                    <div class="col-4">
+                        <div id="LetzteAktualisierung-popup" class="text-end third-white-popup">-</div>
+                    </div>
+                    <div class="col-6 mb-2 d-flex align-self-center">
+                        <div class="sub-text-popup">Name des Windparks</div>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <div class="text-end sub-text-popup">Letzte Aktualisierung</div>
+                    </div>
+                    <div class="col-4 d-flex align-self-center">
+                        <!-- <div id="manufacturing-img"></div> -->
+                         <img src="./assets/img/wind-farm.png" alt="" style="width:100%;margin:0;padding:0;">
+                    </div>
+                    <div class="col-8 d-flex align-self-end">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div id="Betriebers-popup" class="third-white-popup">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Betreiber
+                                </div>
                             </div>
-                            <div class="sub-text-popup">
-                                Anschluss-Netzbetreiber
-                            </div>
-                        </div>
-                        <div class="col-12 mt-4">
-                            <div id="Spannungsebene-popup" class="third-white-popup" style="word-break: break-all;">
-                                -
-                            </div>
-                            <div class="sub-text-popup">
-                                Spannungsebene des Anschlusses
+                            <div class="col-12 mt-4">
+                                <div id="Anlagenbetreibers-popup" class="third-white-popup">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Betreibername dieser Anlage
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>         
-            </div>
-            <div class="accordion accordion-flush card-header row popup-container" id="accordionExample" style="margin:10px;padding:0;">
-                <div class="accordion-item jet-color" style="border-radius:15px;">
-                  <h2 class="accordion-header jet-color accordion-head">
-                    <button class="accordion-button jet-color collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Weitere Details
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body row">
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div class="third-white-popup" id="RegistrierungsdatumderEinheit-popup">-</div>
-                            <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div id="MaStR-NrderEEG-Anlage-popup" class="third-white-popup">-</div>
-                            <div class="sub-text-popup">MarktStammRegister-Nr. der Anlage</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div id="InstallierteLeistungderEEG-Anlage-popup" class="third-white-popup">-</div>
-                            <div class="sub-text-popup">davon Leistung als EEG-Anlage eingtragen (in MW)</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="third-white-popup">-</div>
-                            <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div id="MarktStammRegister-Nr-popup" class="third-white-popup">-</div>
-                            <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div class="third-white-popup" id="EEG-Anlagenschlüssel-popup">-</div>
-                            <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
-                        </div>
-                        <div class="col-12" style="margin-bottom:1rem;">
-                            <div id="Zuschlagnummer-popup" class="third-white-popup">-</div>
-                            <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
+                    
+                </div>
+                <div class="card-header row jet-color popup-container d-flex align-items-center" >
+                    <div class="col-8 d-flex align-self-center">
+                        <div class="text-popup">Volleinspeisung
                         </div>
                     </div>
-                  </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <img id="gepruft-check" src="./assets/img/check-2.png" alt="" style="width:1.8em;height:1.8em;margin-right:5px;padding:0;">
+                        <div id="Netzbetreiberprüfung-popup" class="align-self-end text-popup"> Geprüft</div>
+                    </div>
+                    <div class="col-6 mb-2 d-flex align-self-center">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <div class="text-end sub-text-popup">Netzbetreiberprüfung</div>
+                    </div>
+                    <div class="col-4 d-flex align-self-center">
+                        <!-- <div id="manufacturing-img"></div> -->
+                         <img src="./assets/img/grid-connect.png" alt="" style="width:100%;margin:0;padding:0;">
+                    </div>
+                    <div class="col-8 d-flex align-self-center">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <div id="Anschluss-Netzbetreibers-popup" class="third-white-popup">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Anschluss-Netzbetreiber
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <div id="Spannungsebene-popup" class="third-white-popup" style="word-break: break-all;">
+                                    -
+                                </div>
+                                <div class="sub-text-popup">
+                                    Spannungsebene des Anschlusses
+                                </div>
+                            </div>
+                        </div>
+                    </div>         
                 </div>
-            </div>
+                <div class="accordion accordion-flush card-header row popup-container" id="accordionExample" style="margin:10px;padding:0;">
+                    <div class="accordion-item jet-color" style="border-radius:15px;">
+                      <h2 class="accordion-header jet-color accordion-head">
+                        <button class="accordion-button jet-color collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Weitere Details
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body row">
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div class="third-white-popup" id="RegistrierungsdatumderEinheit-popup">-</div>
+                                <div class="sub-text-popup">Registrierungsdatum der Anlage im Markstammregister</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div id="MaStR-NrderEEG-Anlage-popup" class="third-white-popup">-</div>
+                                <div class="sub-text-popup">MarktStammRegister-Nr. der Anlage</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div id="InstallierteLeistungderEEG-Anlage-popup" class="third-white-popup">-</div>
+                                <div class="sub-text-popup">davon Leistung als EEG-Anlage eingtragen (in MW)</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div id="InbetriebnahmedatumderEEG-Anlage-popup" class="third-white-popup">-</div>
+                                <div class="sub-text-popup">Inbetriebnahme als EEG-Anlage</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div id="MarktStammRegister-Nr-popup" class="third-white-popup">-</div>
+                                <div class="sub-text-popup">MarktStammRegister-Nr. der EEG-Anlage</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div class="third-white-popup" id="EEG-Anlagenschlüssel-popup">-</div>
+                                <div class="sub-text-popup">EEG-Anlagenschlüssel</div>
+                            </div>
+                            <div class="col-12" style="margin-bottom:1rem;">
+                                <div id="Zuschlagnummer-popup" class="third-white-popup">-</div>
+                                <div class="sub-text-popup">Zuschlagnummer (EEG/KWK-Ausschreibung)</div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>   
         </div>
         <div id="show-filter-bar" class="jet-color" style="display:none;">
-            <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn btn-sm"></button>
+            <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn"  data-bs-placement="left" data-bs-title="Show Filter Here"></button>
         </div>
         <div class="card" id="filter-bar">
             <div id="filter-btn-container" class="card-header row no-gutters jet-color d-flex align-items-center" >
@@ -293,7 +299,7 @@
                 <div class="card-header row no-gutters jet-color filter-container d-flex  align-items-center">
                     <div class="col-12 text-filter d-flex align-items-center">
                         <span class="align-middle mb-2">Filtern nach</span>
-                        <select id="slider-nach-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example" style="width:65%;margin-left:5px;">
+                        <select id="slider-nach-select" class="form-select jet-color mb-2 text-filter" aria-label="Default select example" style="width:75%;margin-left:5px;">
                             <option selected value="Hersteller-Zusammenfassung">Hersteller Zusammenfassung</option>
                             <option value="Hersteller der Windenergieanlage">Hersteller der Windenergieanlage</option>
                             <option value="Name des Anschluss-Netzbetreibers">Anschluss-Netzbetreiber</option>
@@ -315,7 +321,7 @@
                     </div>
                 </div>
                 <div class="card-header row no-gutters jet-color filter-container d-flex align-items-center">
-                    <div class="col-10 ide-filter mb-2 text-filter">Inbetriebnahmedatum der Einheit</div>
+                    <div class="col-10 ide-filter mb-2 text-filter">Inbetriebnahmedatum</div>
                     <div class="col-2 mb-2">
                         <button id="reverse-date-filter" type="button" class="btn btn-sm reverse-btn" style="display: none;"><i class="bi bi-arrow-counterclockwise"></i></button>
                     </div>
@@ -348,7 +354,7 @@
                 </div>
                 <div class="card-header row jet-color filter-container d-flex align-items-center">
                     <div class="col-12 mb-2 text-filter">
-                        Anlagen farblich kennzelchnen.
+                        Anlagen farblich kennzeichnen
                     </div>
                     <div class="col-9 row">
                         <div class="col-12 justify-content-start">
