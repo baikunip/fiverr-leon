@@ -9,7 +9,7 @@ if(localStorage.hasOwnProperty('zoom')){
     // if (answer) {
         center=localStorage.getItem('coordinates').split(',')
         zoom=parseFloat(localStorage.getItem('zoom'))
-        bearing=parseFloat(localStorage.getItem('bearing'))
+        // bearing=parseFloat(localStorage.getItem('bearing'))
     // }
 }
 if($('#isMobile').is(':visible')){
@@ -21,7 +21,7 @@ const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: zoom, // starting zoom
-    bearing:137,
+    bearing:bearing,
     // minZoom:7,
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
@@ -431,9 +431,9 @@ map.on('load', () => {
                 'interpolate',
                 ['linear'],
                 ['zoom'],
-                8,
+                7,
                 0,
-                14,
+                9,
                 1
             ],
             // 'circle-color': [
@@ -595,19 +595,19 @@ map.on('mouseleave', 'point', () => {
 map.on('moveend',()=>{
     localStorage.setItem('coordinates',[map.getCenter().lng,map.getCenter().lat])
     localStorage.setItem('zoom',map.getZoom())
-    localStorage.setItem('bearing',map.getBearing())
+    // localStorage.setItem('bearing',map.getBearing())
 })
 // filters
 // Hide/Show FIlters
 function showhidefilter(stats){
     if(stats=="hidden"){
-        $("#filter-bar").hide(500)
-        $("#show-filter-bar").show(500)
+        $("#filter-bar").hide()
+        $("#show-filter-bar").show()
     }else{
         if($('#isMobile').is(':visible')) $("#filter-bar").css("width","99%").css("top","8vh").css("overflow","scroll").css("max-height","83vh")
         else $("#filter-bar").css("width","30em").css("overflow","scroll").css("max-height","70vh")
-        $("#show-filter-bar").hide(500)
-        $("#filter-bar").show(500)
+        $("#show-filter-bar").hide()
+        $("#filter-bar").show()
     }
 } 
 $('#slide-down-popup').on('click',()=>{
@@ -658,11 +658,25 @@ $( "#slider-filter" ).slider({
     max: 15,
     values: [ 0, 15 ],
     slide: function( event, ui ) {
-      if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
-      else $( "#slider-filter-min" ).html('0 MW')
-      $( "#slider-filter-max" ).html((ui.values[1])+' MW')
-      bdeVal=ui.values
-      applyFilter()
+    //   if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
+    //   else $( "#slider-filter-min" ).html('0 MW')
+    //   $( "#slider-filter-max" ).html((ui.values[1])+' MW')
+    //   bdeVal=ui.values
+    //   applyFilter()
+        if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
+                    // if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
+                    // else $( "#slider-filter-min" ).html('0 MW')
+            $( "#slider-filter-min" ).html((ui.values[0])+' MW')
+            $( "#slider-filter-max" ).html((ui.values[1])+' MW')
+        }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
+            $( "#slider-filter-min" ).html((ui.values[0]))
+            $( "#slider-filter-max" ).html((ui.values[1]))
+        }else{
+            $( "#slider-filter-min" ).html((ui.values[0])+' m')
+            $( "#slider-filter-max" ).html((ui.values[1])+' m')
+        }
+        // bdeVal=ui.values
+        applyFilter()
     }
 });
 function disableDate(){
@@ -675,11 +689,11 @@ function enableDate(){
     $('#reverse-date-filter').prop("disabled",false)
 }
 $('#slider-attr-select').on('change',()=>{
-    $('#slider-filter-container').empty().append(
-        `<div id="slider-filter"></div>`
-    )
+    // $('#slider-filter-container').empty().append(
+    //     `<div id="slider-filter"></div>`
+    // )
     let rangeVal=attSliders[$('#slider-attr-select').val()]
-    bdeVal=rangeVal
+    // bdeVal=rangeVal
     if($('#slider-attr-select').val()=="Bruttoleistung der Einheit")measurementUnit=' MW'
     if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
         $( "#slider-filter-min" ).html('0 MW')
@@ -687,6 +701,8 @@ $('#slider-attr-select').on('change',()=>{
         enableDate()
     }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
         $( "#slider-filter-min" ).html((rangeVal[0]))
+        if(stats.includes('In Planung')){rangeVal[1]=2029}
+        else rangeVal[1]=2024
         $( "#slider-filter-max" ).html((rangeVal[1]))
         disableDate()
     }else{
@@ -694,29 +710,32 @@ $('#slider-attr-select').on('change',()=>{
         $( "#slider-filter-max" ).html((rangeVal[1])+' m')
         enableDate()
     }
+    $( "#slider-filter" ).slider("option","min",rangeVal[0])
+    $( "#slider-filter" ).slider("option","max",rangeVal[1])
+    $( "#slider-filter" ).slider("option","values",rangeVal)
     applyFilter()
-    $( "#slider-filter" ).slider({
-        range: true,
-        min: rangeVal[0],
-        max: rangeVal[1],
-        values: rangeVal,
-        slide: function( event, ui ) {
-            if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
-                // if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
-                // else $( "#slider-filter-min" ).html('0 MW')
-                $( "#slider-filter-min" ).html((ui.values[0])+' MW')
-                $( "#slider-filter-max" ).html((ui.values[1])+' MW')
-            }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
-                $( "#slider-filter-min" ).html((ui.values[0]))
-                $( "#slider-filter-max" ).html((ui.values[1]))
-            }else{
-                $( "#slider-filter-min" ).html((ui.values[0])+' m')
-                $( "#slider-filter-max" ).html((ui.values[1])+' m')
-            }
-            bdeVal=ui.values
-            applyFilter()
-        }
-    })
+    // $( "#slider-filter" ).slider({
+    //     range: true,
+    //     min: rangeVal[0],
+    //     max: rangeVal[1],
+    //     values: rangeVal,
+    //     slide: function( event, ui ) {
+    //         if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
+    //             // if(ui.values[0]!=0)$( "#slider-filter-min" ).html((ui.values[0])+' MW')
+    //             // else $( "#slider-filter-min" ).html('0 MW')
+    //             $( "#slider-filter-min" ).html((ui.values[0])+' MW')
+    //             $( "#slider-filter-max" ).html((ui.values[1])+' MW')
+    //         }else if($('#slider-attr-select').val()=="Inbetriebnahmejahr"){
+    //             $( "#slider-filter-min" ).html((ui.values[0]))
+    //             $( "#slider-filter-max" ).html((ui.values[1]))
+    //         }else{
+    //             $( "#slider-filter-min" ).html((ui.values[0])+' m')
+    //             $( "#slider-filter-max" ).html((ui.values[1])+' m')
+    //         }
+    //         bdeVal=ui.values
+    //         applyFilter()
+    //     }
+    // })
 })
 $('#slider-nach-select').on('change', ()=>{
     $("#nach-list").empty()

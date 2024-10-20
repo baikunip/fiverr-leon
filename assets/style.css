@@ -36,23 +36,23 @@ body { margin: 0; padding: 0;
     position:absolute; left:7px;top:15%;height:70%;
 } */
 /* Popup Style */
-#side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:2;}
+#side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:6;}
 #popup{
-    position: absolute;left:.5em;bottom:5vh;max-height:80vh;width:38em;z-index:2;
+    position: absolute;left:.5em;bottom:5vh;max-height:80vh;width:38em;z-index:6;
     border-radius: 15px;background-color: rgba(23, 22, 26, 0.8705882352941177);border-style:solid;border-width:1px;border-color: #3C3C3E;
     backdrop-filter: blur(7px);
 }
 #popup-container{overflow: scroll;height:80vh;}
 .popup-container{border-radius: 15px;margin-left:10px;margin-right:10px;margin-top:10px;padding-bottom:15px;padding-left:10px;padding:2em;border-style:solid;border-width:1px;border-color: #3C3C3E;}
 #slide-down-popup{display:none;}
-#filter-bar{position: absolute;right:0;top:15vh;width:30em;z-index:2;max-height: 70vh;background-color: rgba(23, 22, 26, 0.8705882352941177);backdrop-filter: blur(7px);
+#filter-bar{position: absolute;right:0;top:15vh;width:30em;z-index:10;max-height: 70vh;background-color: rgba(23, 22, 26, 0.8705882352941177);backdrop-filter: blur(7px);
     border: 1px solid #3C3C3E;
     border-top-left-radius: 15px;
     border-bottom-left-radius:15px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-#filter-bar-container{overflow: scroll;height:70vh;}
+#filter-bar-container{overflow: scroll;}
 .jet-color{background-color:#262629!important;color:white!important;}
 .layer-btn{outline:none;background-color:transparent;color:white;width:.7em;height:.7em;}
 .hide-btn{visibility: hidden;}
