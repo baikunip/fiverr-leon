@@ -675,7 +675,7 @@ $( "#slider-filter" ).slider({
             $( "#slider-filter-min" ).html((ui.values[0])+' m')
             $( "#slider-filter-max" ).html((ui.values[1])+' m')
         }
-        // bdeVal=ui.values
+        bdeVal=ui.values
         applyFilter()
     }
 });
@@ -693,7 +693,7 @@ $('#slider-attr-select').on('change',()=>{
     //     `<div id="slider-filter"></div>`
     // )
     let rangeVal=attSliders[$('#slider-attr-select').val()]
-    // bdeVal=rangeVal
+    bdeVal=rangeVal
     if($('#slider-attr-select').val()=="Bruttoleistung der Einheit")measurementUnit=' MW'
     if($('#slider-attr-select').val()=="Bruttoleistung der Einheit"){
         $( "#slider-filter-min" ).html('0 MW')
