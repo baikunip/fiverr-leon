@@ -229,4 +229,10 @@ button.accordion-button:focus{
         right: 5px;
     }
 }
+@media only screen and (max-width: 365px){
+    .sub-text-popup{font-size: .6em;}
+    .text-popup{font-size:1.1em;}
+    .third-white-popup{font-size:.8em;}
+    .popup-container{--bs-gutter-x:.5em!important;}
+}
         

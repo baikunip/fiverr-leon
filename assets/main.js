@@ -9,7 +9,7 @@ if(localStorage.hasOwnProperty('zoom')){
     // if (answer) {
         center=localStorage.getItem('coordinates').split(',')
         zoom=parseFloat(localStorage.getItem('zoom'))
-        // bearing=parseFloat(localStorage.getItem('bearing'))
+        bearing=parseFloat(localStorage.getItem('bearing'))
     // }
 }
 if($('#isMobile').is(':visible')){
@@ -785,6 +785,31 @@ $('#in-planung').on('change',()=>{
             $( "#slider-filter-max" ).html(2024)
         }      
     }
+    if($('#legend-select').val()=="Inbetriebnahmejahr"){
+        let legendVal=attSliders[$('#legend-select').val()]
+        $( "#min-legend-bar" ).html((legendVal[0]))
+        let endVal=[2010,2024]
+        if(stats.includes('In Planung'))endVal=[2015,2029]
+        $( "#max-legend-bar" ).html((endVal[1]))
+        matchPulsingDot=[
+            "case",
+            ["==", ["get", $('#legend-select').val()], ""],
+            'nopulsing-dotGrey',
+            ['step',
+                ['get', $('#legend-select').val()],
+                'nopulsing-dotGrey',
+                0,
+                'nopulsing-dotGrey',
+                1980,
+                'nopulsing-dot1',
+                2000,
+                'nopulsing-dot2',
+                endVal[0],
+                'nopulsing-dot3',
+                endVal[1],
+                'nopulsing-dot4' ] 
+        ]
+    }
     applyFilter()
 })
 $('#in-betrieb').on('change',()=>{
@@ -895,7 +920,9 @@ $('#legend-select').on('change',()=>{
         ]
     }else if($('#legend-select').val()=="Inbetriebnahmejahr"){
         $( "#min-legend-bar" ).html((legendVal[0]))
-        $( "#max-legend-bar" ).html((legendVal[1]))
+        let endVal=[2010,2024]
+        if(stats.includes('In Planung'))endVal=[2015,2029]
+        $( "#max-legend-bar" ).html((endVal[1]))
         matchPulsingDot=[
             "case",
             ["==", ["get", $('#legend-select').val()], ""],
@@ -905,13 +932,13 @@ $('#legend-select').on('change',()=>{
                 'nopulsing-dotGrey',
                 0,
                 'nopulsing-dotGrey',
-                1,
-                'nopulsing-dot1',
                 1980,
-                'nopulsing-dot2',
+                'nopulsing-dot1',
                 2000,
+                'nopulsing-dot2',
+                endVal[0],
                 'nopulsing-dot3',
-                2023,
+                endVal[1],
                 'nopulsing-dot4' ] 
         ]
     }else if($('#legend-select').val()=="Nabenhöhe der Windenergieanlage"){
