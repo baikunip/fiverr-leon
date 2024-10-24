@@ -12,21 +12,25 @@ if(localStorage.hasOwnProperty('zoom')){
         bearing=parseFloat(localStorage.getItem('bearing'))
     // }
 }
-if($('#isMobile').is(':visible')){
-    setTimeout(() => {
-        showhidefilter("hidden")
-    }, 5000);
-}
+
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: zoom, // starting zoom
     bearing:bearing,
-    cacheControl: 'max-age=3600', 
+    attributionControl: false,
     // minZoom:7,
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
-});
+}).addControl(new mapboxgl.AttributionControl({
+    customAttribution: `<a href="https://www.mapbox.com/about/maps/">Privacy Policy</a>`
+}));
+if($('#isMobile').is(':visible')){
+    setTimeout(() => {
+        showhidefilter("hidden")
+    }, 5000);
+    map.addControl(new mapboxgl.NavigationControl({showZoom:false}))
+}
 let geolocate = new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -71,39 +75,72 @@ function forwardGeocoder(query){
     });
     return matchingFeatures;
 }
-map.addControl(
-    new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        localGeocoder: forwardGeocoder,
-        countries:'de',
-        // types:"country",types:"region",types:"postcode",types:"district",types:"place",types:"locality",types:"neighborhood",types:"address",
-        filter: function(item) {
-            // Exclude results of the type "shop" or other Point of Interest types
-            var excludedTypes = ['shop'];
-            return !excludedTypes.some(function(exclude) {
-                return item.properties.category && item.properties.category.includes(exclude);
-            });
-        },
-        render:function(item){
-             // extract the item's maki icon or use a default=
-            // let acceptedTypes=[,'fromLayer']
-            let backgrounColor='white'
-            if(item['place_type'][0]=='fromLayer'){backgrounColor='#D8C99B'}
-            // if(acceptedTypes.includes(item['place_type'][0])){
-                return `<div class='geocoder-dropdown-item row' style='background-color:${backgrounColor}!important;'>
-                <span class='geocoder-dropdown-text col-12'><b>${item.place_name}</b></span>
-                    <span class='geocoder-dropdown-text col-12' style='margin-left:3px;'>
-                    ${item.text}
-                    </span>
-                </div>`;
-            // }
+let geocoder=new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    localGeocoder: forwardGeocoder,
+    countries:'de',
+    // types:"country",types:"region",types:"postcode",types:"district",types:"place",types:"locality",types:"neighborhood",types:"address",
+    filter: function(item) {
+        // Exclude results of the type "shop" or other Point of Interest types
+        var excludedTypes = ['shop'];
+        return !excludedTypes.some(function(exclude) {
+            return item.place_type && item.place_type.includes(exclude);
+        });
+    },
+    render:function(item){
+         // extract the item's maki icon or use a default=
+        // let acceptedTypes=[,'fromLayer']
+        let backgrounColor='white'
+        if(item['place_type'][0]=='fromLayer'){backgrounColor='#D8C99B'}
+        // if(acceptedTypes.includes(item['place_type'][0])){
+            return `<div class='geocoder-dropdown-item row' style='background-color:${backgrounColor}!important;'>
+            <span class='geocoder-dropdown-text col-12'><b>${item.place_name}</b></span>
+                <span class='geocoder-dropdown-text col-12' style='margin-left:3px;'>
+                ${item.text}
+                </span>
+            </div>`;
+        // }
+        
+    },
+    zoom: 14,
+    placeholder: 'Ort oder ID suchen',
+    mapboxgl: mapboxgl
+})
+geocoder.on('result',(e)=>{ 
+    if(e.result.place_type[0]=='fromLayer'){
+        const clickEvent = {
+            lngLat: new mapboxgl.LngLat(e.result.center[0], e.result.center[1]),
+            point: map.project(new mapboxgl.LngLat(e.result.center[0], e.result.center[1])), // Get pixel coordinates
+            // point:[0,0],
+            target: map, // Reference to the map object
+            type: 'click', // Event type
+            originalEvent: {} // Add an empty object for originalEvent
+        }
+        if(map.isMoving()){
+            map.once('moveend',()=>{
+                clickEvent.point=map.project(new mapboxgl.LngLat(e.result.center[0], e.result.center[1]))
+                try {
+                    // Dispatch the custom 'click' event at the specific coordinates
+                    map.fire('click', clickEvent);
+                } catch (error) {
+                    console.error('Error during event dispatch:', error);
+                }
+            })
+        }else{
+            try {
+                // Dispatch the custom 'click' event at the specific coordinates
+                map.fire('click', clickEvent);
+            } catch (error) {
+                console.error('Error during event dispatch:', error);
+            }
+        }
             
-        },
-        zoom: 14,
-        placeholder: 'Ort oder ID suchen',
-        mapboxgl: mapboxgl
-    })
-);
+    }
+})
+geocoder.on('error', function(err) {
+    console.error('Geocoder error:', err);
+})
+map.addControl(geocoder);
 // draw pulsing dot before load it to the map components
  // to draw a pulsing dot icon on the map.
  const size = 50
@@ -513,7 +550,7 @@ map.on('load', () => {
 })
 
 // Popup functions
-map.on('click', function (e) {
+function showPopupData(e){
     var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
     if (!features.length) {
         $("#popup").hide()
@@ -576,6 +613,9 @@ map.on('click', function (e) {
         matchPulsingDot
     ]
     )
+}
+map.on('click', function (e) {
+    showPopupData(e)
 });
 map.on('mouseenter', 'point', () => {
     map.getCanvas().style.cursor = 'pointer'
@@ -751,9 +791,18 @@ $('#nach-list-input').flexdatalist({searchContain: true}).on('change:flexdatalis
 // Date Range Picker
 $('.input-group.date').datepicker({
     format: 'mm/dd/yyyy',
+    autoclose:true,
     todayBtn:"linked",
     startView:2
-});
+}).on('hide', function(e) {
+    // If the input is empty when the datepicker is closed, prevent the current date from being inserted
+    if (!$(this).val()) {
+        // $('#reverse-date-filter').click()
+        dateComissioned=[-2208988800,Date.now()]
+        $(this).datepicker('clearDates'); // Clear the input if no date is selected
+    }
+})
+$('.input-group.date').blur()
 $('#date-commision-start').on('changeDate',()=>{
     dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000
     applyFilter()
@@ -852,7 +901,15 @@ $('#reverse-date-filter').on('click',()=>{
     $('.input-group.date').datepicker({
         format: 'mm/dd/yyyy',
         todayBtn:"linked",
+        autoclose:true,
         startView:2
+    }).on('hide', function(e) {
+        // If the input is empty when the datepicker is closed, prevent the current date from being inserted
+        if (!$(this).val()) {
+             // Clear the input if no date is selected
+            dateComissioned=[-2208988800,Date.now()]
+            $(this).datepicker('clearDates');
+        }
     });
     $('#date-commision-start').on('changeDate',()=>{
         dateComissioned[0]=new Date($('#date-commision-start').datepicker('getUTCDate')).getTime()/1000
@@ -893,7 +950,7 @@ function applyFilter(){
 // legends
 $('#legend-select').on('change',()=>{
     let legendVal=attSliders[$('#legend-select').val()]
-    map.setFilter('point-heat',[">", ['to-number', ["get", $('#legend-select').val()]], 0])
+    // map.setFilter('point-heat',[">", ['to-number', ["get", $('#legend-select').val()]], 0])
     if($('#legend-select').val()=="Bruttoleistung der Einheit"){
         $( "#min-legend-bar" ).html('0.5 MW')
         $( "#max-legend-bar" ).html('15 MW')
@@ -975,4 +1032,5 @@ $('#legend-select').on('change',()=>{
     map.setLayoutProperty('point', 
         'icon-image', matchPulsingDot
     )
+    applyFilter()
 })
