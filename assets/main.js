@@ -404,11 +404,12 @@ map.on('load', () => {
     map.addImage('nopulsing-dotGrey', nopulsingDotGrey, { pixelRatio: 2 });
     const layers = map.getStyle().layers;
     // Find the index of the first symbol layer in the map style.
-    let firstSymbolId;
+    let firstSymbolId,countryBoundaries;
     for (const layer of layers) {
+        console.log(layer)
+        if(layer.id=="admin-1-boundary-bg") countryBoundaries = layer.id
         if (layer.type === 'symbol') {
             firstSymbolId = layer.id;
-            break;
         }
     }
     map.addSource('datapoints', {
@@ -450,7 +451,7 @@ map.on('load', () => {
             'icon-image': matchPulsingDot,
             'icon-allow-overlap': true // important fot display
         }
-    },firstSymbolId);
+    },countryBoundaries);
     map.addLayer({
         'id': 'point-heat',
         'type': 'heatmap',
@@ -506,7 +507,7 @@ map.on('load', () => {
                 0
             ]
         }
-    },firstSymbolId);
+    },countryBoundaries);
 })
 // Layer Control Functionalities
 let layerHide=(layerId)=>{
