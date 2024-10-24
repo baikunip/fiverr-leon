@@ -67,6 +67,9 @@
         <div class="card" id="popup" style="display:none;">
             <button id="slide-down-popup" type="button" class="btn btn-block jet-color"><i class="bi bi-chevron-compact-down"></i></button>
             <div id="popup-container">
+                <div id="no-coordinate-alert" class="alert alert-danger" role="alert">
+                    Standort der Turbine fehlt!
+                  </div>
                 <div class="card-header row jet-color popup-container d-flex align-items-center" style="border-radius:15px;">
                     <div class="col d-flex justify-content-center align-items-center">
                         <div><i class="bi bi-circle-fill h5" id="betriebs-status-icon" style="color:rgb(103, 213, 103);margin-right:4px;"></i></div>
@@ -253,7 +256,9 @@
             </div>   
         </div>
         <div id="show-filter-bar" class="jet-color" style="display:none;">
-            <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn"  data-bs-placement="left" data-bs-title="Show Filter Here"></button>
+            <button id="show-filter-btn" type="button" onclick='showhidefilter("show")' class="jet-color filter-btn btn"  data-bs-placement="left" data-bs-title="Show Filter Here">
+                <!-- <i class="bi bi-chevron-double-left"></i> -->
+            </button>
         </div>
         <div class="card" id="filter-bar">
             <div id="filter-btn-container" class="row no-gutters jet-color d-flex align-items-center" >

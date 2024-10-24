@@ -25,11 +25,11 @@ const map = new mapboxgl.Map({
 }).addControl(new mapboxgl.AttributionControl({
     customAttribution: `<a href="https://www.mapbox.com/about/maps/">Privacy Policy</a>`
 }));
+map.addControl(new mapboxgl.NavigationControl({showZoom:false}),'top-left')
 if($('#isMobile').is(':visible')){
     setTimeout(() => {
         showhidefilter("hidden")
     }, 5000);
-    map.addControl(new mapboxgl.NavigationControl({showZoom:false}))
 }
 let geolocate = new mapboxgl.GeolocateControl({
     positionOptions: {
@@ -444,7 +444,6 @@ map.on('load', () => {
     // Find the index of the first symbol layer in the map style.
     let firstSymbolId,countryBoundaries;
     for (const layer of layers) {
-        console.log(layer)
         if(layer.id=="admin-1-boundary-bg") countryBoundaries = layer.id
         if (layer.type === 'symbol') {
             firstSymbolId = layer.id;
@@ -452,7 +451,7 @@ map.on('load', () => {
     }
     map.addSource('datapoints', {
         type: 'vector',
-        bounds:[5.8663, 47.2701, 15.0419, 55.0815],
+        // bounds:[5.8663, 47.2701, 15.0419, 55.0815],
         // Use any Mapbox-hosted tileset using its tileset id.
         // Learn more about where to find a tileset id:
         // https://docs.mapbox.com/help/glossary/tileset-id/
@@ -547,11 +546,36 @@ map.on('load', () => {
             ]
         }
     },countryBoundaries);
+    // map.addLayer({
+    //     id: 'missing-coordinates',
+    //     type: 'circle',
+    //     source: {
+    //         type: 'geojson',
+    //         data: {
+    //             type: 'FeatureCollection',
+    //             features: [
+    //                 {
+    //                     type: 'Feature',
+    //                     geometry: {
+    //                         type: 'Point',
+    //                         coordinates: [0, 0]  // Default to 0,0
+    //                     },
+    //                     properties: {}
+    //                 }
+    //             ]
+    //         }
+    //     },
+    //     paint: {
+    //         'circle-radius': 10,
+    //         'circle-color': '#ff0000'
+    //     }
+    // });
+   
 })
 
 // Popup functions
 function showPopupData(e){
-    var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['point']});
     if (!features.length) {
         $("#popup").hide()
         $("#slide-up-popup").hide()
@@ -577,6 +601,8 @@ function showPopupData(e){
         if(!feature.properties[property]) return "-"
         else return feature.properties[property]
     }
+    if(feature.geometry.coordinates[0]+feature.geometry.coordinates[1]==0)$('#no-coordinate-alert').show()
+    else $('#no-coordinate-alert').hide()
     $("#Betriebs-Status-popup").html(setPopupValue("Betriebs-Status"))
     if(setPopupValue("Betriebs-Status")=="In Betrieb")$("#betriebs-status-icon").css("color","rgb(103, 213, 103)")
     else if(setPopupValue("Betriebs-Status")=="Endgültig stillgelegt")$("#betriebs-status-icon").css("color","red")
@@ -617,6 +643,9 @@ function showPopupData(e){
 map.on('click', function (e) {
     showPopupData(e)
 });
+// map.on('click','missing-coordinates',(e)=>{
+//     console.log('this is missing-coordinates')
+//     showPopupData(e)})
 map.on('mouseenter', 'point', () => {
     map.getCanvas().style.cursor = 'pointer'
   })

@@ -35,7 +35,8 @@ body { margin: 0; padding: 0;
 /* #search-bar-icon{
     position:absolute; left:7px;top:15%;height:70%;
 } */
-.mapboxgl-ctrl-compass{display:none!important;}
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl{padding:0;margin:0!important;}
+div.mapboxgl-ctrl-top-left > div:nth-child(1) > button.mapboxgl-ctrl-compass{display:none!important;}
 /* Popup Style */
 #side-bar{position: absolute;left:.5em;top:.5vh;max-height:30vh;width:25vw;z-index:6;}
 #popup{
@@ -47,6 +48,9 @@ body { margin: 0; padding: 0;
 .popup-container{border-radius: 15px;margin-left:10px;margin-right:10px;margin-top:10px;padding-bottom:15px;padding-left:10px;padding:2em;border-style:solid;border-width:1px;border-color: #3C3C3E;}
 #slide-down-popup{display:none;border-style:solid;border-width:1px;border-color: #3C3C3E;border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;}
+#no-coordinate-alert{
+    margin-left:10px;margin-right:10px;margin-top:10px;display:none;
+}
 #filter-bar{position: absolute;right:0;top:15vh;width:30em;z-index:10;max-height: 70vh;background-color: rgba(23, 22, 26, 0.8705882352941177);backdrop-filter: blur(7px);
     border: 1px solid #3C3C3E;
     border-top-left-radius: 15px;
@@ -109,10 +113,10 @@ button.accordion-button:focus{
     border-bottom-right-radius: 0px;
 }
 #show-filter-btn{
-    background:no-repeat center/100% url('./img/backLeft.svg');
+    background:no-repeat center/90% url('./img/backLeft.svg');
     height:20px;
     width:20px;
-    padding:0;margin:0;
+    margin:4px 3px 4px 3px;padding:0;
 }
 .card-header:first-child{
     border-radius: 15px!important;
@@ -207,7 +211,7 @@ button.accordion-button:focus{
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    .mapboxgl-ctrl-compass{
+    div.mapboxgl-ctrl-top-left > div:nth-child(1) > button.mapboxgl-ctrl-compass{
         display:block!important;position:absolute!important;z-index:4;top:4vh;
         left:0;
         width:26px;
