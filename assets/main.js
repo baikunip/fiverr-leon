@@ -22,6 +22,7 @@ const map = new mapboxgl.Map({
     center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: zoom, // starting zoom
     bearing:bearing,
+    cacheControl: 'max-age=3600', 
     // minZoom:7,
     // maxZoom:16,
     style: 'mapbox://styles/mapbox/satellite-streets-v12'
@@ -414,6 +415,7 @@ map.on('load', () => {
     }
     map.addSource('datapoints', {
         type: 'vector',
+        bounds:[5.8663, 47.2701, 15.0419, 55.0815],
         // Use any Mapbox-hosted tileset using its tileset id.
         // Learn more about where to find a tileset id:
         // https://docs.mapbox.com/help/glossary/tileset-id/
@@ -457,7 +459,7 @@ map.on('load', () => {
         'type': 'heatmap',
         'source': 'datapoints',
         'source-layer': tilesetName,
-        'maxzoom': 9,
+        // 'maxzoom': 9,
         'filter':['all',["in", ["get","Betriebs-Status"],["literal", ["In Betrieb","Vorübergehend stillgelegt"]]]],
         'paint':{
             'heatmap-intensity': [
@@ -509,19 +511,7 @@ map.on('load', () => {
         }
     },countryBoundaries);
 })
-// Layer Control Functionalities
-let layerHide=(layerId)=>{
-    map.setLayoutProperty(layerId, 'visibility', 'none');
-    $('#'+layerId+'-visibility').empty().append(
-        `<a id="point-heat-hide" class="btn btn-sm btn-dark jet-color" onclick="layerShow('`+layerId+`')" role="button" data-bs-toggle="button"><i class="bi bi-eye-slash"></i></a>`
-    )
-}
-let layerShow=(layerId)=>{
-    map.setLayoutProperty(layerId, 'visibility', 'visible');
-    $('#'+layerId+'-visibility').empty().append(
-        `<a id="point-heat-show" class="btn btn-sm btn-dark jet-color" onclick="layerHide('`+layerId+`')" role="button" data-bs-toggle="button"><i class="bi bi-eye"></i></a>`
-    )
-}
+
 // Popup functions
 map.on('click', function (e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
@@ -598,6 +588,9 @@ map.on('moveend',()=>{
     localStorage.setItem('zoom',map.getZoom())
     // localStorage.setItem('bearing',map.getBearing())
 })
+// map.on('zoomend',()=>{
+//     if(map.getZoom()>=5.9)
+// })
 // filters
 // Hide/Show FIlters
 function showhidefilter(stats){
